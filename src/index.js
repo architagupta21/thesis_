@@ -2,10 +2,15 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faReact } from '@fortawesome/free-brands-svg-icons';
+import { faCog, faStore } from '@fortawesome/free-solid-svg-icons';
 import store from './store';
 import App from './components/App';
 import Admin from './admin';
 import AppMenu from './AppMenu';
+
+library.add(faReact, faCog, faStore);
 
 const renderApp = () => (
     <Provider store={store}>
