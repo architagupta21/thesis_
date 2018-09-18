@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Counter from './Counter';
 
 const AppContainer = styled.div`
@@ -13,8 +15,14 @@ const AppContainer = styled.div`
 
 const App = () => (
     <AppContainer>
-        <h2>Hello LTI React App!</h2>
-        <p>Open Developer Tools to see log outputs on s tate change</p>
+        <h2>
+            Hello LTI <FontAwesomeIcon icon={['fab', 'react']} />
+            React App!
+        </h2>
+        <p>
+            Open <FontAwesomeIcon icon="cog" /> Developer Tools to see log
+            outputs on state change
+        </p>
 
         <button
             type="button"
@@ -56,7 +64,9 @@ const App = () => (
         >
             Test API
         </button>
-        <h4>Redux Example</h4>
+        <h4>
+            <FontAwesomeIcon icon="store" /> Redux Example
+        </h4>
         <Counter />
     </AppContainer>
 );
