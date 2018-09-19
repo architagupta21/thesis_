@@ -1,9 +1,7 @@
-'use strict'
-var webpack = require("webpack");
+// const webpack = require('webpack');
 
-var webpackConfig = require('./webpack.config')
+const webpackConfig = require('./webpack.config');
 
-
-// modify the config for product if needed
+// modify the config for production if needed
 
 module.exports = webpackConfig;
