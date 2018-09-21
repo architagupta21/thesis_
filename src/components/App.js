@@ -9,22 +9,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Counter from './Counter';
 
 const AppContainer = styled.div`
-    border: 1px solid lightgrey;
     padding: 50px;
+
+    border: 1px solid lightgrey;
+`;
+
+const AppTitle = styled.div`
+    font-weight: bold;
+
+    font-size: 20px;
+`;
+
+const TestAPIButton = styled.button`
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 `;
 
 const App = () => (
     <AppContainer>
-        <h2>
+        <AppTitle>
             Hello LTI <FontAwesomeIcon icon={['fab', 'react']} />
             React App!
-        </h2>
+            <FontAwesomeIcon icon={['fab', 'cog']} />
+        </AppTitle>
         <p>
             Open <FontAwesomeIcon icon="cog" /> Developer Tools to see log
-            outputs on state change
+            outputs on state changesu
         </p>
 
-        <button
+        <TestAPIButton
             type="button"
             onClick={() => {
                 axios({
@@ -50,7 +69,7 @@ const App = () => (
                     url: '../public/api/crud.php/posts', // test with posts table
                     params: {
                         jwt_token: $JWT_TOKEN,
-                        filter: 'posts.title,eq,A post by Will',
+                        filter: 'posts.title,eq,A post by Tony',
                         transform: 1,
                     },
                 })
@@ -63,7 +82,8 @@ const App = () => (
             }}
         >
             Test API
-        </button>
+        </TestAPIButton>
+
         <h4>
             <FontAwesomeIcon icon="store" /> Redux Example
         </h4>
