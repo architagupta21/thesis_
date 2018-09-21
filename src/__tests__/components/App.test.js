@@ -40,6 +40,8 @@ describe('App Component Title', () => {
     it('has correct icons', () => {
         const icons = title.findWhere(n => n.type() === FontAwesomeIcon);
         expect(icons.at(0).props().icon[1]).toEqual('react');
+        expect(icons.at(1).props().icon[0]).toEqual('fas');
+
         expect(icons.at(1).props().icon[1]).toEqual('cog');
     });
 });

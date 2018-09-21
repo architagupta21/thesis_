@@ -36,7 +36,7 @@ const App = () => (
         <AppTitle>
             Hello LTI <FontAwesomeIcon icon={['fab', 'react']} />
             React App!
-            <FontAwesomeIcon icon={['fab', 'cog']} />
+            <FontAwesomeIcon icon={['fas', 'cog']} />
         </AppTitle>
         <p>
             Open <FontAwesomeIcon icon="cog" /> Developer Tools to see log

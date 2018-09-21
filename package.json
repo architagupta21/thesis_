@@ -10,7 +10,7 @@
     "start": "BABEL_ENV=development webpack --watch --mode development",
     "build": "BABEL_ENV=production webpack --mode production --config ./webpack.config.prod.js",
     "lint": "./node_modules/.bin/eslint ./src --ext .js",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
