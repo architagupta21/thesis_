@@ -2,16 +2,20 @@ module.exports = {
     "extends": [
         "airbnb",
         "prettier",
-        "prettier/react"
+        "prettier/react",
+    //    "jest/recommended"
     ],
     "plugins": [
+        "jest",
         "react",
         "jsx-a11y",
-        "import"
+        "import",
+        "prettier"
     ],
     "env":{
         "jest": true,
         "browser": true,
+        "jest/globals": true
     },
     "rules": {
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
@@ -27,12 +31,12 @@ module.exports = {
         ],
         "no-shadow": "off",
         "no-console": "off",
+        
     },
-    "plugins": [
-        "prettier"
-    ],
+    
     "globals": {
         "$LTI":false,
         "$JWT_TOKEN":false,
+        "sinon":false,
     }
 };

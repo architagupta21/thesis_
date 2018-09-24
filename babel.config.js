@@ -1,14 +1,19 @@
 // eslint-disable-next-line func-names
 module.exports = function(api) {
-    let presets = null;
-    let plugins = null;
+    let plugins = [
+        [
+            'babel-plugin-styled-components',
+            {
+                displayName: true,
+                fileName: false,
+            },
+        ],
+    ];
+    let presets = ['@babel/preset-env', '@babel/preset-react'];
 
     console.log(api.env());
 
-    if (api.env('development')) {
-        plugins = [];
-        presets = ['@babel/preset-env', '@babel/preset-react'];
-    } else {
+    if (api.env('production')) {
         plugins = [
             ['transform-remove-console', { exclude: ['error', 'warn'] }],
         ];
