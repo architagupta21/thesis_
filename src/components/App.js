@@ -22,54 +22,14 @@ const APIButtonMessage = styled.div``;
 
 const APIButton = styled.button``;
 
-const APIButtonComponent = ({
-    onClick = () => {
-        axios({
-            method: 'get',
-            url: '../public/api/api.php',
-            params: {
-                action: 'hello',
-                jwt_token: $JWT_TOKEN,
-                data: {
-                    name: $LTI.userID,
-                },
-            },
-        })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-        axios({
-            method: 'get',
-            url: '../public/api/crud.php/posts', // test with posts table
-            params: {
-                jwt_token: $JWT_TOKEN,
-                filter: 'posts.title,eq,A post by Will',
-                transform: 1,
-            },
-        })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    },
-}) => (
+const APIButtonComponent = ({ onClick }) => (
     <APIButton type="button" onClick={onClick}>
         Test API
     </APIButton>
 );
 
 APIButtonComponent.propTypes = {
-    onClick: PropTypes.func,
-};
-
-APIButtonComponent.defaultProps = {
-    onClick: () => {},
+    onClick: PropTypes.func.isRequired,
 };
 
 const App = () => (
@@ -88,7 +48,46 @@ const App = () => (
             Ensure that you have created the sample database and tables to test
             the API button below, Use developer tools to see output.
         </APIButtonMessage>
-        <APIButtonComponent />
+        <APIButtonComponent
+            onClick={() => {
+                const a = { red: 'green', blue: 'orange' };
+                const b = { ...a, blue: 'red' };
+                console.log(b);
+                axios({
+                    method: 'get',
+                    url: '../public/api/api.php',
+                    params: {
+                        action: 'hello',
+                        jwt_token: $JWT_TOKEN,
+                        data: {
+                            name: $LTI.userID,
+                        },
+                    },
+                })
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+                axios({
+                    method: 'get',
+                    url: '../public/api/crud.php/posts', // test with posts table
+                    params: {
+                        jwt_token: $JWT_TOKEN,
+                        filter: 'posts.title,eq,A post by Will',
+                        transform: 1,
+                    },
+                })
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }}
+        />
         <h4>
             <FontAwesomeIcon icon="store" /> Redux Example
         </h4>
