@@ -4,8 +4,8 @@ language: node_js
 script:
   - yarn
   - yarn lint
+  - yarn test
   - yarn build
-#  - yarn test
 
 # enable once tests are in place
 # after_success: "sbt coveralls"

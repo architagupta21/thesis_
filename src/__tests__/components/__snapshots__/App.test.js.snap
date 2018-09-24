@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component matches snapshot 1`] = `
+<AppContainer>
+  <AppTitle>
+    Hello LTI
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon={
+        Array [
+          "fab",
+          "react",
+        ]
+      }
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      symbol={false}
+      title=""
+      transform={null}
+    />
+    React App!
+  </AppTitle>
+  <p>
+    Open 
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon="cog"
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      symbol={false}
+      title=""
+      transform={null}
+    />
+     Developer Tools to see log outputs on state change
+  </p>
+  <APIButtonMessage>
+    Ensure that you have created the sample database and tables to test the API button below, Use developer tools to see output.
+  </APIButtonMessage>
+  <APIButtonComponent
+    onClick={[Function]}
+  />
+  <h4>
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon="store"
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      symbol={false}
+      title=""
+      transform={null}
+    />
+     Redux Example
+  </h4>
+  <Connect(CounterComponent) />
+</AppContainer>
+`;
