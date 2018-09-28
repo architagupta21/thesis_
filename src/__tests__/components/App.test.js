@@ -36,7 +36,9 @@ describe('App Component', () => {
     });
 
     describe('API Test Button', () => {
-        const APIButtonComponen = shallow(<APIButtonComponent />);
+        const APIButtonComponen = shallow(
+            <APIButtonComponent onClick={() => {}} />
+        );
         const APIButton = APIButtonComponen.find('APIButton');
 
         const spy = sinon.spy();
