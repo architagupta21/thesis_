@@ -59,11 +59,13 @@ module.exports = (env, argv) => {
                 files: ['./public/**/*'],
             }),
         ],
-
+        resolve: {
+            extensions: ['.ts', '.tsx', '.js', '.json'],
+        },
         module: {
             rules: [
                 {
-                    test: /\.js$/,
+                    test: /\.(tsx?)|(js)$/,
                     exclude: /node_modules/,
                     use: {
                         loader: 'babel-loader',
