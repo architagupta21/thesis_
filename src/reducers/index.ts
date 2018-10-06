@@ -35,6 +35,12 @@ const saveReducer = (state = false, action: AnyAction) => {
   }
 };
 
+export interface RootState {
+  count: number;
+  defaultCount: number;
+  save: boolean;
+}
+
 export default combineReducers({
   count: countReducer,
   defaultCount: defaultCountReducer,

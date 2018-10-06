@@ -1,85 +1,82 @@
 import { Dispatch, Store } from "redux";
+import { RootState } from "../reducers";
+import { ThunkAction } from "redux-thunk";
 
-export const Actions = {
-  SET_SAVE_TRUE: "SET_SAVE_TRUE",
-  SET_SAVE_FALSE: "SET_SAVE_FALSE",
+export enum Actions {
+  SET_SAVE_TRUE,
+  SET_SAVE_FALSE,
+  INCREASE_COUNT,
+  DECREASE_COUNT,
+  RESET_COUNT,
+  SET_DEFAULT_COUNT
+}
 
-  INCREASE_COUNT: "INCREASE_COUNT",
-  DECREASE_COUNT: "DECREASE_COUNT",
-  RESET_COUNT: "RESET_COUNT",
-  SET_DEFAULT_COUNT: "SET_DEFAULT_COUNT"
-};
+export interface SetSaveTrue {
+  type: Actions.SET_SAVE_TRUE;
+}
 
-/**
- * Action Creator:
- *
- * sets EDIT flag to be true
- *
- * @returns action object to be dispatched
- */
-const setSaveTrue = () => ({
+export interface SetSaveFalse {
+  type: Actions.SET_SAVE_FALSE;
+}
+
+export type SetSaveAction = SetSaveTrue | SetSaveFalse;
+
+const setSaveTrue = (): SetSaveTrue => ({
   type: Actions.SET_SAVE_TRUE
 });
 
-/**
- * Action Creator:
- *
- * sets EDIT flag to be false
- *
- * @returns action object to be dispatched
- */
-const setSaveFalse = () => ({
+const setSaveFalse = (): SetSaveFalse => ({
   type: Actions.SET_SAVE_FALSE
 });
 
-/**
- * Action Creator:
- *
- * increases count by given value
- *
- * @param value Int
- *
- * @returns action object to be dispatched
- */
-const increaseCount = (value: number) => ({
+//#region Count Actions
+
+//#region Count Actions Interfaces
+export interface CountPayload {
+  value: number;
+}
+export interface IncreaseCount {
+  type: Actions.INCREASE_COUNT;
+  payload: CountPayload;
+}
+export interface DecreaseCount {
+  type: Actions.DECREASE_COUNT;
+  payload: CountPayload;
+}
+
+export interface ResetCountArguments {
+  type: Actions.RESET_COUNT;
+  payload: CountPayload;
+}
+
+export interface ResetCount
+  extends ThunkAction<void, RootState, {}, ResetCountArguments> {}
+
+export interface SetCountDefault {
+  type: Actions.SET_DEFAULT_COUNT;
+  payload: CountPayload;
+}
+//#endregion Count Actions Interfaces
+
+const increaseCount = (value: number): IncreaseCount => ({
   type: Actions.INCREASE_COUNT,
   payload: {
     value
   }
 });
 
-/**
- * Action Creator:
- *
- * decreases count by given value
- *
- * @param value Int
- *
- * @returns action object to be dispatched
- */
-const decreaseCount = (value: number) => ({
+const decreaseCount = (value: number): DecreaseCount => ({
   type: Actions.DECREASE_COUNT,
   payload: {
     value
   }
 });
 
-/**
- * Action Creator:
- *
- * resets count by assinging dispatching an action with the defaultCount
- *
- * when reset count is called, the action uses redux thunk to
- * dispatch the defaultCount variable
- *
- * Read about https://github.com/reduxjs/redux-thunk to understand
- * more about what this action is doing
- *
- * @returns action object to be dispatched
- */
-const resetCount = () => (dispatch: Dispatch, getState: Store["getState"]) => {
+const resetCount = (): ResetCount => (
+  dispatch: Dispatch<ResetCountArguments>,
+  getState
+) => {
   const { defaultCount } = getState();
-
   dispatch({
     type: Actions.RESET_COUNT,
     payload: {
@@ -88,21 +85,14 @@ const resetCount = () => (dispatch: Dispatch, getState: Store["getState"]) => {
   });
 };
 
-/**
- * Action Creator:
- *
- * sets the default count value with the given value
- *
- * @param value Int
- *
- * @returns action object to be dispatched
- */
-const setCountDefault = (value: number) => ({
+const setCountDefault = (value: number): SetCountDefault => ({
   type: Actions.SET_DEFAULT_COUNT,
   payload: {
     value
   }
 });
+
+//#endregion count actions
 
 // function are ordered as above
 export {
