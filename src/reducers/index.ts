@@ -1,17 +1,8 @@
-import { combineReducers } from "redux";
+import { combineReducers, AnyAction } from "redux";
 
 import { Actions } from "../actions";
 
-interface IPayload {
-  value: number;
-}
-
-interface IAction {
-  type: string;
-  payload: IPayload;
-}
-
-const defaultCountReducer = (state = 0, action: IAction) => {
+const defaultCountReducer = (state = 0, action: AnyAction) => {
   switch (action.type) {
     case Actions.SET_DEFAULT_COUNT:
       return action.payload.value;
@@ -20,7 +11,7 @@ const defaultCountReducer = (state = 0, action: IAction) => {
   }
 };
 
-const countReducer = (state = 0, action: IAction) => {
+const countReducer = (state = 0, action: AnyAction) => {
   switch (action.type) {
     case Actions.INCREASE_COUNT:
       return state + action.payload.value;
@@ -33,7 +24,7 @@ const countReducer = (state = 0, action: IAction) => {
   }
 };
 
-const saveReducer = (state = false, action: IAction) => {
+const saveReducer = (state = false, action: AnyAction) => {
   switch (action.type) {
     case Actions.SET_SAVE_TRUE:
       return true;

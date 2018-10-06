@@ -1,11 +1,13 @@
-export const Actions = {
-    SET_SAVE_TRUE: 'SET_SAVE_TRUE',
-    SET_SAVE_FALSE: 'SET_SAVE_FALSE',
+import { Dispatch, Store } from "redux";
 
-    INCREASE_COUNT: 'INCREASE_COUNT',
-    DECREASE_COUNT: 'DECREASE_COUNT',
-    RESET_COUNT: 'RESET_COUNT',
-    SET_DEFAULT_COUNT: 'SET_DEFAULT_COUNT',
+export const Actions = {
+  SET_SAVE_TRUE: "SET_SAVE_TRUE",
+  SET_SAVE_FALSE: "SET_SAVE_FALSE",
+
+  INCREASE_COUNT: "INCREASE_COUNT",
+  DECREASE_COUNT: "DECREASE_COUNT",
+  RESET_COUNT: "RESET_COUNT",
+  SET_DEFAULT_COUNT: "SET_DEFAULT_COUNT"
 };
 
 /**
@@ -16,7 +18,7 @@ export const Actions = {
  * @returns action object to be dispatched
  */
 const setSaveTrue = () => ({
-    type: Actions.SET_SAVE_TRUE,
+  type: Actions.SET_SAVE_TRUE
 });
 
 /**
@@ -27,7 +29,7 @@ const setSaveTrue = () => ({
  * @returns action object to be dispatched
  */
 const setSaveFalse = () => ({
-    type: Actions.SET_SAVE_FALSE,
+  type: Actions.SET_SAVE_FALSE
 });
 
 /**
@@ -39,11 +41,11 @@ const setSaveFalse = () => ({
  *
  * @returns action object to be dispatched
  */
-const increaseCount = value => ({
-    type: Actions.INCREASE_COUNT,
-    payload: {
-        value,
-    },
+const increaseCount = (value: number) => ({
+  type: Actions.INCREASE_COUNT,
+  payload: {
+    value
+  }
 });
 
 /**
@@ -55,11 +57,11 @@ const increaseCount = value => ({
  *
  * @returns action object to be dispatched
  */
-const decreaseCount = value => ({
-    type: Actions.DECREASE_COUNT,
-    payload: {
-        value,
-    },
+const decreaseCount = (value: number) => ({
+  type: Actions.DECREASE_COUNT,
+  payload: {
+    value
+  }
 });
 
 /**
@@ -75,14 +77,15 @@ const decreaseCount = value => ({
  *
  * @returns action object to be dispatched
  */
-const resetCount = () => (dispatch, getState) => {
-    const { defaultCount } = getState();
-    dispatch({
-        type: Actions.RESET_COUNT,
-        payload: {
-            value: defaultCount,
-        },
-    });
+const resetCount = () => (dispatch: Dispatch, getState: Store["getState"]) => {
+  const { defaultCount } = getState();
+
+  dispatch({
+    type: Actions.RESET_COUNT,
+    payload: {
+      value: defaultCount
+    }
+  });
 };
 
 /**
@@ -94,19 +97,19 @@ const resetCount = () => (dispatch, getState) => {
  *
  * @returns action object to be dispatched
  */
-const setCountDefault = value => ({
-    type: Actions.SET_DEFAULT_COUNT,
-    payload: {
-        value,
-    },
+const setCountDefault = (value: number) => ({
+  type: Actions.SET_DEFAULT_COUNT,
+  payload: {
+    value
+  }
 });
 
 // function are ordered as above
 export {
-    setSaveTrue,
-    setSaveFalse,
-    increaseCount,
-    decreaseCount,
-    resetCount,
-    setCountDefault,
+  setSaveTrue,
+  setSaveFalse,
+  increaseCount,
+  decreaseCount,
+  resetCount,
+  setCountDefault
 };

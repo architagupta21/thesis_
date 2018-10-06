@@ -38,5 +38,11 @@ module.exports = {
         "$LTI":false,
         "$JWT_TOKEN":false,
         "sinon":false,
+    },
+    "settings": {
+        "import/resolver": {
+            "node": true,
+            "eslint-import-resolver-typescript": true
+        }
     }
 };

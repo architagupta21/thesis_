@@ -28,7 +28,7 @@ module.exports = (env, argv) => {
     return {
         mode: argv.mode,
         entry: {
-            bundle: './src/index.js',
+            bundle: './src/index.tsx',
         },
         output: {
             filename: '[name].js',
