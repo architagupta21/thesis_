@@ -1,4 +1,4 @@
-import { Dispatch, Store } from "redux";
+import { Dispatch, Store, Action } from "redux";
 import { RootState } from "../reducers";
 import { ThunkAction } from "redux-thunk";
 
@@ -11,20 +11,32 @@ export enum Actions {
   SET_DEFAULT_COUNT
 }
 
-export interface SetSaveTrue {
+export interface SetSaveTrue extends Action {
   type: Actions.SET_SAVE_TRUE;
 }
 
-export interface SetSaveFalse {
+export interface SetSaveFalse extends Action {
   type: Actions.SET_SAVE_FALSE;
 }
 
 export type SetSaveAction = SetSaveTrue | SetSaveFalse;
 
+/**
+ * Sets redux "save" state as true, this allows the edit page to trigger the save function
+ *
+ * @returns {SetSaveTrue}
+ */
 const setSaveTrue = (): SetSaveTrue => ({
   type: Actions.SET_SAVE_TRUE
 });
 
+/**
+ *
+ * Sets redux "save" state to false, this allows the edit page to be able to trigger save again,
+ * otherwise when the user goes to the edit page, they it will immeditaly redirect to the app page
+ *
+ * @returns {SetSaveFalse}
+ */
 const setSaveFalse = (): SetSaveFalse => ({
   type: Actions.SET_SAVE_FALSE
 });
@@ -35,16 +47,16 @@ const setSaveFalse = (): SetSaveFalse => ({
 export interface CountPayload {
   value: number;
 }
-export interface IncreaseCount {
+export interface IncreaseCount extends Action {
   type: Actions.INCREASE_COUNT;
   payload: CountPayload;
 }
-export interface DecreaseCount {
+export interface DecreaseCount extends Action {
   type: Actions.DECREASE_COUNT;
   payload: CountPayload;
 }
 
-export interface ResetCountArguments {
+export interface ResetCountArguments extends Action {
   type: Actions.RESET_COUNT;
   payload: CountPayload;
 }
@@ -58,6 +70,12 @@ export interface SetCountDefault {
 }
 //#endregion Count Actions Interfaces
 
+/**
+ * Increases count by given value
+ *
+ * @param {number} value
+ * @returns {IncreaseCount}
+ */
 const increaseCount = (value: number): IncreaseCount => ({
   type: Actions.INCREASE_COUNT,
   payload: {
@@ -65,6 +83,12 @@ const increaseCount = (value: number): IncreaseCount => ({
   }
 });
 
+/**
+ * Decreases count by given value
+ *
+ * @param {number} value
+ * @returns {DecreaseCount}
+ */
 const decreaseCount = (value: number): DecreaseCount => ({
   type: Actions.DECREASE_COUNT,
   payload: {
@@ -72,6 +96,14 @@ const decreaseCount = (value: number): DecreaseCount => ({
   }
 });
 
+/**
+ * Resets count to default value (set in store)
+ *
+ * This is a redux-thunk, that reads the defaultCount in redux store
+ * and dispatches the reset count action using the defaultCount as payload
+ *
+ * @returns {ResetCount}
+ */
 const resetCount = (): ResetCount => (
   dispatch: Dispatch<ResetCountArguments>,
   getState
@@ -85,6 +117,12 @@ const resetCount = (): ResetCount => (
   });
 };
 
+/**
+ * Sets the defaultCount to the given value
+ *
+ * @param {number} value
+ * @returns {SetCountDefault}
+ */
 const setCountDefault = (value: number): SetCountDefault => ({
   type: Actions.SET_DEFAULT_COUNT,
   payload: {
