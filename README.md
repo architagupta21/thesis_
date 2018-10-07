@@ -5,7 +5,7 @@ Create an LTI provider using React + PHP, with minimal build configuration with 
 
 ## Typescript support (Work in progress - [#19](/../../issues/19))
 
-Switch to `typescript` branch to see this base implimented in Typescript
+Switch to [typescript](/../../tree/typescript) branch to see this base implimented in Typescript
 
 
 ## Quick Start
