@@ -3,6 +3,10 @@
 
 Create an LTI provider using React + PHP, with minimal build configuration with opiniontated code formatting using ESlint & Prettier
 
+## Typescript support (Work in progress - [#19](/../../issues/19))
+
+Switch to `typescript` branch to see this base implimented in Typescript
+
 
 ## Quick Start
 
