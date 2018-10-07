@@ -29,3 +29,5 @@ interface $LTI {
 }
 
 declare var $LTI: $LTI;
+
+declare var $JWT_TOKEN: string;
