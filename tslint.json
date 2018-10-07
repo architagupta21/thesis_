@@ -1,0 +1,25 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+    "no-unused-variable": true,
+    "interface-name": [true, "never-prefix"],
+    "no-console": false,
+    "prettier": [
+      true,
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 80,
+        "tabWidth": 4
+      }
+    ]
+  },
+  "rulesDirectory": ["tslint-plugin-prettier"]
+}

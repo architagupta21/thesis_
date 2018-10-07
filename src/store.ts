@@ -1,34 +1,34 @@
-import axios from "axios";
-import { applyMiddleware, createStore } from "redux";
-import { multiClientMiddleware } from "redux-axios-middleware";
-import { createLogger } from "redux-logger";
-import promise from "redux-promise-middleware";
-import thunk from "redux-thunk";
+import axios from 'axios';
+import { applyMiddleware, createStore } from 'redux';
+import { multiClientMiddleware } from 'redux-axios-middleware';
+import { createLogger } from 'redux-logger';
+import promise from 'redux-promise-middleware';
+import thunk from 'redux-thunk';
 
-import reducer from "./reducers";
+import reducer from './reducers';
 
 const logger = createLogger({});
 
 const clients = {
-  default: {
-    client: axios.create({
-      baseURL: "../public/api/crud.php/",
-      responseType: "json"
-    })
-  },
-  activityAPI: {
-    client: axios.create({
-      baseURL: "../public/api/api.php/",
-      responseType: "json"
-    })
-  }
+    activityAPI: {
+        client: axios.create({
+            baseURL: '../public/api/api.php/',
+            responseType: 'json',
+        }),
+    },
+    default: {
+        client: axios.create({
+            baseURL: '../public/api/crud.php/',
+            responseType: 'json',
+        }),
+    },
 };
 
 const middleware = applyMiddleware(
-  promise(),
-  thunk,
-  logger,
-  multiClientMiddleware(clients)
+    promise(),
+    thunk,
+    logger,
+    multiClientMiddleware(clients)
 );
 
 export default createStore(reducer, middleware);

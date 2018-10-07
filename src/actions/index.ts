@@ -1,22 +1,22 @@
-import { Dispatch, Store, Action } from "redux";
-import { RootState } from "../reducers";
-import { ThunkAction } from "redux-thunk";
+import { Action, Dispatch, Store } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from '../reducers';
 
 export enum Actions {
-  SET_SAVE_TRUE,
-  SET_SAVE_FALSE,
-  INCREASE_COUNT,
-  DECREASE_COUNT,
-  RESET_COUNT,
-  SET_DEFAULT_COUNT
+    SET_SAVE_TRUE,
+    SET_SAVE_FALSE,
+    INCREASE_COUNT,
+    DECREASE_COUNT,
+    RESET_COUNT,
+    SET_DEFAULT_COUNT,
 }
 
 export interface SetSaveTrue extends Action {
-  type: Actions.SET_SAVE_TRUE;
+    type: Actions.SET_SAVE_TRUE;
 }
 
 export interface SetSaveFalse extends Action {
-  type: Actions.SET_SAVE_FALSE;
+    type: Actions.SET_SAVE_FALSE;
 }
 
 export type SetSaveAction = SetSaveTrue | SetSaveFalse;
@@ -27,7 +27,7 @@ export type SetSaveAction = SetSaveTrue | SetSaveFalse;
  * @returns {SetSaveTrue}
  */
 const setSaveTrue = (): SetSaveTrue => ({
-  type: Actions.SET_SAVE_TRUE
+    type: Actions.SET_SAVE_TRUE,
 });
 
 /**
@@ -38,35 +38,35 @@ const setSaveTrue = (): SetSaveTrue => ({
  * @returns {SetSaveFalse}
  */
 const setSaveFalse = (): SetSaveFalse => ({
-  type: Actions.SET_SAVE_FALSE
+    type: Actions.SET_SAVE_FALSE,
 });
 
 //#region Count Actions
 
 //#region Count Actions Interfaces
 export interface CountPayload {
-  value: number;
+    value: number;
 }
 export interface IncreaseCount extends Action {
-  type: Actions.INCREASE_COUNT;
-  payload: CountPayload;
+    type: Actions.INCREASE_COUNT;
+    payload: CountPayload;
 }
 export interface DecreaseCount extends Action {
-  type: Actions.DECREASE_COUNT;
-  payload: CountPayload;
+    type: Actions.DECREASE_COUNT;
+    payload: CountPayload;
 }
 
 export interface ResetCountArguments extends Action {
-  type: Actions.RESET_COUNT;
-  payload: CountPayload;
+    type: Actions.RESET_COUNT;
+    payload: CountPayload;
 }
 
 export interface ResetCount
-  extends ThunkAction<void, RootState, {}, ResetCountArguments> {}
+    extends ThunkAction<void, RootState, {}, ResetCountArguments> {}
 
 export interface SetCountDefault {
-  type: Actions.SET_DEFAULT_COUNT;
-  payload: CountPayload;
+    type: Actions.SET_DEFAULT_COUNT;
+    payload: CountPayload;
 }
 //#endregion Count Actions Interfaces
 
@@ -77,10 +77,10 @@ export interface SetCountDefault {
  * @returns {IncreaseCount}
  */
 const increaseCount = (value: number): IncreaseCount => ({
-  type: Actions.INCREASE_COUNT,
-  payload: {
-    value
-  }
+    payload: {
+        value,
+    },
+    type: Actions.INCREASE_COUNT,
 });
 
 /**
@@ -90,10 +90,10 @@ const increaseCount = (value: number): IncreaseCount => ({
  * @returns {DecreaseCount}
  */
 const decreaseCount = (value: number): DecreaseCount => ({
-  type: Actions.DECREASE_COUNT,
-  payload: {
-    value
-  }
+    payload: {
+        value,
+    },
+    type: Actions.DECREASE_COUNT,
 });
 
 /**
@@ -105,16 +105,16 @@ const decreaseCount = (value: number): DecreaseCount => ({
  * @returns {ResetCount}
  */
 const resetCount = (): ResetCount => (
-  dispatch: Dispatch<ResetCountArguments>,
-  getState
+    dispatch: Dispatch<ResetCountArguments>,
+    getState
 ) => {
-  const { defaultCount } = getState();
-  dispatch({
-    type: Actions.RESET_COUNT,
-    payload: {
-      value: defaultCount
-    }
-  });
+    const { defaultCount } = getState();
+    dispatch({
+        payload: {
+            value: defaultCount,
+        },
+        type: Actions.RESET_COUNT,
+    });
 };
 
 /**
@@ -124,20 +124,20 @@ const resetCount = (): ResetCount => (
  * @returns {SetCountDefault}
  */
 const setCountDefault = (value: number): SetCountDefault => ({
-  type: Actions.SET_DEFAULT_COUNT,
-  payload: {
-    value
-  }
+    payload: {
+        value,
+    },
+    type: Actions.SET_DEFAULT_COUNT,
 });
 
 //#endregion count actions
 
 // function are ordered as above
 export {
-  setSaveTrue,
-  setSaveFalse,
-  increaseCount,
-  decreaseCount,
-  resetCount,
-  setCountDefault
+    setSaveTrue,
+    setSaveFalse,
+    increaseCount,
+    decreaseCount,
+    resetCount,
+    setCountDefault,
 };
