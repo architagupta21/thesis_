@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4529
+# Version 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: localhost (MySQL 5.6.38)
+# Host: 127.0.0.1 (MySQL 5.7.21)
 # Database: test
-# Generation Time: 2018-08-19 06:43:12 +0000
+# Generation Time: 2018-11-05 06:29:49 +0000
 # ************************************************************
 
 
@@ -20,38 +20,55 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+# Dump of table authors
+# ------------------------------------------------------------
+
+CREATE TABLE `authors` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `authors` WRITE;
+/*!40000 ALTER TABLE `authors` DISABLE KEYS */;
+
+INSERT INTO `authors` (`id`, `name`)
+VALUES
+	(1,'Sam'),
+	(2,'Scott'),
+	(3,'Natasha'),
+	(4,'Tony'),
+	(5,'Stephen'),
+	(6,'Bruce'),
+	(7,'Wong'),
+	(8,'Steve');
+
+/*!40000 ALTER TABLE `authors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table posts
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `posts`;
-
 CREATE TABLE `posts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `text` varchar(255) DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(256) DEFAULT NULL,
+  `text` varchar(256) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  `authorId` int(11) DEFAULT NULL,
+  `authorID` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `authorId` (`authorId`),
-  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `authors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `authorID` (`authorID`),
+  CONSTRAINT `authorID` FOREIGN KEY (`authorID`) REFERENCES `authors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 
-INSERT INTO `posts` (`id`, `title`, `text`, `createdAt`, `updatedAt`, `authorId`)
+INSERT INTO `posts` (`id`, `title`, `text`, `createdAt`, `updatedAt`, `authorID`)
 VALUES
-	(1,'A post by Maurine','Et qui quia odio dolore. Eligendi in deserunt. Harum sit odio dolor dicta provident quo provident.','2018-08-09 01:47:33','2018-08-09 01:47:33',1),
-	(2,'A post by Edmond','Harum ullam pariatur quos est quod. Ea quisquam esse quia et commodi autem. Ut exercitationem maiores et voluptas.','2018-08-09 01:47:33','2018-08-09 01:47:33',2),
-	(3,'A post by Katlyn','Omnis iusto doloremque et. Quos sequi molestiae beatae. Necessitatibus molestiae placeat saepe eligendi.','2018-08-09 01:47:33','2018-08-09 01:47:33',4),
-	(4,'A post by Danika','Excepturi et laudantium fuga similique sed corporis voluptatem dolores esse. Et repudiandae magnam aut atque dolores voluptatibus ut. Iusto laborum placeat quia deleniti dolorem quibusdam.','2018-08-09 01:47:33','2018-08-09 01:47:33',3),
-	(5,'A post by Millie','Veniam perspiciatis et nisi aut corporis nisi. Est soluta accusamus officiis ut excepturi. Libero enim qui quo fuga enim.','2018-08-09 01:47:33','2018-08-09 01:47:33',5),
-	(6,'A post by Henderson','Non voluptas quia dicta ipsam omnis necessitatibus et. Adipisci dolores sunt numquam. Occaecati rerum neque et.','2018-08-09 01:47:33','2018-08-09 01:47:33',6),
-	(7,'A post by Will','Quisquam asperiores sit voluptatum deserunt enim iste molestias nesciunt. Sequi omnis eligendi aut voluptatem. Eligendi voluptates omnis eius iure commodi et.','2018-08-09 01:47:33','2018-08-09 01:47:33',7),
-	(8,'A post by Jayde','Voluptas impedit ea reprehenderit quae incidunt nemo vel in. Nihil iste asperiores consequatur ex quidem omnis. Deserunt quae eligendi.','2018-08-09 01:47:33','2018-08-09 01:47:33',9),
-	(9,'A post by Giuseppe','Voluptatem exercitationem in omnis et consequatur nisi officiis excepturi. Nam omnis odit. Magni aut quia praesentium distinctio.','2018-08-09 01:47:33','2018-08-09 01:47:33',10),
-	(10,'A post by Will','Nulla exercitationem omnis illum. Natus eum cum voluptatem consequatur ex et ipsum quam. Veritatis laboriosam deleniti omnis occaecati in culpa occaecati enim.','2018-08-09 01:47:33','2018-08-09 01:47:33',7),
+	(5,'A Post by Tony','Et qui quia odio dolore. Eligendi in deserunt. Harum sit odio dolor dicta provident quo provident.','2018-08-09 01:47:33','2018-08-09 01:47:33',4),
+	(6,'A Post by Stephen','Harum ullam pariatur quos est quod. Ea quisquam esse quia et commodi autem. Ut exercitationem maiores et voluptas.','2018-08-09 01:47:33','2018-08-09 01:47:33',5);
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -29,6 +29,7 @@ class MyApi
 	 */
 	private function _processRequest()
 	{
+
 		// get the request
 		if (!empty($_REQUEST)) {
 			// convert to object for consistency

@@ -35,8 +35,32 @@ const saveReducer = (state = false, action) => {
     }
 };
 
+const phpMessageReducer = (state = '', action) => {
+    switch (action.type) {
+        case Actions.GET_PHP_MESSAGE_SUCCESS:
+            return action.payload.data;
+        default:
+            return state;
+    }
+};
+
+const dbPostReducer = (state = '', action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case Actions.GET_DB_POST_SUCCESS:
+            if (payload.data.posts.length > 0) {
+                return payload.data.posts[0].text;
+            }
+            return 'No Posts Available';
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     count: countReducer,
     defaultCount: defaultCountReducer,
     save: saveReducer,
+    phpMessage: phpMessageReducer,
+    dbPost: dbPostReducer,
 });

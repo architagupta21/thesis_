@@ -6,6 +6,18 @@ export const Actions = {
     DECREASE_COUNT: 'DECREASE_COUNT',
     RESET_COUNT: 'RESET_COUNT',
     SET_DEFAULT_COUNT: 'SET_DEFAULT_COUNT',
+
+    GET_PHP_MESSAGE_START: 'GET_PHP_MESSAGE_START',
+    GET_PHP_MESSAGE_SUCCESS: 'GET_PHP_MESSAGE_SUCCESS',
+    GET_PHP_MESSAGE_ERROR: 'GET_PHP_MESSAGE_ERROR',
+
+    GET_DB_POST_START: 'GET_DB_POST_START',
+    GET_DB_POST_SUCCESS: 'GET_DB_POST_SUCCESS',
+    GET_DB_POST_ERROR: 'GET_DB_POST_ERROR',
+};
+
+const Tables = {
+    POSTS: 'posts',
 };
 
 /**
@@ -101,6 +113,54 @@ const setCountDefault = value => ({
     },
 });
 
+const getPHPMessage = () => ({
+    types: [
+        Actions.GET_PHP_MESSAGE_START,
+        Actions.GET_PHP_MESSAGE_SUCCESS,
+        Actions.GET_PHP_MESSAGE_ERROR,
+    ],
+    payload: {
+        client: 'activityAPI', // here you can define client used
+        request: {
+            method: 'get',
+            params: {
+                action: 'hello',
+                data: {
+                    name: 'ankith',
+                },
+            },
+        },
+    },
+});
+
+// example of using redux thunk
+const getDBPost = () => (dispatch, getState) => {
+    const { phpMessage } = getState();
+
+    console.log(
+        'You can access redux state directly in actions using redux thunk: phpMessage - ',
+        phpMessage
+    );
+
+    return dispatch({
+        types: [
+            Actions.GET_DB_POST_START,
+            Actions.GET_DB_POST_SUCCESS,
+            Actions.GET_DB_POST_ERROR,
+        ],
+        payload: {
+            request: {
+                method: 'get',
+                url: `/${Tables.POSTS}`,
+                params: {
+                    filter: 'posts.title,eq,A post by Tony',
+                    transform: 1,
+                },
+            },
+        },
+    });
+};
+
 // function are ordered as above
 export {
     setSaveTrue,
@@ -109,4 +169,6 @@ export {
     decreaseCount,
     resetCount,
     setCountDefault,
+    getPHPMessage,
+    getDBPost,
 };
