@@ -78,6 +78,20 @@ exports[`App Component matches snapshot 1`] = `
     />
      Redux Example
   </h4>
+  <h5>
+    PHP MESSAGE: 
+  </h5>
+  <p>
+    DB POST: 
+  </p>
+  <h5>
+    COUNTER EXAMPLE
+  </h5>
+  <p>
+    APP COMPONENT: 
+    0
+  </p>
+  COUNTER COMPONENT: 
   <Connect(CounterComponent) />
 </AppContainer>
 `;

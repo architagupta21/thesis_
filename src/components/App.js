@@ -114,11 +114,13 @@ export default withRouter(
 );
 
 App.propTypes = {
-    phpMessage: PropTypes.string.isRequired,
-    dbPost: PropTypes.string.isRequired,
+    phpMessage: PropTypes.string,
+    dbPost: PropTypes.string,
     count: PropTypes.number,
 };
 
 App.defaultProps = {
     count: 0,
+    phpMessage: '',
+    dbPost: '',
 };
