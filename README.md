@@ -1,4 +1,5 @@
-# LTI React Template
+# Copus LTI
+
 [![Build Status](https://travis-ci.org/UQ-UQx/react-php-lti.svg?branch=master)](https://travis-ci.org/UQ-UQx/react-php-lti)
 
 Create an LTI provider using React + PHP, with minimal build configuration with opiniontated code formatting using ESlint & Prettier
