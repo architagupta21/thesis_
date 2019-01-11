@@ -37,7 +37,7 @@ class CreateProgramPage extends React.Component {
                 <button
                     type="button"
                     onClick={event => {
-                        alert(inputValue);
+                        console.log(inputValue);
                     }}
                 >
                     Show me the value
