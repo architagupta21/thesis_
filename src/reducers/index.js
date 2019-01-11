@@ -57,10 +57,19 @@ const dbPostReducer = (state = '', action) => {
     }
 };
 
+const progamExistsReducer = (state = false, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     count: countReducer,
     defaultCount: defaultCountReducer,
     save: saveReducer,
     phpMessage: phpMessageReducer,
     dbPost: dbPostReducer,
+    programExists: progamExistsReducer,
 });

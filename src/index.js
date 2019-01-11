@@ -11,6 +11,8 @@ import Admin from './admin';
 import AppMenu from './AppMenu';
 import { getPHPMessage, getDBPost } from './actions';
 
+import CreateProgramPage from './components/CreateProgramPage';
+
 library.add(faReact, faCog, faStore);
 
 const renderApp = (noError = true) =>
@@ -27,6 +29,10 @@ const renderApp = (noError = true) =>
                         ''
                     )}
                     <Switch>
+                        <Route
+                            path="/createprogram"
+                            render={props => <CreateProgramPage {...props} />}
+                        />
                         <Route
                             path="/edit"
                             render={props => <Admin {...props} />}
