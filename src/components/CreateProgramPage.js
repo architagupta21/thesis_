@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import CreateProgramForm from './CreateProgramForm';
 
 const ComponentContainer = styled.div``;
 
@@ -11,7 +12,10 @@ class CreateProgramPage extends React.Component {
         super(props);
 
         this.state = {
-            inputValue: 'Default Value',
+            coordinatorId: '',
+            year: '',
+            semester: '',
+            coordinatorIdInput: '',
         };
     }
 
@@ -20,28 +24,69 @@ class CreateProgramPage extends React.Component {
 
         const { programExists } = this.props;
 
-        const { inputValue } = this.state;
+        const { coordinatorId } = this.state;
+        const { year } = this.state;
+        const { semester } = this.state;
+
+        const { coordinatorIdInput } = this.state;
 
         return (
             <ComponentContainer>
-                Create Program Page {JSON.stringify(programExists)}
+                The Offering does not exist. Fill the details below to create a
+                new offering {JSON.stringify(programExists)}
+                <br />
+                Coordinator Staff ID
                 <input
                     onChange={event => {
                         console.log(event.target.value);
                         this.setState({
-                            inputValue: event.target.value,
+                            coordinatorId: event.target.value,
                         });
                     }}
-                    value={inputValue}
+                    value={coordinatorId}
                 />
+                <br />
+                Year
+                <input
+                    onChange={event => {
+                        console.log(event.target.value);
+                        this.setState({
+                            year: event.target.value,
+                        });
+                    }}
+                    value={year}
+                />
+                <br />
+                Semester
+                <input
+                    onChange={event => {
+                        console.log(event.target.value);
+                        this.setState({
+                            semester: event.target.value,
+                        });
+                    }}
+                    value={semester}
+                />
+                <br />
                 <button
                     type="button"
-                    onClick={event => {
-                        console.log(inputValue);
+                    onClick={() => {
+                        console.log(coordinatorId);
+                        console.log(year);
+                        console.log(semester);
                     }}
                 >
-                    Show me the value
+                    Save
                 </button>
+                <br />
+                <br />
+                <br />
+                <br />
+                <CreateProgramForm
+                    InputOnChange={text => {
+                        this.setState({ coordinatorIdInput: text });
+                    }}
+                />
             </ComponentContainer>
         );
     }

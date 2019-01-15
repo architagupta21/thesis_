@@ -7,6 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start-windows": ".\\node_modules\\.bin\\webpack --watch --mode development",
+    "build-windows": ".\\node_modules\\.bin\\webpack --mode production --config .//webpack.config.prod.js",
     "start": "BABEL_ENV=development webpack --watch --mode development",
     "build": "BABEL_ENV=production webpack --mode production --config ./webpack.config.prod.js",
     "lint": "./node_modules/.bin/eslint ./src --ext .js",
