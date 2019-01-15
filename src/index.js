@@ -7,11 +7,12 @@ import { faReact } from '@fortawesome/free-brands-svg-icons';
 import { faCog, faStore } from '@fortawesome/free-solid-svg-icons';
 import store from './store';
 import App from './components/App';
-import Admin from './admin';
-import AppMenu from './AppMenu';
-import { getPHPMessage, getDBPost } from './actions';
+import DataAnalysisPage from './components/DataAnalysisPage';
+import DataEntryPage from './components/DataEntryPage';
+import MainPage from './components/MainPage';
 
-import CreateProgramPage from './components/CreateProgramPage';
+import SettingsPage from './settings';
+import { getPHPMessage, getDBPost } from './actions';
 
 library.add(faReact, faCog, faStore);
 
@@ -21,25 +22,26 @@ const renderApp = (noError = true) =>
     ) : (
         <Provider store={store}>
             <Router>
-                <Fragment>
-                    {$LTI.user_role === 'Instructor' ||
-                    $LTI.user_role === 'Administrator' ? (
-                        <AppMenu />
-                    ) : (
-                        ''
-                    )}
+                <App>
                     <Switch>
                         <Route
-                            path="/createprogram"
-                            render={props => <CreateProgramPage {...props} />}
+                            path="/settings"
+                            render={props => <SettingsPage {...props} />}
                         />
                         <Route
-                            path="/edit"
-                            render={props => <Admin {...props} />}
+                            path="/dataentry"
+                            render={props => <DataEntryPage {...props} />}
                         />
-                        <Route path="/" render={props => <App {...props} />} />
+                        <Route
+                            path="/analytics"
+                            render={props => <DataAnalysisPage {...props} />}
+                        />
+                        <Route
+                            path="/"
+                            render={props => <MainPage {...props} />}
+                        />
                     </Switch>
-                </Fragment>
+                </App>
             </Router>
         </Provider>
     );

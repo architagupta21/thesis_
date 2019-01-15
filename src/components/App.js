@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Counter from './Counter';
+import SideMenu from './SideMenu';
 
 const AppContainer = styled.div`
     border: 1px solid lightgrey;
@@ -44,22 +44,18 @@ class App extends React.Component {
         this.state = {};
     }
 
-    componentDidMount() {
-        const { programExists, history } = this.props;
-
-        console.log('Component did mount: ', programExists);
-
-        // redirect to program create page.
-
-        if (!programExists) {
-            history.push('/createprogram');
-        }
-    }
-
     render() {
         console.log('App Props: ', this.props);
 
-        return <AppContainer> This is the main App page</AppContainer>;
+        const { children } = this.props;
+
+        return (
+            <AppContainer>
+                {' '}
+                <SideMenu />
+                {children}
+            </AppContainer>
+        );
     }
 }
 
