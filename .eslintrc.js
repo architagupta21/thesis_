@@ -20,6 +20,9 @@ module.exports = {
     "rules": {
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/forbid-prop-types": [0],
+        "react/prop-types":[0],
+        "no-unused-vars":[1],
         "prettier/prettier": [
             "error",
             {

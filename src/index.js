@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
@@ -7,8 +7,8 @@ import { faReact } from '@fortawesome/free-brands-svg-icons';
 import { faCog, faStore } from '@fortawesome/free-solid-svg-icons';
 import store from './store';
 import App from './components/App';
+import Layout from './components/Layout';
 import Admin from './admin';
-import AppMenu from './AppMenu';
 import { getPHPMessage, getDBPost } from './actions';
 
 library.add(faReact, faCog, faStore);
@@ -19,13 +19,7 @@ const renderApp = (noError = true) =>
     ) : (
         <Provider store={store}>
             <Router>
-                <Fragment>
-                    {$LTI.user_role === 'Instructor' ||
-                    $LTI.user_role === 'Administrator' ? (
-                        <AppMenu />
-                    ) : (
-                        ''
-                    )}
+                <Layout>
                     <Switch>
                         <Route
                             path="/edit"
@@ -33,7 +27,7 @@ const renderApp = (noError = true) =>
                         />
                         <Route path="/" render={props => <App {...props} />} />
                     </Switch>
-                </Fragment>
+                </Layout>
             </Router>
         </Provider>
     );
@@ -71,7 +65,7 @@ if ($LTI.userID === 'student') {
     */
 
     // this method can be used to resolve multiple promises before redering the app
-    Promise.all([store.dispatch(getPHPMessage()), store.dispatch(getDBPost())])
+    Promise.all([store.dispatch(getPHPMessage())])
         .then(response => {
             console.log(response);
             /* 
