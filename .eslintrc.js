@@ -23,6 +23,7 @@ module.exports = {
         "react/forbid-prop-types": [0],
         "react/prop-types":[0],
         "no-unused-vars":[1],
+        "linebreak-style":[0],
         "prettier/prettier": [
             "error",
             {
