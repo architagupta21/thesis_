@@ -56,7 +56,7 @@ function Layout(props) {
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" color="inherit" noWrap>
-                        Permanent drawer
+                        COPUS
                     </Typography>
                 </Toolbar>
             </AppBar>
