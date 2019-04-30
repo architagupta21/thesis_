@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { setCountDefault, setSaveFalse } from '../actions';
+import uuid from 'uuid/v4';
+import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
 
 const Container = styled.div`
     padding: 20px;
@@ -16,9 +17,16 @@ const DefaultCountInput = styled.input`
 `;
 
 // https://reactjs.org/docs/hooks-intro.html
-const Admin = ({ history, setCountDefault, defaultCountFromRedux }) => {
+const Admin = ({
+    history,
+    setCountDefault,
+    defaultCountFromRedux,
+    addStaffMember,
+    staff,
+}) => {
     const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
 
+    console.log('MY STAFF:', staff);
     return (
         <Container>
             Default Count Value:
@@ -42,6 +50,24 @@ const Admin = ({ history, setCountDefault, defaultCountFromRedux }) => {
                     Save Changes
                 </Button>
             </div>
+            <br />
+            <br />
+            <br />
+            {staff.map(person => (
+                <div>
+                    <div>{person.id}</div>
+                </div>
+            ))}
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                    console.log('ADD STAFF BUTTOn');
+                    addStaffMember(uuid(), 'prof', 'random', 'person');
+                }}
+            >
+                ADD RANDOM STAFF
+            </Button>
         </Container>
     );
 };
@@ -93,8 +119,9 @@ export default withRouter(
         state => ({
             save: state.save,
             defaultCountFromRedux: state.defaultCount,
+            staff: state.staff,
         }),
-        { setCountDefault, setSaveFalse }
+        { setCountDefault, setSaveFalse, addStaffMember }
     )(Admin)
 );
 

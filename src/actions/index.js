@@ -14,6 +14,8 @@ export const Actions = {
     GET_DB_POST_START: 'GET_DB_POST_START',
     GET_DB_POST_SUCCESS: 'GET_DB_POST_SUCCESS',
     GET_DB_POST_ERROR: 'GET_DB_POST_ERROR',
+
+    ADD_STAFF: 'ADD_STAFF',
 };
 
 const Tables = {
@@ -161,6 +163,16 @@ const getDBPost = () => (dispatch, getState) => {
     });
 };
 
+const addStaffMember = (id, title, firstname, lastname) => ({
+    type: Actions.ADD_STAFF,
+    payload: {
+        id,
+        title,
+        firstname,
+        lastname,
+    },
+});
+
 // function are ordered as above
 export {
     setSaveTrue,
@@ -171,4 +183,5 @@ export {
     setCountDefault,
     getPHPMessage,
     getDBPost,
+    addStaffMember,
 };
