@@ -89,6 +89,38 @@ const staffReducer = (state = [], action) => {
     }
 };
 
+const activityReducer = (state = [], action) => {
+    /**
+     
+        {
+            type: ADD_ACTIVITY,
+            payload: {
+                id,
+                name,
+                staff,
+                student,
+            }
+        }
+     
+     */
+    const { type, payload } = action;
+
+    switch (type) {
+        case Actions.ADD_ACTIVITY:
+            return [
+                ...state,
+                {
+                    id: payload.id,
+                    name: payload.name,
+                    staff: payload.staff,
+                    student: payload.student,
+                },
+            ];
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     count: countReducer,
     defaultCount: defaultCountReducer,
@@ -96,4 +128,5 @@ export default combineReducers({
     phpMessage: phpMessageReducer,
     dbPost: dbPostReducer,
     staff: staffReducer,
+    activity: activityReducer,
 });
