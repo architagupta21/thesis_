@@ -9,74 +9,93 @@ import TextField from '@material-ui/core/TextField';
 // import { Record } from 'immutable';
 import { addStaffMember } from '../actions';
 
-// class AddStaffDetailsForm extends Component{
-
-// }
+const Container = styled.div`
+    padding: 20px;
+    border: 1px solid lightblue;
+`;
 
 const staffObj = {
-    fname: '',
-    lname: '',
+    firstname: '',
+    lastname: '',
     title: '',
 };
 
-const onFNameChange = event => {
-    staffObj.fname = event.target.value;
+const onFirstNameChange = event => {
+    staffObj.firstname = event.target.value;
 };
 
-const onLNameChange = event => {
-    staffObj.lname = event.target.value;
+const onLastNameChange = event => {
+    staffObj.lastname = event.target.value;
 };
 
 const onTitleChange = event => {
     staffObj.title = event.target.value;
 };
 
-const AddStaffDetailsForm = () => (
-    <Container>
-        <form>
-            <TextField
-                id="outlined-name"
-                label="Title"
-                onChange={onTitleChange}
-                margin="normal"
-                variant="outlined"
-            />
-            <br />
-            <TextField
-                id="outlined-name"
-                label="First Name"
-                onChange={onFNameChange}
-                margin="normal"
-                variant="outlined"
-            />
-            <br />
-            <TextField
-                id="outlined-name"
-                label="Last Name"
-                onChange={onLNameChange}
-                margin="normal"
-                variant="outlined"
-            />
-            <br />
-            <br />
-            <br />
-            <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                    console.log('Adding staff details:');
-                    addStaffMember(
-                        uuid(),
-                        staffObj.title,
-                        staffObj.fname,
-                        staffObj.lname
-                    );
-                }}
-            >
-                ADD STAFF
-            </Button>
-        </form>
-    </Container>
-);
+const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
+    // const [defaultCount, setDefaultCount] = useState(eve);
+    console.log('MY STAFF:', staff);
+    return (
+        <Container>
+            <form>
+                <TextField
+                    id="outlined-name"
+                    label="Title"
+                    onChange={onTitleChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                <br />
+                <TextField
+                    id="outlined-name"
+                    label="First Name"
+                    onChange={onFirstNameChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                <br />
+                <TextField
+                    id="outlined-name"
+                    label="Last Name"
+                    onChange={onLastNameChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                <br />
+                <br />
+                <br />
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                        console.log('Adding staff details:');
+                        addStaffMember(
+                            uuid(),
+                            staffObj.title,
+                            staffObj.firstname,
+                            staffObj.lastname
+                        );
+                    }}
+                >
+                    ADD STAFF
+                </Button>
+            </form>
+        </Container>
+    );
+};
 
-export default AddStaffDetailsForm;
+export default withRouter(
+    connect(
+        state => ({
+            save: state.save,
+            staff: state.staff,
+        }),
+        {
+            addStaffMember,
+        }
+    )(AddStaffDetailsFormComponent)
+);
+AddStaffDetailsFormComponent.propTypes = {
+    history: PropTypes.shape({}).isRequired,
+    staff: PropTypes.shape({}).isRequired,
+};

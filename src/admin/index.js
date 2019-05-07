@@ -4,10 +4,8 @@ import styled from 'styled-components';
 import PropTypes, { string } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import uuid from 'uuid/v4';
-import TextField from '@material-ui/core/TextField';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
-// import AddStaffDetailsForm from '../components/AddStaffDetailsForm';
+import AddStaffDetailsFormComponent from '../components/AddStaffDetailsForm';
 
 const Container = styled.div`
     padding: 20px;
@@ -17,31 +15,8 @@ const Container = styled.div`
 const DefaultCountInput = styled.input`
     margin-left: 10px;
 `;
-const staffObj = {
-    fname: '',
-    lname: '',
-    title: '',
-};
 
-const onFNameChange = event => {
-    staffObj.fname = event.target.value;
-};
-
-const onLNameChange = event => {
-    staffObj.lname = event.target.value;
-};
-
-const onTitleChange = event => {
-    staffObj.title = event.target.value;
-};
-
-const Admin = ({
-    history,
-    setCountDefault,
-    defaultCountFromRedux,
-    addStaffMember,
-    staff,
-}) => {
+const Admin = ({ history, setCountDefault, defaultCountFromRedux, staff }) => {
     const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
     console.log('MY STAFF:', staff);
     return (
@@ -68,69 +43,12 @@ const Admin = ({
                 </Button>
             </div>
             {staff.map(person => (
-                <div>
-                    <div>{person.id}</div>
-                </div>
+                <div>{<div>{person.firstname}</div>}</div>
             ))}
-            {/* <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                    console.log('ADD STAFF BUTTOn');
-                    addStaffMember(uuid(), 'prof', 'random', 'person');
-                }}
-            >
-                ADD RANDOM STAFF
-            </Button> */}
             <br />
             <br />
             <br />
-            {/* <AddStaffDetailsForm /> */}
-            <form>
-                <TextField
-                    id="outlined-name"
-                    label="Title"
-                    onChange={onTitleChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-                <TextField
-                    id="outlined-name"
-                    label="First Name"
-                    onChange={onFNameChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-                <TextField
-                    id="outlined-name"
-                    label="Last Name"
-                    onChange={onLNameChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-
-                <br />
-                <br />
-
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => {
-                        console.log('Adding staff details:');
-                        addStaffMember(
-                            uuid(),
-                            staffObj.title,
-                            staffObj.fname,
-                            staffObj.lname
-                        );
-                    }}
-                >
-                    ADD STAFF
-                </Button>
-            </form>
+            <AddStaffDetailsFormComponent />
         </Container>
     );
 };
@@ -141,7 +59,12 @@ export default withRouter(
             defaultCountFromRedux: state.defaultCount,
             staff: state.staff,
         }),
-        { setCountDefault, setSaveFalse, addStaffMember }
+        {
+            setCountDefault,
+            setSaveFalse,
+            addStaffMember,
+            AddStaffDetailsFormComponent,
+        }
     )(Admin)
 );
 
