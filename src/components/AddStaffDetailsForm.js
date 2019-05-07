@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import uuid from 'uuid/v4';
 import TextField from '@material-ui/core/TextField';
-// import { Record } from 'immutable';
 import { addStaffMember } from '../actions';
 
 const Container = styled.div`
@@ -14,26 +13,13 @@ const Container = styled.div`
     border: 1px solid lightblue;
 `;
 
-const staffObj = {
+const obj = {
     firstname: '',
     lastname: '',
     title: '',
 };
-
-const onFirstNameChange = event => {
-    staffObj.firstname = event.target.value;
-};
-
-const onLastNameChange = event => {
-    staffObj.lastname = event.target.value;
-};
-
-const onTitleChange = event => {
-    staffObj.title = event.target.value;
-};
-
 const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
-    // const [defaultCount, setDefaultCount] = useState(eve);
+    const [staffObj = obj] = useState();
     console.log('MY STAFF:', staff);
     return (
         <Container>
@@ -41,7 +27,9 @@ const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
                 <TextField
                     id="outlined-name"
                     label="Title"
-                    onChange={onTitleChange}
+                    onChange={event => {
+                        staffObj.title = event.target.value;
+                    }}
                     margin="normal"
                     variant="outlined"
                 />
@@ -49,7 +37,9 @@ const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
                 <TextField
                     id="outlined-name"
                     label="First Name"
-                    onChange={onFirstNameChange}
+                    onChange={event => {
+                        staffObj.firstname = event.target.value;
+                    }}
                     margin="normal"
                     variant="outlined"
                 />
@@ -57,7 +47,9 @@ const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
                 <TextField
                     id="outlined-name"
                     label="Last Name"
-                    onChange={onLastNameChange}
+                    onChange={event => {
+                        staffObj.lastname = event.target.value;
+                    }}
                     margin="normal"
                     variant="outlined"
                 />
