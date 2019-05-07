@@ -116,6 +116,20 @@ const activityReducer = (state = [], action) => {
                     student: payload.student,
                 },
             ];
+        case Actions.REMOVE_ACTIVITY:
+            return state.filter(state => state.id !== action.payload);
+        case Actions.UPDATE_ACTIVITY:
+            return state.map(item => {
+                if (item.id === payload.id) {
+                    return {
+                        ...item,
+                        name: payload.name,
+                        staff: payload.staff,
+                        student: payload.student,
+                    };
+                }
+                return item;
+            });
         default:
             return state;
     }
