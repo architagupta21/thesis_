@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import uuid from 'uuid/v4';
+import TextField from '@material-ui/core/TextField';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
+// import AddStaffDetailsForm from '../components/AddStaffDetailsForm';
 
 const Container = styled.div`
     padding: 20px;
@@ -15,8 +17,24 @@ const Container = styled.div`
 const DefaultCountInput = styled.input`
     margin-left: 10px;
 `;
+const staffObj = {
+    fname: '',
+    lname: '',
+    title: '',
+};
 
-// https://reactjs.org/docs/hooks-intro.html
+const onFNameChange = event => {
+    staffObj.fname = event.target.value;
+};
+
+const onLNameChange = event => {
+    staffObj.lname = event.target.value;
+};
+
+const onTitleChange = event => {
+    staffObj.title = event.target.value;
+};
+
 const Admin = ({
     history,
     setCountDefault,
@@ -25,7 +43,6 @@ const Admin = ({
     staff,
 }) => {
     const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
-
     console.log('MY STAFF:', staff);
     return (
         <Container>
@@ -42,7 +59,7 @@ const Admin = ({
                     variant="contained"
                     color="primary"
                     onClick={() => {
-                        console.log('I WANT TO SAVFE');
+                        console.log('I WANT TO SAVE');
                         setCountDefault(parseInt(defaultCount, 10));
                         history.push('/');
                     }}
@@ -50,15 +67,12 @@ const Admin = ({
                     Save Changes
                 </Button>
             </div>
-            <br />
-            <br />
-            <br />
             {staff.map(person => (
                 <div>
                     <div>{person.id}</div>
                 </div>
             ))}
-            <Button
+            {/* <Button
                 variant="contained"
                 color="secondary"
                 onClick={() => {
@@ -67,53 +81,59 @@ const Admin = ({
                 }}
             >
                 ADD RANDOM STAFF
-            </Button>
+            </Button> */}
+            <br />
+            <br />
+            <br />
+            <AddStaffDetailsForm />
+            <form>
+                <TextField
+                    id="outlined-name"
+                    label="Title"
+                    onChange={onTitleChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                <br />
+                <TextField
+                    id="outlined-name"
+                    label="First Name"
+                    onChange={onFNameChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                <br />
+                <TextField
+                    id="outlined-name"
+                    label="Last Name"
+                    onChange={onLNameChange}
+                    margin="normal"
+                    variant="outlined"
+                />
+                <br />
+
+                <br />
+                <br />
+
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                        console.log('Adding staff details:');
+                        addStaffMember(
+                            uuid(),
+                            staffObj.title,
+                            staffObj.fname,
+                            staffObj.lname
+                        );
+                    }}
+                >
+                    ADD STAFF
+                </Button>
+            </form>
         </Container>
     );
 };
-
-// class Admin extends Component {
-//     constructor(props) {
-//         super(props);
-
-//         this.state = {
-//             defaultCount: props.defaultCount,
-//         };
-//     }
-
-//     render() {
-//         const { defaultCount } = this.state;
-//         const { setCountDefault, history } = this.props;
-//         return (
-//             <Container>
-//                 Default Count Value:
-//                 <DefaultCountInput
-//                     type="number"
-//                     value={defaultCount}
-//                     onChange={event => {
-//                         this.setState({
-//                             defaultCount: event.target.value,
-//                         });
-//                     }}
-//                 />
-//                 <div>
-//                     <Button
-//                         variant="contained"
-//                         color="primary"
-//                         onClick={() => {
-//                             console.log('I WANT TO SAVFE');
-//                             setCountDefault(parseInt(defaultCount, 10));
-//                             history.push('/');
-//                         }}
-//                     >
-//                         Save Changes
-//                     </Button>
-//                 </div>
-//             </Container>
-//         );
-//     }
-// }
-
 export default withRouter(
     connect(
         state => ({
