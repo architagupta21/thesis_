@@ -6,12 +6,12 @@ import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import uuid from 'uuid/v4';
 import TextField from '@material-ui/core/TextField';
+// import { Record } from 'immutable';
 import { addStaffMember } from '../actions';
-import { Record } from 'immutable';
 
-class AddStaffDetailsForm extends Component{
-    
-}
+// class AddStaffDetailsForm extends Component{
+
+// }
 
 const staffObj = {
     fname: '',
@@ -31,56 +31,52 @@ const onTitleChange = event => {
     staffObj.title = event.target.value;
 };
 
-const AddStaffDetailsForm=()=>{
-return(
+const AddStaffDetailsForm = () => (
     <Container>
         <form>
-                <TextField
-                    id="outlined-name"
-                    label="Title"
-                    onChange={onTitleChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-                <TextField
-                    id="outlined-name"
-                    label="First Name"
-                    onChange={onFNameChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-                <TextField
-                    id="outlined-name"
-                    label="Last Name"
-                    onChange={onLNameChange}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-
-                <br />
-                <br />
-
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => {
-                        console.log('Adding staff details:');
-                        addStaffMember(
-                            uuid(),
-                            staffObj.title,
-                            staffObj.fname,
-                            staffObj.lname
-                        );
-                    }}
-                >
-                    ADD STAFF
-                </Button>
-            </form>
-            }
+            <TextField
+                id="outlined-name"
+                label="Title"
+                onChange={onTitleChange}
+                margin="normal"
+                variant="outlined"
+            />
+            <br />
+            <TextField
+                id="outlined-name"
+                label="First Name"
+                onChange={onFNameChange}
+                margin="normal"
+                variant="outlined"
+            />
+            <br />
+            <TextField
+                id="outlined-name"
+                label="Last Name"
+                onChange={onLNameChange}
+                margin="normal"
+                variant="outlined"
+            />
+            <br />
+            <br />
+            <br />
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                    console.log('Adding staff details:');
+                    addStaffMember(
+                        uuid(),
+                        staffObj.title,
+                        staffObj.fname,
+                        staffObj.lname
+                    );
+                }}
+            >
+                ADD STAFF
+            </Button>
+        </form>
     </Container>
-)
+);
 
 export default AddStaffDetailsForm;

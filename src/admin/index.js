@@ -85,7 +85,7 @@ const Admin = ({
             <br />
             <br />
             <br />
-            <AddStaffDetailsForm />
+            {/* <AddStaffDetailsForm /> */}
             <form>
                 <TextField
                     id="outlined-name"
