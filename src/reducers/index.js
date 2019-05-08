@@ -89,7 +89,7 @@ const staffReducer = (state = [], action) => {
     }
 };
 
-const activityReducer = (state = [], action) => {
+const activitiesReducer = (state = [], action) => {
     /**
      
         {
@@ -142,5 +142,5 @@ export default combineReducers({
     phpMessage: phpMessageReducer,
     dbPost: dbPostReducer,
     staff: staffReducer,
-    activity: activityReducer,
+    activities: activitiesReducer,
 });
