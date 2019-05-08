@@ -48,7 +48,7 @@ const Admin = ({ history, setCountDefault, defaultCountFromRedux, staff }) => {
             <br />
             <br />
             <br />
-            <AddStaffDetailsFormComponent />
+            <AddStaffDetailsFormComponent staff={staff} />
         </Container>
     );
 };
