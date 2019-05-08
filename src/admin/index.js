@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
@@ -63,7 +63,6 @@ export default withRouter(
             setCountDefault,
             setSaveFalse,
             addStaffMember,
-            AddStaffDetailsFormComponent,
         }
     )(Admin)
 );

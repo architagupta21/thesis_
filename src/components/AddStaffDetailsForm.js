@@ -13,23 +13,30 @@ const Container = styled.div`
     border: 1px solid lightblue;
 `;
 
-const obj = {
-    firstname: '',
-    lastname: '',
-    title: '',
-};
-const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
-    const [staffObj = obj] = useState();
-    console.log('MY STAFF:', staff);
+const AddStaffDetailsFormComponent = ({ addStaffMember }) => {
+    const [staffObj, setValues] = useState({
+        firstname: '',
+        lastname: '',
+        title: '',
+    });
+
+    const updateFields = e => {
+        setValues({
+            ...staffObj,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    console.log('NEW STAFF:', staffObj);
     return (
         <Container>
             <form>
                 <TextField
-                    id="outlined-name"
+                    id="outlined-title"
                     label="Title"
-                    onChange={event => {
-                        staffObj.title = event.target.value;
-                    }}
+                    value={staffObj.title}
+                    onChange={updateFields}
+                    name="title"
                     margin="normal"
                     variant="outlined"
                 />
@@ -37,9 +44,9 @@ const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
                 <TextField
                     id="outlined-name"
                     label="First Name"
-                    onChange={event => {
-                        staffObj.firstname = event.target.value;
-                    }}
+                    value={staffObj.firstname}
+                    onChange={updateFields}
+                    name="firstname"
                     margin="normal"
                     variant="outlined"
                 />
@@ -47,9 +54,9 @@ const AddStaffDetailsFormComponent = ({ addStaffMember, staff }) => {
                 <TextField
                     id="outlined-name"
                     label="Last Name"
-                    onChange={event => {
-                        staffObj.lastname = event.target.value;
-                    }}
+                    value={staffObj.lastname}
+                    onChange={updateFields}
+                    name="lastname"
                     margin="normal"
                     variant="outlined"
                 />
@@ -87,7 +94,3 @@ export default withRouter(
         }
     )(AddStaffDetailsFormComponent)
 );
-AddStaffDetailsFormComponent.propTypes = {
-    history: PropTypes.shape({}).isRequired,
-    staff: PropTypes.shape({}).isRequired,
-};
