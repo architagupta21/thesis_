@@ -85,7 +85,7 @@ const staffReducer = (state = [], action) => {
                 },
             ];
         case Actions.REMOVE_STAFF:
-            return state.filter(state => state.id !== action.payload);
+            return state.filter(state => state.id !== action.payload.id);
         case Actions.UPDATE_STAFF:
             return state.map(item => {
                 if (item.id === payload.id) {

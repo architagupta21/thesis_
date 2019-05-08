@@ -1,7 +1,6 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes, { string } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import uuid from 'uuid/v4';
@@ -9,16 +8,11 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
 import DeleteIcon from '@material-ui/icons/Delete';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
@@ -39,23 +33,16 @@ const AddStaffDetailsFormComponent = ({
     removeStaffMember,
     updateStaffMember,
     staff,
-    // deleteObj,
 }) => {
-    const [staffObj, setValues] = useState({
-        // id: uuid(),
-    });
-    // const []
+    const [staffObj, setValues] = useState({ id: '' });
     const [updateWindow, setUpdateWindow] = useState(false);
-    const [selectedId, setSelectedId] = useState('');
+    const [listid, setlistitemid] = useState('');
     const updateFields = e => {
         setValues({
             ...staffObj,
             [e.target.name]: e.target.value,
-            // staff.id === staffObj.id,
         });
     };
-    console.log('NEW STAFF:', staffObj);
-
     // console.log('NEW STAFF:', staffObj);
     return (
         <Container>
@@ -68,9 +55,10 @@ const AddStaffDetailsFormComponent = ({
                     Update Staff Member Details
                 </DialogTitle>
                 <DialogContent>
+                    <div>Enter the title:</div>
                     <TextField
                         id="outlined-title"
-                        label="Title"
+                        // label="Title"
                         value={staffObj.title}
                         onChange={updateFields}
                         name="title"
@@ -78,9 +66,10 @@ const AddStaffDetailsFormComponent = ({
                         variant="outlined"
                     />
                     <br />
+                    <div>Enter First Name:</div>
                     <TextField
                         id="outlined-name"
-                        label="First Name"
+                        // label="First Name"
                         value={staffObj.firstname}
                         onChange={updateFields}
                         name="firstname"
@@ -88,9 +77,10 @@ const AddStaffDetailsFormComponent = ({
                         variant="outlined"
                     />
                     <br />
+                    <div>Enter Last Name:</div>
                     <TextField
                         id="outlined-name"
-                        label="Last Name"
+                        // label="Last Name"
                         value={staffObj.lastname}
                         onChange={updateFields}
                         name="lastname"
@@ -112,7 +102,7 @@ const AddStaffDetailsFormComponent = ({
                     <Button
                         onClick={() => {
                             updateStaffMember(
-                                staff.id,
+                                listid,
                                 staffObj.title,
                                 staffObj.firstname,
                                 staffObj.lastname
@@ -173,41 +163,42 @@ const AddStaffDetailsFormComponent = ({
                         onClick={() => {
                             console.log('Adding staff details:');
                             addStaffMember(
-                                uuid(),
+                                (staffObj.id = uuid()),
                                 staffObj.title,
                                 staffObj.firstname,
                                 staffObj.lastname
                             );
                             console.log('Staff Added!');
                         }}
-                        // onSubmit={event => {
-                        //     event.preventDefault();
-                        //     staff(staffObj);
-                        // }}
                     >
                         ADD STAFF
                     </Button>
                     <br />
                     <br />
-                    {/* <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                            setUpdateWindow(true);
-                        }}
-                    >
-                        UPDATE STAFF DETAILS
-                    </Button> */}
                 </form>
             </Container>
             <Container>
                 <div>List of Staff Members:</div>
-
                 <List>
                     {staff.map(value => (
                         <ListItem key={value.id} dense button>
-                            <Checkbox tabIndex={-1} disableRipple />
-                            <ListItemText primary={value.id} />
+                            <Checkbox
+                                tabIndex={-1}
+                                disableRipple
+                                onChange={event => {
+                                    if (event.target.checked === true) {
+                                        setlistitemid(value.id);
+                                        console.log('list id: ', listid);
+                                    } else {
+                                        setlistitemid('');
+                                    }
+                                }}
+                                value={value.id}
+                            />
+                            <ListItemText
+                                primary={`${value.firstname} ${value.id}`}
+                            />
+
                             <ListItemSecondaryAction>
                                 <IconButton
                                     aria-label="Delete"
@@ -232,15 +223,6 @@ const AddStaffDetailsFormComponent = ({
                 </Button>
                 <br />
                 <br />
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => {
-                        removeStaffMember(selectedId);
-                    }}
-                >
-                    DELETE MEMBER
-                </Button>
             </Container>
         </Container>
     );
