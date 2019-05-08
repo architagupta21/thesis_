@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Dialog from '@material-ui/core/Dialog';
@@ -32,9 +33,15 @@ const ActivityForm = ({
     const [studentActivity, setStudentActivity] = useState(false);
     const [selectedId, setSelectedId] = useState('');
     const [updateWindow, setUpdateWindow] = useState(false);
+    const [updateActivityName, setUpdateActivityName] = useState('');
+    const [updateStaffActivity, setUpdateStaffActivity] = useState(false);
+    const [updateStudentActivity, setUpdateStudentActivity] = useState(false);
 
     const staffActivities = activities.filter(type => type.staff);
     const studentActivities = activities.filter(type => type.student);
+    const unassignedActivities = activities.filter(
+        type => type.staff === false && type.student === false
+    );
 
     console.log('MY ACTIVITY:', activities);
 
@@ -51,9 +58,9 @@ const ActivityForm = ({
                 <DialogContent>
                     <TextField
                         label="Activity Name"
-                        value={activityName}
+                        value={updateActivityName}
                         onChange={event => {
-                            setActivityName(event.target.value);
+                            setUpdateActivityName(event.target.value);
                         }}
                         fullWidth
                     />
@@ -63,25 +70,25 @@ const ActivityForm = ({
                                 event.target.value === 'staff' &&
                                 event.target.checked === true
                             ) {
-                                setStaffActivity(true);
+                                setUpdateStaffActivity(true);
                             }
                             if (
                                 event.target.value === 'student' &&
                                 event.target.checked === true
                             ) {
-                                setStudentActivity(true);
+                                setUpdateStudentActivity(true);
                             }
                             if (
                                 event.target.value === 'staff' &&
                                 event.target.checked === false
                             ) {
-                                setStaffActivity(false);
+                                setUpdateStaffActivity(false);
                             }
                             if (
                                 event.target.value === 'student' &&
                                 event.target.checked === false
                             ) {
-                                setStudentActivity(false);
+                                setUpdateStudentActivity(false);
                             }
                         }}
                     >
@@ -89,13 +96,13 @@ const ActivityForm = ({
                             value="staff"
                             control={<Checkbox />}
                             label="Staff"
-                            checked={staffActivity}
+                            checked={updateStaffActivity}
                         />
                         <FormControlLabel
                             value="student"
                             control={<Checkbox />}
                             label="Student"
-                            checked={studentActivity}
+                            checked={updateStudentActivity}
                         />
                     </FormControl>
                 </DialogContent>
@@ -103,6 +110,7 @@ const ActivityForm = ({
                     <Button
                         onClick={() => {
                             setUpdateWindow(false);
+                            setSelectedId('');
                         }}
                         color="primary"
                     >
@@ -112,11 +120,12 @@ const ActivityForm = ({
                         onClick={() => {
                             updateActivity(
                                 selectedId,
-                                activityName,
-                                staffActivity,
-                                studentActivity
+                                updateActivityName,
+                                updateStaffActivity,
+                                updateStudentActivity
                             );
                             setUpdateWindow(false);
+                            setSelectedId('');
                         }}
                         color="primary"
                     >
@@ -131,6 +140,7 @@ const ActivityForm = ({
                 }}
                 margin="normal"
                 variant="outlined"
+                value={activityName}
                 fullWidth
             />
             <br />
@@ -168,17 +178,20 @@ const ActivityForm = ({
                     value="staff"
                     control={<Checkbox />}
                     label="Staff"
+                    checked={staffActivity}
                 />
                 <FormControlLabel
                     value="student"
                     control={<Checkbox />}
                     label="Student"
+                    checked={studentActivity}
                 />
             </FormControl>
             <br />
             <Button
                 variant="contained"
                 color="secondary"
+                disabled={!activityName}
                 onClick={() => {
                     addActivity(
                         uuid(),
@@ -186,6 +199,9 @@ const ActivityForm = ({
                         staffActivity,
                         studentActivity
                     );
+                    setActivityName('');
+                    setStaffActivity(false);
+                    setStudentActivity(false);
                 }}
             >
                 ADD ACTIVITY
@@ -198,26 +214,26 @@ const ActivityForm = ({
                     <FormGroup>
                         <FormControlLabel
                             control={
-                                <Checkbox
+                                <Radio
                                     checked={item.id === selectedId}
                                     onChange={event => {
                                         if (event.target.checked === true) {
                                             setSelectedId(event.target.value);
-                                            setActivityName(
+                                            setUpdateActivityName(
                                                 activities.filter(
                                                     i =>
                                                         i.id ===
                                                         event.target.value
                                                 )[0].name
                                             );
-                                            setStaffActivity(
+                                            setUpdateStaffActivity(
                                                 activities.filter(
                                                     i =>
                                                         i.id ===
                                                         event.target.value
                                                 )[0].staff
                                             );
-                                            setStudentActivity(
+                                            setUpdateStudentActivity(
                                                 activities.filter(
                                                     i =>
                                                         i.id ===
@@ -238,6 +254,13 @@ const ActivityForm = ({
                 <Button
                     variant="contained"
                     color="primary"
+                    disabled={
+                        !(
+                            selectedId &&
+                            staffActivities.filter(e => e.id === selectedId)
+                                .length > 0
+                        )
+                    }
                     onClick={() => {
                         setUpdateWindow(true);
                     }}
@@ -247,6 +270,13 @@ const ActivityForm = ({
                 <Button
                     variant="contained"
                     color="secondary"
+                    disabled={
+                        !(
+                            selectedId &&
+                            staffActivities.filter(e => e.id === selectedId)
+                                .length > 0
+                        )
+                    }
                     onClick={() => {
                         removeActivity(selectedId);
                     }}
@@ -260,26 +290,26 @@ const ActivityForm = ({
                     <FormGroup>
                         <FormControlLabel
                             control={
-                                <Checkbox
+                                <Radio
                                     checked={item.id === selectedId}
                                     onChange={event => {
                                         if (event.target.checked === true) {
                                             setSelectedId(event.target.value);
-                                            setActivityName(
+                                            setUpdateActivityName(
                                                 activities.filter(
                                                     i =>
                                                         i.id ===
                                                         event.target.value
                                                 )[0].name
                                             );
-                                            setStaffActivity(
+                                            setUpdateStaffActivity(
                                                 activities.filter(
                                                     i =>
                                                         i.id ===
                                                         event.target.value
                                                 )[0].staff
                                             );
-                                            setStudentActivity(
+                                            setUpdateStudentActivity(
                                                 activities.filter(
                                                     i =>
                                                         i.id ===
@@ -300,6 +330,13 @@ const ActivityForm = ({
                 <Button
                     variant="contained"
                     color="primary"
+                    disabled={
+                        !(
+                            selectedId &&
+                            studentActivities.filter(e => e.id === selectedId)
+                                .length > 0
+                        )
+                    }
                     onClick={() => {
                         setUpdateWindow(true);
                     }}
@@ -309,6 +346,91 @@ const ActivityForm = ({
                 <Button
                     variant="contained"
                     color="secondary"
+                    disabled={
+                        !(
+                            selectedId &&
+                            studentActivities.filter(e => e.id === selectedId)
+                                .length > 0
+                        )
+                    }
+                    onClick={() => {
+                        removeActivity(selectedId);
+                    }}
+                >
+                    DELETE ACTIVITY
+                </Button>
+            </Container>
+            <Container>
+                <div>Unassigned Activities:</div>
+                {unassignedActivities.map(item => (
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Radio
+                                    checked={item.id === selectedId}
+                                    onChange={event => {
+                                        if (event.target.checked === true) {
+                                            setSelectedId(event.target.value);
+                                            setUpdateActivityName(
+                                                activities.filter(
+                                                    i =>
+                                                        i.id ===
+                                                        event.target.value
+                                                )[0].name
+                                            );
+                                            setUpdateStaffActivity(
+                                                activities.filter(
+                                                    i =>
+                                                        i.id ===
+                                                        event.target.value
+                                                )[0].staff
+                                            );
+                                            setUpdateStudentActivity(
+                                                activities.filter(
+                                                    i =>
+                                                        i.id ===
+                                                        event.target.value
+                                                )[0].student
+                                            );
+                                        } else {
+                                            setSelectedId('');
+                                        }
+                                    }}
+                                    value={item.id}
+                                />
+                            }
+                            label={item.name}
+                        />
+                    </FormGroup>
+                ))}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={
+                        !(
+                            selectedId &&
+                            unassignedActivities.filter(
+                                e => e.id === selectedId
+                            ).length > 0
+                        )
+                    }
+                    onClick={() => {
+                        setUpdateWindow(true);
+                    }}
+                >
+                    UPDATE ACTIVITY
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    disabled={
+                        !(
+                            selectedId &&
+                            unassignedActivities.filter(
+                                e => e.id === selectedId
+                            ).length > 0
+                        )
+                    }
                     onClick={() => {
                         removeActivity(selectedId);
                     }}
