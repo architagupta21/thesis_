@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import uuid from 'uuid/v4';
+import ActivityForm from '../components/ActivityForm';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
 
 const Container = styled.div`
@@ -27,6 +28,7 @@ const Admin = ({
     const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
 
     console.log('MY STAFF:', staff);
+
     return (
         <Container>
             Default Count Value:
@@ -68,6 +70,7 @@ const Admin = ({
             >
                 ADD RANDOM STAFF
             </Button>
+            <ActivityForm />
         </Container>
     );
 };
@@ -121,7 +124,11 @@ export default withRouter(
             defaultCountFromRedux: state.defaultCount,
             staff: state.staff,
         }),
-        { setCountDefault, setSaveFalse, addStaffMember }
+        {
+            setCountDefault,
+            setSaveFalse,
+            addStaffMember,
+        }
     )(Admin)
 );
 

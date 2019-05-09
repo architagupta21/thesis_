@@ -89,6 +89,52 @@ const staffReducer = (state = [], action) => {
     }
 };
 
+const activitiesReducer = (state = [], action) => {
+    /**
+     
+        {
+            type: ADD_ACTIVITY,
+            payload: {
+                id,
+                name,
+                staff,
+                student,
+            }
+        }
+     
+     */
+    const { type, payload } = action;
+
+    switch (type) {
+        case Actions.ADD_ACTIVITY:
+            return [
+                ...state,
+                {
+                    id: payload.id,
+                    name: payload.name,
+                    staff: payload.staff,
+                    student: payload.student,
+                },
+            ];
+        case Actions.REMOVE_ACTIVITY:
+            return state.filter(state => state.id !== action.payload);
+        case Actions.UPDATE_ACTIVITY:
+            return state.map(item => {
+                if (item.id === payload.id) {
+                    return {
+                        ...item,
+                        name: payload.name,
+                        staff: payload.staff,
+                        student: payload.student,
+                    };
+                }
+                return item;
+            });
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     count: countReducer,
     defaultCount: defaultCountReducer,
@@ -96,4 +142,5 @@ export default combineReducers({
     phpMessage: phpMessageReducer,
     dbPost: dbPostReducer,
     staff: staffReducer,
+    activities: activitiesReducer,
 });

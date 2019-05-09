@@ -16,6 +16,9 @@ export const Actions = {
     GET_DB_POST_ERROR: 'GET_DB_POST_ERROR',
 
     ADD_STAFF: 'ADD_STAFF',
+    ADD_ACTIVITY: 'ADD_ACTIVITY',
+    REMOVE_ACTIVITY: 'REMOVE_ACTIVITY',
+    UPDATE_ACTIVITY: 'UPDATE_ACTIVITY',
 };
 
 const Tables = {
@@ -173,6 +176,31 @@ const addStaffMember = (id, title, firstname, lastname) => ({
     },
 });
 
+const addActivity = (id, name, staff, student) => ({
+    type: Actions.ADD_ACTIVITY,
+    payload: {
+        id,
+        name,
+        staff,
+        student,
+    },
+});
+
+const removeActivity = id => ({
+    type: Actions.REMOVE_ACTIVITY,
+    payload: id,
+});
+
+const updateActivity = (id, name, staff, student) => ({
+    type: Actions.UPDATE_ACTIVITY,
+    payload: {
+        id,
+        name,
+        staff,
+        student,
+    },
+});
+
 // function are ordered as above
 export {
     setSaveTrue,
@@ -184,4 +212,7 @@ export {
     getPHPMessage,
     getDBPost,
     addStaffMember,
+    addActivity,
+    removeActivity,
+    updateActivity,
 };
