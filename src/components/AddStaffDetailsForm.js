@@ -37,6 +37,7 @@ const AddStaffDetailsFormComponent = ({
     const [staffObj, setValues] = useState({ id: '' });
     const [updateWindow, setUpdateWindow] = useState(false);
     const [listid, setlistitemid] = useState('');
+    const [checked, setCheckStatus] = useState(false);
     const updateFields = e => {
         setValues({
             ...staffObj,
@@ -94,6 +95,7 @@ const AddStaffDetailsFormComponent = ({
                     <Button
                         onClick={() => {
                             setUpdateWindow(false);
+                            setlistitemid('');
                         }}
                         color="primary"
                     >
@@ -108,6 +110,7 @@ const AddStaffDetailsFormComponent = ({
                                 staffObj.lastname
                             );
                             setUpdateWindow(false);
+                            setlistitemid('');
                         }}
                         color="primary"
                     >
@@ -121,6 +124,7 @@ const AddStaffDetailsFormComponent = ({
                         e.preventDefault();
                         staff(staffObj);
                     }}
+                    id="staffForm"
                 >
                     <TextField
                         id="outlined-title"
@@ -130,7 +134,6 @@ const AddStaffDetailsFormComponent = ({
                         name="title"
                         margin="normal"
                         variant="outlined"
-                        required
                     />
                     <br />
                     <TextField
@@ -141,18 +144,16 @@ const AddStaffDetailsFormComponent = ({
                         name="firstname"
                         margin="normal"
                         variant="outlined"
-                        required
                     />
                     <br />
                     <TextField
-                        id="outlined-name"
+                        id="outlined-lastname"
                         label="Last Name"
                         value={staffObj.lastname}
                         onChange={updateFields}
                         name="lastname"
                         margin="normal"
                         variant="outlined"
-                        required
                     />
                     <br />
                     <br />
@@ -168,6 +169,7 @@ const AddStaffDetailsFormComponent = ({
                                 staffObj.firstname,
                                 staffObj.lastname
                             );
+                            setlistitemid(staffObj.id);
                             console.log('Staff Added!');
                         }}
                     >
@@ -187,8 +189,12 @@ const AddStaffDetailsFormComponent = ({
                                 disableRipple
                                 onChange={event => {
                                     if (event.target.checked === true) {
-                                        setlistitemid(value.id);
-                                        console.log('list id: ', listid);
+                                        setlistitemid(event.target.value);
+                                        staffObj.id = event.target.value;
+                                        staffObj.title = value.title;
+                                        staffObj.firstname = value.firstname;
+                                        staffObj.lastname = value.lastname;
+                                        // setCheckStatus(true);
                                     } else {
                                         setlistitemid('');
                                     }
