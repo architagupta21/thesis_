@@ -19,6 +19,10 @@ export const Actions = {
     ADD_ACTIVITY: 'ADD_ACTIVITY',
     REMOVE_ACTIVITY: 'REMOVE_ACTIVITY',
     UPDATE_ACTIVITY: 'UPDATE_ACTIVITY',
+
+    ADD_PROGRAM: 'ADD_PROGRAM',
+    REMOVE_PROGRAM: 'REMOVE_PROGRAM',
+    UPDATE_PROGRAM: 'UPDATE_PROGRAM',
 };
 
 const Tables = {
@@ -201,6 +205,29 @@ const updateActivity = (id, name, staff, student) => ({
     },
 });
 
+const addProgram = (id, name, level) => ({
+    type: Actions.ADD_PROGRAM,
+    payload: {
+        id,
+        name,
+        level,
+    },
+});
+
+const removeProgram = id => ({
+    type: Actions.REMOVE_PROGRAM,
+    payload: id,
+});
+
+const updateProgram = (id, name, level) => ({
+    type: Actions.UPDATE_PROGRAM,
+    payload: {
+        id,
+        name,
+        level,
+    },
+});
+
 // function are ordered as above
 export {
     setSaveTrue,
@@ -215,4 +242,7 @@ export {
     addActivity,
     removeActivity,
     updateActivity,
+    addProgram,
+    removeProgram,
+    updateProgram,
 };
