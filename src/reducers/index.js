@@ -135,6 +135,37 @@ const activitiesReducer = (state = [], action) => {
     }
 };
 
+const programsReducer = (state = [], action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case Actions.ADD_PROGRAM:
+            return [
+                ...state,
+                {
+                    id: payload.id,
+                    name: payload.name,
+                    level: payload.level,
+                },
+            ];
+        case Actions.REMOVE_PROGRAM:
+            return state.filter(state => state.id !== action.payload);
+        case Actions.UPDATE_PROGRAM:
+            return state.map(item => {
+                if (item.id === payload.id) {
+                    return {
+                        ...item,
+                        name: payload.name,
+                        level: payload.level,
+                    };
+                }
+                return item;
+            });
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     count: countReducer,
     defaultCount: defaultCountReducer,
@@ -143,4 +174,5 @@ export default combineReducers({
     dbPost: dbPostReducer,
     staff: staffReducer,
     activities: activitiesReducer,
+    programs: programsReducer,
 });
