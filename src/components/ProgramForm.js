@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
+import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Dialog from '@material-ui/core/Dialog';
@@ -50,14 +51,35 @@ const ProgramForm = ({
                         }}
                         fullWidth
                     />
-                    <TextField
-                        label="Program Level"
-                        value={updateProgramLevel}
+                    <FormControl
                         onChange={event => {
-                            setUpdateProgramLevel(event.target.value);
+                            if (
+                                event.target.value === 'undergraduate' &&
+                                event.target.checked === true
+                            ) {
+                                setUpdateProgramLevel('undergraduate');
+                            }
+                            if (
+                                event.target.value === 'postgraduate' &&
+                                event.target.checked === true
+                            ) {
+                                setUpdateProgramLevel('postgraduate');
+                            }
                         }}
-                        fullWidth
-                    />
+                    >
+                        <FormControlLabel
+                            value="undergraduate"
+                            control={<Radio />}
+                            label="Undergraduate"
+                            checked={updateProgramLevel === 'undergraduate'}
+                        />
+                        <FormControlLabel
+                            value="postgraduate"
+                            control={<Radio />}
+                            label="Postgraduate"
+                            checked={updateProgramLevel === 'postgraduate'}
+                        />
+                    </FormControl>
                 </DialogContent>
                 <DialogActions>
                     <Button
@@ -86,25 +108,44 @@ const ProgramForm = ({
                 </DialogActions>
             </Dialog>
             <TextField
-                label="Program Name"
                 onChange={event => {
                     setProgramName(event.target.value);
                 }}
                 margin="normal"
                 variant="outlined"
+                placeholder="Bachelor of Engineering"
                 value={programName}
                 fullWidth
             />
-            <TextField
-                label="Program Level"
+            <FormControl
                 onChange={event => {
-                    setProgramLevel(event.target.value);
+                    if (
+                        event.target.value === 'undergraduate' &&
+                        event.target.checked === true
+                    ) {
+                        setProgramLevel('undergraduate');
+                    }
+                    if (
+                        event.target.value === 'postgraduate' &&
+                        event.target.checked === true
+                    ) {
+                        setProgramLevel('postgraduate');
+                    }
                 }}
-                margin="normal"
-                variant="outlined"
-                value={programLevel}
-                fullWidth
-            />
+            >
+                <FormControlLabel
+                    value="undergraduate"
+                    control={<Radio />}
+                    label="Undergraduate"
+                    checked={programLevel === 'undergraduate'}
+                />
+                <FormControlLabel
+                    value="postgraduate"
+                    control={<Radio />}
+                    label="Postgraduate"
+                    checked={programLevel === 'postgraduate'}
+                />
+            </FormControl>
             <br />
             <Button
                 variant="contained"
