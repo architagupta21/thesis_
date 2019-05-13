@@ -48,6 +48,13 @@ const AppMenu = props => {
                     <button type="button">Edit LTI App</button>
                 </Link>
             )}
+            {location.pathname === '/analysis' ? (
+                <AdminPageOptions {...props} />
+            ) : (
+                <Link to="/analysis">
+                    <button type="button">Edit LTI App</button>
+                </Link>
+            )}
         </Container>
     );
 };
@@ -67,4 +74,5 @@ AdminPageOptions.propTypes = {
     }).isRequired,
     setSaveTrue: PropTypes.func.isRequired,
     history: PropTypes.shape({}).isRequired,
+    analysis : 
 };

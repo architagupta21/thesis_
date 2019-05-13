@@ -16,13 +16,13 @@ const DefaultCountInput = styled.input`
     margin-left: 10px;
 `;
 
-const Admin = ({ history, setCountDefault, defaultCountFromRedux, staff }) => {
-    const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
+const Admin = ({ staff }) => {
+    // const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
     console.log('MY STAFF:', staff);
     return (
         <Container>
             Default Count Value:
-            <DefaultCountInput
+            {/* <DefaultCountInput
                 type="number"
                 value={defaultCount}
                 onChange={event => {
@@ -41,7 +41,7 @@ const Admin = ({ history, setCountDefault, defaultCountFromRedux, staff }) => {
                 >
                     Save Changes
                 </Button>
-            </div>
+            </div> */}
             {staff.map(person => (
                 <div>{<div>{person.firstname}</div>}</div>
             ))}
@@ -68,7 +68,7 @@ export default withRouter(
 );
 
 Admin.propTypes = {
-    defaultCountFromRedux: PropTypes.number.isRequired,
-    setCountDefault: PropTypes.func.isRequired,
+    // defaultCountFromRedux: PropTypes.number.isRequired,
+    // setCountDefault: PropTypes.func.isRequired,
     history: PropTypes.shape({}).isRequired,
 };

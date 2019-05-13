@@ -9,6 +9,7 @@ import store from './store';
 import App from './components/App';
 import Layout from './components/Layout';
 import Admin from './admin';
+import Analysis from './analysis';
 import { getPHPMessage, getDBPost } from './actions';
 
 library.add(faReact, faCog, faStore);
@@ -26,6 +27,10 @@ const renderApp = (noError = true) =>
                             render={props => <Admin {...props} />}
                         />
                         <Route path="/" render={props => <App {...props} />} />
+                        <Route
+                            path="/analysis"
+                            render={props => <Analysis {...props} />}
+                        />
                     </Switch>
                 </Layout>
             </Router>

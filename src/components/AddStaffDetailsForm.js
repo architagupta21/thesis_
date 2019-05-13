@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
-
+import { Donut } from '../../node_modules/britecharts-react/lib/cjs/Donut';
 import {
     addStaffMember,
     removeStaffMember,
@@ -28,6 +28,39 @@ const Container = styled.div`
     border: 1px solid lightblue;
 `;
 
+const donutDataWith4Slices = [
+    {
+        quantity: 60,
+        percentage: 60,
+        name: 'React',
+        id: 1,
+    },
+    {
+        quantity: 20,
+        percentage: 20,
+        name: 'Ember',
+        id: 2,
+    },
+    {
+        quantity: 10,
+        percentage: 10,
+        name: 'Angular',
+        id: 3,
+    },
+    {
+        quantity: 10,
+        percentage: 10,
+        name: 'Backbone',
+        id: 4,
+    },
+];
+const marginObject = {
+    left: 100,
+    right: 40,
+    top: 40,
+    bottom: 40,
+};
+
 const AddStaffDetailsFormComponent = ({
     addStaffMember,
     removeStaffMember,
@@ -37,13 +70,14 @@ const AddStaffDetailsFormComponent = ({
     const [staffObj, setValues] = useState({ id: '' });
     const [updateWindow, setUpdateWindow] = useState(false);
     const [listid, setlistitemid] = useState('');
-    const [checked, setCheckStatus] = useState(false);
+    // const [checked, setCheckStatus] = useState(false);
     const updateFields = e => {
         setValues({
             ...staffObj,
             [e.target.name]: e.target.value,
         });
     };
+
     // console.log('NEW STAFF:', staffObj);
     return (
         <Container>
@@ -230,6 +264,24 @@ const AddStaffDetailsFormComponent = ({
                 <br />
                 <br />
             </Container>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div>Analysis Page </div>
+
+            <Donut
+                data={donutDataWith4Slices}
+                width={400}
+                height={400}
+                margin={marginObject}
+                externalRadius={500 / 2.5}
+                internalRadius={500 / 5}
+            />
         </Container>
     );
 };

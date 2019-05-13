@@ -12,12 +12,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
 import HomeIcon from '@material-ui/icons/Home';
-
 import SettingsIcon from '@material-ui/icons/Settings';
-
 import { withRouter, Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -74,7 +70,7 @@ function Layout(props) {
                     <ListItem
                         button
                         onClick={() => {
-                            console.log('go to edit');
+                            console.log('go to home');
                             history.push('/');
                         }}
                     >
@@ -94,6 +90,18 @@ function Layout(props) {
                             <SettingsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Settings" />
+                    </ListItem>
+                    <ListItem
+                        button
+                        onClick={() => {
+                            console.log('go to analysis page');
+                            history.push('/analysis');
+                        }}
+                    >
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Data Analysis" />
                     </ListItem>
                 </List>
             </Drawer>
