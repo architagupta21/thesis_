@@ -9,6 +9,7 @@ import ActivityForm from '../components/ActivityForm';
 import ProgramForm from '../components/ProgramForm';
 import CourseForm from '../components/CourseForm';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
+import StaffDetailsForm from '../components/StaffDetailsForm';
 
 const Container = styled.div`
     padding: 20px;
@@ -75,6 +76,7 @@ const Admin = ({
             <ActivityForm />
             <ProgramForm />
             <CourseForm />
+            <StaffDetailsForm />
         </Container>
     );
 };
