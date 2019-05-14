@@ -34,7 +34,7 @@ const Admin = ({
 
     return (
         <Container>
-            Default Count Value:
+            {/* Default Count Value:
             <DefaultCountInput
                 type="number"
                 value={defaultCount}
@@ -56,9 +56,9 @@ const Admin = ({
                 </Button>
             </div>
             <br />
+            <br /> */}
             <br />
-            <br />
-            {staff.map(person => (
+            {/* {staff.map(person => (
                 <div>
                     <div>{person.id}</div>
                 </div>
@@ -72,7 +72,7 @@ const Admin = ({
                 }}
             >
                 ADD RANDOM STAFF
-            </Button>
+            </Button> */}
             <ActivityForm />
             <ProgramForm />
             <CourseForm />
