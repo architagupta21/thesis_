@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import uuid from 'uuid/v4';
 import ActivityForm from '../components/ActivityForm';
 import ProgramForm from '../components/ProgramForm';
+import CourseForm from '../components/CourseForm';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
 
 const Container = styled.div`
@@ -73,6 +74,7 @@ const Admin = ({
             </Button>
             <ActivityForm />
             <ProgramForm />
+            <CourseForm />
         </Container>
     );
 };
