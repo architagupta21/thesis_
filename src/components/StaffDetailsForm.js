@@ -31,8 +31,18 @@ const StaffDetailsForm = ({
   updateStaffMember,
   staff
 }) => {
-  const [staffObj, setValues] = useState({});
-  const [updateStaffObj, UpdatesetValues] = useState({});
+  const [staffObj, setValues] = useState({
+    id: '',
+    title: '',
+    firstname: '',
+    lastname: ''
+  });
+  const [updateStaffObj, UpdatesetValues] = useState({
+    id: '',
+    title: '',
+    firstname: '',
+    lastname: ''
+  });
 
   const UpdatedValues = e => {
     UpdatesetValues({
@@ -117,92 +127,100 @@ const StaffDetailsForm = ({
           </Button>
         </DialogActions>
       </Dialog>
-      <div>Staff Details Form:</div>
-      {/* <form id="staffForm"> */}
-      <TextField
-        id="outlined-title"
-        label="Title"
-        value={staffObj.title !== null ? staffObj.title : ""}
-        onChange={updateFields}
-        name="title"
-        margin="normal"
-        variant="outlined"
 
-      />
-      <br />
-      <TextField
-        id="outlined-name"
-        label="First Name"
-        value={staffObj.firstname}
-        onChange={updateFields}
-        name="firstname"
-        margin="normal"
-        variant="outlined"
-      />
-      <br />
-      <TextField
-        id="outlined-lastname"
-        label="Last Name"
-        value={staffObj.lastname}
-        onChange={updateFields}
-        name="lastname"
-        margin="normal"
-        variant="outlined"
-      />
-      <br />
-      <br />
-      <br />
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={!(staffObj.title && staffObj.firstname && staffObj.lastname)}
-        onClick={() => {
-          console.log("Adding staff details:");
-          addStaffMember(
-            (staffObj.id = uuid()),
-            staffObj.title,
-            staffObj.firstname,
-            staffObj.lastname
-          );
-          staffObj = ({});
-        }}
-      >
-        ADD STAFF
+      <div>Enter New Staff Details:</div>
+      <div>
+        <TextField
+          id="outlined-title"
+          label="Title"
+          value={staffObj.title}
+          onChange={updateFields}
+          name="title"
+          margin="normal"
+          variant="outlined"
+        />
+        <br />
+        <TextField
+          id="outlined-name"
+          label="First Name"
+          value={staffObj.firstname}
+          onChange={updateFields}
+          name="firstname"
+          margin="normal"
+          variant="outlined"
+        />
+        <br />
+        <TextField
+          id="outlined-lastname"
+          label="Last Name"
+          value={staffObj.lastname}
+          onChange={updateFields}
+          name="lastname"
+          margin="normal"
+          variant="outlined"
+        />
+        <br />
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={
+            !(staffObj.title.length
+              && staffObj.firstname.length
+              && staffObj.lastname.length)
+          }
+          onClick={() => {
+            console.log("Adding staff details:");
+            addStaffMember(
+              (staffObj.id = uuid()),
+              staffObj.title,
+              staffObj.firstname,
+              staffObj.lastname
+            );
+            setValues({
+              title: "",
+              firstname: "",
+              lastname: "",
+            });
+          }}
+        >
+          ADD STAFF
         </Button>
-      <br />
-      {/* </form> */}
+        <br />
+      </div>
       <br />
       <br />
       <div>Staff Memebers Added Are: </div>
-      {
+      <FormGroup>{
         staff.map(staffmembers => (
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Radio
-                  color="primary"
-                  checked={staffmembers.id === listid}
-                  value={staffmembers.id}
-                  onChange={event => {
-                    if (event.target.checked === true) {
-                      console.log(event.target.value);
-                      setlistitemid(event.target.value);
-                      UpdatesetValues(staff.filter(
-                        i =>
-                          i.id === event.target.value
-                      )[0]);
-                    } else {
-                      setlistitemid("");
-                    }
-                  }}
-                />
-              }
-              label={staffmembers.firstname + " " + staffmembers.lastname}
-            >
-            </FormControlLabel>
-          </FormGroup>
+          <FormControlLabel
+            control={
+              <Radio
+                color="primary"
+                checked={staffmembers.id === listid}
+                value={staffmembers.id}
+                onChange={event => {
+                  if (event.target.checked === true) {
+                    console.log(event.target.value);
+                    setlistitemid(event.target.value);
+                    UpdatesetValues(staff.filter(
+                      i =>
+                        i.id === event.target.value
+                    )[0]);
+                  } else {
+                    setlistitemid("");
+                  }
+                }}
+              />
+            }
+            label={staffmembers.firstname + " " + staffmembers.lastname}
+            key={staffmembers.id}
+          >
+          </FormControlLabel>
         ))
       }
+      </FormGroup>
       <br /> <br />
       <Button
         variant="contained"
@@ -210,7 +228,6 @@ const StaffDetailsForm = ({
         disabled={!(listid)}
         onClick={() => {
           setUpdateWindow(true);
-          // console.log('button', staffObj.title);
         }}
       >
         UPDATE STAFF RECORD
@@ -229,7 +246,6 @@ const StaffDetailsForm = ({
         </Button>
       <br />
       <br />
-      {/* </FormControl> */}
     </Container >
   );
 };
