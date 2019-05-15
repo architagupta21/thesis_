@@ -9,6 +9,7 @@ import ActivityForm from '../components/ActivityForm';
 import ProgramForm from '../components/ProgramForm';
 import CourseForm from '../components/CourseForm';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
+import StaffDetailsForm from '../components/StaffDetailsForm';
 
 const Container = styled.div`
     padding: 20px;
@@ -33,7 +34,7 @@ const Admin = ({
 
     return (
         <Container>
-            Default Count Value:
+            {/* Default Count Value:
             <DefaultCountInput
                 type="number"
                 value={defaultCount}
@@ -55,9 +56,9 @@ const Admin = ({
                 </Button>
             </div>
             <br />
+            <br /> */}
             <br />
-            <br />
-            {staff.map(person => (
+            {/* {staff.map(person => (
                 <div>
                     <div>{person.id}</div>
                 </div>
@@ -71,10 +72,11 @@ const Admin = ({
                 }}
             >
                 ADD RANDOM STAFF
-            </Button>
+            </Button> */}
             <ActivityForm />
             <ProgramForm />
             <CourseForm />
+            <StaffDetailsForm />
         </Container>
     );
 };
