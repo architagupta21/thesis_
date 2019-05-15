@@ -86,16 +86,18 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                                 setUpdateCourseSemester(event.target.value);
                             }}
                         >
-                            <MenuItem value="s1">Semester 1</MenuItem>
-                            <MenuItem value="s2">Semester 2</MenuItem>
+                            <MenuItem value="Semester 1">Semester 1</MenuItem>
+                            <MenuItem value="Semester 2">Semester 2</MenuItem>
                         </Select>
                     </FormControl>
+                    <br />
                     <TextField
+                        label="Year"
+                        type="number"
                         value={updateCourseYear}
                         onChange={event => {
                             setUpdateCourseYear(event.target.value);
                         }}
-                        fullWidth
                     />
                 </DialogContent>
                 <DialogActions>
@@ -172,19 +174,21 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                         setCourseSemester(event.target.value);
                     }}
                 >
-                    <MenuItem value="s1">Semester 1</MenuItem>
-                    <MenuItem value="s2">Semester 2</MenuItem>
+                    <MenuItem value="Semester 1">Semester 1</MenuItem>
+                    <MenuItem value="Semester 2">Semester 2</MenuItem>
                 </Select>
             </FormControl>
+            <br />
             <TextField
                 onChange={event => {
                     setCourseYear(event.target.value);
                 }}
                 margin="normal"
                 variant="outlined"
-                placeholder="Current Year"
+                label="Year"
+                type="number"
+                placeholder={2019}
                 value={courseYear}
-                fullWidth
             />
             <br />
             <Button
@@ -213,49 +217,33 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
             <br />
             <Container>
                 <div>Current Courses:</div>
-                {courses.map(item => (
-                    <FormGroup>
+                <FormGroup>
+                    {courses.map(item => (
                         <FormControlLabel
+                            key={item.id}
                             control={
                                 <Radio
                                     checked={item.id === selectedId}
                                     onChange={event => {
                                         if (event.target.checked === true) {
                                             setSelectedId(event.target.value);
+                                            const courseToUpdate = courses.filter(
+                                                i => i.id === event.target.value
+                                            )[0];
                                             setUpdateCourseCode(
-                                                courses.filter(
-                                                    i =>
-                                                        i.id ===
-                                                        event.target.value
-                                                )[0].code
+                                                courseToUpdate.code
                                             );
                                             setUpdateCourseName(
-                                                courses.filter(
-                                                    i =>
-                                                        i.id ===
-                                                        event.target.value
-                                                )[0].name
+                                                courseToUpdate.name
                                             );
                                             setUpdateCourseUnits(
-                                                courses.filter(
-                                                    i =>
-                                                        i.id ===
-                                                        event.target.value
-                                                )[0].units
+                                                courseToUpdate.units
                                             );
                                             setUpdateCourseSemester(
-                                                courses.filter(
-                                                    i =>
-                                                        i.id ===
-                                                        event.target.value
-                                                )[0].semester
+                                                courseToUpdate.semester
                                             );
                                             setUpdateCourseYear(
-                                                courses.filter(
-                                                    i =>
-                                                        i.id ===
-                                                        event.target.value
-                                                )[0].year
+                                                courseToUpdate.year
                                             );
                                         } else {
                                             setSelectedId('');
@@ -264,10 +252,12 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                                     value={item.id}
                                 />
                             }
-                            label={item.name}
+                            label={`${item.code} ${item.name}- ${
+                                item.semester
+                            }, ${item.year}`}
                         />
-                    </FormGroup>
-                ))}
+                    ))}
+                </FormGroup>
                 <Button
                     variant="contained"
                     color="primary"
