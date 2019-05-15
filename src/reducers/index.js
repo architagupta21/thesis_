@@ -166,6 +166,43 @@ const programsReducer = (state = [], action) => {
     }
 };
 
+const coursesReducer = (state = [], action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case Actions.ADD_COURSE:
+            return [
+                ...state,
+                {
+                    id: payload.id,
+                    code: payload.code,
+                    name: payload.name,
+                    units: payload.units,
+                    semester: payload.semester,
+                    year: payload.year,
+                },
+            ];
+        case Actions.REMOVE_COURSE:
+            return state.filter(state => state.id !== action.payload);
+        case Actions.UPDATE_COURSE:
+            return state.map(item => {
+                if (item.id === payload.id) {
+                    return {
+                        ...item,
+                        code: payload.code,
+                        name: payload.name,
+                        units: payload.units,
+                        semester: payload.semester,
+                        year: payload.year,
+                    };
+                }
+                return item;
+            });
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     count: countReducer,
     defaultCount: defaultCountReducer,
@@ -175,4 +212,5 @@ export default combineReducers({
     staff: staffReducer,
     activities: activitiesReducer,
     programs: programsReducer,
+    courses: coursesReducer,
 });

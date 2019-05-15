@@ -219,6 +219,7 @@ const ActivityForm = ({
                                     onChange={event => {
                                         if (event.target.checked === true) {
                                             setSelectedId(event.target.value);
+                                            console.log(selectedId);
                                             setUpdateActivityName(
                                                 activities.filter(
                                                     i =>
