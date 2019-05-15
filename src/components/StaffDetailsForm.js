@@ -166,9 +166,9 @@ const StaffDetailsForm = ({
           variant="contained"
           color="primary"
           disabled={
-            !(staffObj.title.length
-              && staffObj.firstname.length
-              && staffObj.lastname.length)
+            !(staffObj.title.length > 0
+              && staffObj.firstname.length > 0
+              && staffObj.lastname.length > 0)
           }
           onClick={() => {
             console.log("Adding staff details:");
@@ -179,6 +179,7 @@ const StaffDetailsForm = ({
               staffObj.lastname
             );
             setValues({
+              id: "",
               title: "",
               firstname: "",
               lastname: "",
@@ -214,7 +215,9 @@ const StaffDetailsForm = ({
                 }}
               />
             }
-            label={staffmembers.firstname + " " + staffmembers.lastname}
+            label={staffmembers.title + " "
+              + staffmembers.firstname + " "
+              + staffmembers.lastname}
             key={staffmembers.id}
           >
           </FormControlLabel>
