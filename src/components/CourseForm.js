@@ -45,7 +45,7 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 aria-labelledby="form-dialog-title"
                 fullWidth
             >
-                <DialogTitle id="form-dialog-title">Update Coutse</DialogTitle>
+                <DialogTitle id="form-dialog-title">Update Course</DialogTitle>
                 <DialogContent>
                     <TextField
                         label="Course Code"
@@ -183,18 +183,23 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 onChange={event => {
                     setCourseYear(event.target.value);
                 }}
-                margin="normal"
                 variant="outlined"
+                margin="normal"
                 label="Year"
                 type="number"
-                placeholder={2019}
                 value={courseYear}
             />
             <br />
             <Button
                 variant="contained"
                 color="secondary"
-                disabled={!courseCode}
+                disabled={
+                    !courseCode ||
+                    !courseName ||
+                    !courseSemester ||
+                    !courseUnits ||
+                    !courseYear
+                }
                 onClick={() => {
                     addCourse(
                         uuid(),
