@@ -15,6 +15,18 @@ export const Actions = {
     GET_DB_POST_SUCCESS: 'GET_DB_POST_SUCCESS',
     GET_DB_POST_ERROR: 'GET_DB_POST_ERROR',
 
+    ADD_ACTIVITY: 'ADD_ACTIVITY',
+    REMOVE_ACTIVITY: 'REMOVE_ACTIVITY',
+    UPDATE_ACTIVITY: 'UPDATE_ACTIVITY',
+
+    ADD_PROGRAM: 'ADD_PROGRAM',
+    REMOVE_PROGRAM: 'REMOVE_PROGRAM',
+    UPDATE_PROGRAM: 'UPDATE_PROGRAM',
+
+    ADD_COURSE: 'ADD_COURSE',
+    REMOVE_COURSE: 'REMOVE_COURSE',
+    UPDATE_COURSE: 'UPDATE_COURSE',
+
     ADD_STAFF: 'ADD_STAFF',
     REMOVE_STAFF: 'REMOVE_STAFF',
     UPDATE_STAFF: 'UPDATE_STAFF',
@@ -165,6 +177,83 @@ const getDBPost = () => (dispatch, getState) => {
     });
 };
 
+const addActivity = (id, name, staff, student) => ({
+    type: Actions.ADD_ACTIVITY,
+    payload: {
+        id,
+        name,
+        staff,
+        student,
+    },
+});
+
+const removeActivity = id => ({
+    type: Actions.REMOVE_ACTIVITY,
+    payload: id,
+});
+
+const updateActivity = (id, name, staff, student) => ({
+    type: Actions.UPDATE_ACTIVITY,
+    payload: {
+        id,
+        name,
+        staff,
+        student,
+    },
+});
+
+const addProgram = (id, name, level) => ({
+    type: Actions.ADD_PROGRAM,
+    payload: {
+        id,
+        name,
+        level,
+    },
+});
+
+const removeProgram = id => ({
+    type: Actions.REMOVE_PROGRAM,
+    payload: id,
+});
+
+const updateProgram = (id, name, level) => ({
+    type: Actions.UPDATE_PROGRAM,
+    payload: {
+        id,
+        name,
+        level,
+    },
+});
+
+const addCourse = (id, code, name, units, semester, year) => ({
+    type: Actions.ADD_COURSE,
+    payload: {
+        id,
+        code,
+        name,
+        units,
+        semester,
+        year,
+    },
+});
+
+const removeCourse = id => ({
+    type: Actions.REMOVE_COURSE,
+    payload: id,
+});
+
+const updateCourse = (id, code, name, units, semester, year) => ({
+    type: Actions.UPDATE_COURSE,
+    payload: {
+        id,
+        code,
+        name,
+        units,
+        semester,
+        year,
+    },
+});
+
 const addStaffMember = (id, title, firstname, lastname) => ({
     type: Actions.ADD_STAFF,
     payload: {
@@ -201,7 +290,16 @@ export {
     setCountDefault,
     getPHPMessage,
     getDBPost,
+    addActivity,
+    removeActivity,
+    updateActivity,
+    addProgram,
+    removeProgram,
+    updateProgram,
+    addCourse,
+    removeCourse,
+    updateCourse,
     addStaffMember,
-    removeStaffMember,
     updateStaffMember,
+    removeStaffMember,
 };

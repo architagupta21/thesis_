@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import uuid from 'uuid/v4';
+import ActivityForm from '../components/ActivityForm';
+import ProgramForm from '../components/ProgramForm';
+import CourseForm from '../components/CourseForm';
 import { setCountDefault, setSaveFalse, addStaffMember } from '../actions';
-import AddStaffDetailsFormComponent from '../components/AddStaffDetailsForm';
+import StaffDetailsForm from '../components/StaffDetailsForm';
 
 const Container = styled.div`
     padding: 20px;
@@ -19,10 +23,11 @@ const DefaultCountInput = styled.input`
 const Admin = ({ staff }) => {
     // const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
     console.log('MY STAFF:', staff);
+
     return (
         <Container>
-            Default Count Value:
-            {/* <DefaultCountInput
+            {/* Default Count Value:
+            <DefaultCountInput
                 type="number"
                 value={defaultCount}
                 onChange={event => {
@@ -48,7 +53,25 @@ const Admin = ({ staff }) => {
             <br />
             <br />
             <br />
-            <AddStaffDetailsFormComponent staff={staff} />
+            {/* {staff.map(person => (
+                <div>
+                    <div>{person.id}</div>
+                </div>
+            ))}
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                    console.log('ADD STAFF BUTTOn');
+                    addStaffMember(uuid(), 'prof', 'random', 'person');
+                }}
+            >
+                ADD RANDOM STAFF
+            </Button> */}
+            <ActivityForm />
+            <ProgramForm />
+            <CourseForm />
+            <StaffDetailsForm />
         </Container>
     );
 };
