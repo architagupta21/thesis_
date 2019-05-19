@@ -26,11 +26,11 @@ const renderApp = (noError = true) =>
                             path="/edit"
                             render={props => <Admin {...props} />}
                         />
-                        <Route path="/" render={props => <App {...props} />} />
                         <Route
                             path="/analysis"
                             render={props => <Analysis {...props} />}
                         />
+                        <Route path="/" render={props => <App {...props} />} />
                     </Switch>
                 </Layout>
             </Router>

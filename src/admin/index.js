@@ -47,12 +47,12 @@ const Admin = ({ staff }) => {
                     Save Changes
                 </Button>
             </div> */}
-            {staff.map(person => (
+            {/* {staff.map(person => (
                 <div>{<div>{person.firstname}</div>}</div>
-            ))}
+            ))} */}
+            {/* <br />
             <br />
-            <br />
-            <br />
+            <br /> */}
             {/* {staff.map(person => (
                 <div>
                     <div>{person.id}</div>
