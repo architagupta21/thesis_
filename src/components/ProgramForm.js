@@ -167,7 +167,7 @@ const ProgramForm = ({
                     </DialogActions>
                 </Dialog>
                 <div style={{ padding: '25px' }}>
-                    Enter Program Details:
+                    <div>Enter Program Details:</div>
                     <TextField
                         onChange={event => {
                             setProgramName(event.target.value);
@@ -176,8 +176,9 @@ const ProgramForm = ({
                         variant="outlined"
                         placeholder="Bachelor of Engineering"
                         value={programName}
-                        fullWidth
+                        // fullWidth
                     />
+                    <br />
                     <FormControl
                         onChange={event => {
                             if (

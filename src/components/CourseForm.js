@@ -184,10 +184,10 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                 }}
             >
                 <ExpansionPanelSummary>
-                    <div>Activity Form</div>
+                    <div>Course Detail Form</div>
                 </ExpansionPanelSummary>
                 <div style={{ padding: '25px' }}>
-                    Enter Course Details:
+                    <div>Enter Course Details:</div>
                     <TextField
                         onChange={event => {
                             setCourseCode(event.target.value);
@@ -197,8 +197,9 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                         label="Course Code"
                         placeholder="DECO7861"
                         value={courseCode}
-                        fullWidth
+                        // fullWidth
                     />
+                    <br />
                     <TextField
                         onChange={event => {
                             setCourseName(event.target.value);
@@ -208,8 +209,9 @@ const CourseForm = ({ courses, addCourse, removeCourse, updateCourse }) => {
                         label="Course Name"
                         placeholder="Masters Thesis"
                         value={courseName}
-                        fullWidth
+                        // fullWidth
                     />
+                    <br />
                     <FormControl style={{ minWidth: 120 }}>
                         <InputLabel>Units</InputLabel>
                         <Select

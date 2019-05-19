@@ -202,7 +202,7 @@ const ActivityForm = ({
                         margin="normal"
                         variant="outlined"
                         value={activityName}
-                        fullWidth
+                        // fullWidth
                     />
                     <br />
                     <FormControl

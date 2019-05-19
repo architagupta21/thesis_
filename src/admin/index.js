@@ -69,8 +69,11 @@ const Admin = ({ staff }) => {
                 ADD RANDOM STAFF
             </Button> */}
             <ActivityForm />
+            <br />
             <ProgramForm />
+            <br />
             <CourseForm />
+            <br />
             <StaffDetailsForm />
         </Container>
     );
