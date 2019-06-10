@@ -74,5 +74,4 @@ AdminPageOptions.propTypes = {
     }).isRequired,
     setSaveTrue: PropTypes.func.isRequired,
     history: PropTypes.shape({}).isRequired,
-    analysis : 
 };
