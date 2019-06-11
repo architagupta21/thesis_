@@ -13,7 +13,6 @@ const DataEntry = () => {
     console.log('data entry begins..');
     return (
         <Container>
-            <div>Hello there!</div>
             <DataEntryComp />
         </Container>
     );
