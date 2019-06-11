@@ -10,6 +10,7 @@ import App from './components/App';
 import Layout from './components/Layout';
 import Admin from './admin';
 import Analysis from './analysis';
+import DataEntry from './dataentry';
 import { getPHPMessage, getDBPost } from './actions';
 
 library.add(faReact, faCog, faStore);
@@ -25,6 +26,10 @@ const renderApp = (noError = true) =>
                         <Route
                             path="/edit"
                             render={props => <Admin {...props} />}
+                        />
+                        <Route
+                            path="/dataentry"
+                            render={props => <DataEntry {...props} />}
                         />
                         <Route
                             path="/analysis"

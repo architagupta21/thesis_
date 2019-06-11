@@ -94,6 +94,18 @@ function Layout(props) {
                     <ListItem
                         button
                         onClick={() => {
+                            console.log('go to data entry page');
+                            history.push('/dataentry');
+                        }}
+                    >
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Data Entry" />
+                    </ListItem>
+                    <ListItem
+                        button
+                        onClick={() => {
                             console.log('go to analysis page');
                             history.push('/analysis');
                         }}

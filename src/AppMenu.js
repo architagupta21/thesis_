@@ -48,6 +48,13 @@ const AppMenu = props => {
                     <button type="button">Edit LTI App</button>
                 </Link>
             )}
+            {location.pathname === '/dataentry' ? (
+                <AdminPageOptions {...props} />
+            ) : (
+                <Link to="/dataentry">
+                    <button type="button">Edit LTI App</button>
+                </Link>
+            )}
             {location.pathname === '/analysis' ? (
                 <AdminPageOptions {...props} />
             ) : (
