@@ -90,7 +90,6 @@ const staffReducer = (state = [], action) => {
     }
 };
 
-
 const activitiesReducer = (state = [], action) => {
     /**
      

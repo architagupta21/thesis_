@@ -20,16 +20,8 @@ const DefaultCountInput = styled.input`
     margin-left: 10px;
 `;
 
-// https://reactjs.org/docs/hooks-intro.html
-const Admin = ({
-    history,
-    setCountDefault,
-    defaultCountFromRedux,
-    addStaffMember,
-    staff,
-}) => {
-    const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
-
+const Admin = ({ staff }) => {
+    // const [defaultCount, setDefaultCount] = useState(defaultCountFromRedux);
     console.log('MY STAFF:', staff);
 
     return (
@@ -47,17 +39,20 @@ const Admin = ({
                     variant="contained"
                     color="primary"
                     onClick={() => {
-                        console.log('I WANT TO SAVFE');
+                        console.log('I WANT TO SAVE');
                         setCountDefault(parseInt(defaultCount, 10));
                         history.push('/');
                     }}
                 >
                     Save Changes
                 </Button>
-            </div>
+            </div> */}
+            {/* {staff.map(person => (
+                <div>{<div>{person.firstname}</div>}</div>
+            ))} */}
+            {/* <br />
             <br />
             <br /> */}
-            <br />
             {/* {staff.map(person => (
                 <div>
                     <div>{person.id}</div>
@@ -74,55 +69,15 @@ const Admin = ({
                 ADD RANDOM STAFF
             </Button> */}
             <ActivityForm />
+            <br />
             <ProgramForm />
+            <br />
             <CourseForm />
+            <br />
             <StaffDetailsForm />
         </Container>
     );
 };
-
-// class Admin extends Component {
-//     constructor(props) {
-//         super(props);
-
-//         this.state = {
-//             defaultCount: props.defaultCount,
-//         };
-//     }
-
-//     render() {
-//         const { defaultCount } = this.state;
-//         const { setCountDefault, history } = this.props;
-//         return (
-//             <Container>
-//                 Default Count Value:
-//                 <DefaultCountInput
-//                     type="number"
-//                     value={defaultCount}
-//                     onChange={event => {
-//                         this.setState({
-//                             defaultCount: event.target.value,
-//                         });
-//                     }}
-//                 />
-//                 <div>
-//                     <Button
-//                         variant="contained"
-//                         color="primary"
-//                         onClick={() => {
-//                             console.log('I WANT TO SAVFE');
-//                             setCountDefault(parseInt(defaultCount, 10));
-//                             history.push('/');
-//                         }}
-//                     >
-//                         Save Changes
-//                     </Button>
-//                 </div>
-//             </Container>
-//         );
-//     }
-// }
-
 export default withRouter(
     connect(
         state => ({
@@ -139,7 +94,7 @@ export default withRouter(
 );
 
 Admin.propTypes = {
-    defaultCountFromRedux: PropTypes.number.isRequired,
-    setCountDefault: PropTypes.func.isRequired,
+    // defaultCountFromRedux: PropTypes.number.isRequired,
+    // setCountDefault: PropTypes.func.isRequired,
     history: PropTypes.shape({}).isRequired,
 };

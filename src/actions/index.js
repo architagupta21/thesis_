@@ -280,7 +280,6 @@ const removeStaffMember = id => ({
         id,
     },
 });
-
 // function are ordered as above
 export {
     setSaveTrue,
