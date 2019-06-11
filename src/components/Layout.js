@@ -13,6 +13,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import HomeIcon from '@material-ui/icons/Home';
+import InsertChart from '@material-ui/icons/InsertChart';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -94,12 +95,23 @@ function Layout(props) {
                     <ListItem
                         button
                         onClick={() => {
+                            history.push('/observation');
+                        }}
+                    >
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Date Entry" />
+                    </ListItem>
+                    <ListItem
+                        button
+                        onClick={() => {
                             console.log('go to analysis page');
                             history.push('/analysis');
                         }}
                     >
                         <ListItemIcon>
-                            <InboxIcon />
+                            <InsertChart />
                         </ListItemIcon>
                         <ListItemText primary="Data Analysis" />
                     </ListItem>
