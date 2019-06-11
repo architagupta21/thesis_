@@ -15,7 +15,55 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import uuid from 'uuid/v4';
 
-const DataEntryNewRow = () => <div>Hello there!!</div>;
+const DataEntryNewRow = () => {
+    const [newRow, setNewRow] = useState(false);
+    function renderNewRow() {
+        if (newRow) {
+            return (
+                <div>
+                    <DataEntryNewRow />
+                </div>
+            );
+        }
+        return null;
+    }
+    return (
+        <div>
+            <TextField
+                label="Field1"
+                type="email"
+                name="email"
+                margin="normal"
+                variant="outlined"
+                style={{ margin: '10px' }}
+            />
+            <TextField
+                label="Field3"
+                type="email"
+                name="email"
+                margin="normal"
+                variant="outlined"
+                style={{ margin: '10px' }}
+            />
+            <TextField
+                label="Field4"
+                type="email"
+                name="email"
+                autoComplete="email"
+                margin="normal"
+                variant="outlined"
+                style={{ margin: '10px' }}
+                onBlur={() => {
+                    if (newRow === false) {
+                        setNewRow(true);
+                    }
+                }}
+            />
+            {renderNewRow()}
+            {console.log('bool new row', newRow)}
+        </div>
+    );
+};
 
 export default withRouter(
     connect(state => ({
