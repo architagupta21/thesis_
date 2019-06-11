@@ -55,7 +55,7 @@ module.exports = (env, argv) => {
             new BrowserSyncPlugin({
                 host: 'localhost',
                 port: 3000,
-                proxy: 'http://localhost:81/',
+                proxy: 'http://localhost:80/',
                 files: ['./public/**/*'],
             }),
         ],
