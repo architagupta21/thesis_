@@ -4,31 +4,20 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
+import moment from 'moment';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
-import CourseForm from './CourseForm';
 
 const Container = styled.div`
     padding: 20px;
     border: 1px solid lightblue;
 `;
-const getCurrentDate = (separator = '-') => {
-    const newDate = new Date(); // moment
-    const date = newDate.getDate();
-    const month = newDate.getMonth() + 1;
-    const year = newDate.getFullYear();
-
-    return `${year}${separator}${
-        month < 10 ? `0${month}` : `${month}`
-    }${separator}${date}`;
-};
 
 const Observation = ({ observations, courses, staff }) => {
     const [semester, setSemester] = useState('');
-    const [date, setDate] = useState(getCurrentDate);
+    const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [selectedCourseID, setSelectedCourseID] = useState('');
     const [selectedStaffID, setSelectedStaffID] = useState('');
     const [location, setLocation] = useState('');
