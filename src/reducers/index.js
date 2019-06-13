@@ -57,7 +57,14 @@ const dbPostReducer = (state = '', action) => {
     }
 };
 
-const staffReducer = (state = [], action) => {
+const staff = {
+    id: 'fdsagdsafas',
+    title: 'Mr',
+    firstname: 'Guang',
+    lastname: 'Yang',
+};
+
+const staffReducer = (state = [staff], action) => {
     const { type, payload } = action;
     switch (type) {
         case Actions.ADD_STAFF:
@@ -167,7 +174,16 @@ const programsReducer = (state = [], action) => {
     }
 };
 
-const coursesReducer = (state = [], action) => {
+const course = {
+    id: 'nnkjnadnk',
+    code: 'DECO1300',
+    name: 'Test',
+    units: 2,
+    semester: 'Semester 1',
+    year: 2019,
+};
+
+const coursesReducer = (state = [course], action) => {
     const { type, payload } = action;
 
     switch (type) {

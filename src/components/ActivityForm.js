@@ -89,8 +89,6 @@ const ActivityForm = ({
         type => type.staff === false && type.student === false
     );
 
-    console.log('MY ACTIVITY:', activities);
-
     return (
         <div>
             <ExpansionPanel
@@ -212,14 +210,12 @@ const ActivityForm = ({
                                 event.target.checked === true
                             ) {
                                 setStaffActivity(true);
-                                console.log('new test');
                             }
                             if (
                                 event.target.value === 'student' &&
                                 event.target.checked === true
                             ) {
                                 setStudentActivity(true);
-                                console.log('new test 2');
                             }
                             if (
                                 event.target.value === 'staff' &&
@@ -285,7 +281,6 @@ const ActivityForm = ({
                                                     setSelectedId(
                                                         event.target.value
                                                     );
-                                                    console.log(selectedId);
                                                     setUpdateActivityName(
                                                         activities.filter(
                                                             i =>
