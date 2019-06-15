@@ -268,7 +268,7 @@ const ActivityForm = ({
                     <div>
                         <div>Current Staff Activities:</div>
                         {staffActivities.map(item => (
-                            <FormGroup>
+                            <FormGroup key={item.id}>
                                 <FormControlLabel
                                     control={
                                         <Radio
@@ -354,7 +354,7 @@ const ActivityForm = ({
                     <div>
                         <div>Current Student Activities:</div>
                         {studentActivities.map(item => (
-                            <FormGroup>
+                            <FormGroup key={item.id}>
                                 <FormControlLabel
                                     control={
                                         <Radio
@@ -440,7 +440,7 @@ const ActivityForm = ({
                     <div>
                         <div>Unassigned Activities:</div>
                         {unassignedActivities.map(item => (
-                            <FormGroup>
+                            <FormGroup key={item.id}>
                                 <FormControlLabel
                                     control={
                                         <Radio

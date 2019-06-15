@@ -30,6 +30,8 @@ export const Actions = {
     ADD_STAFF: 'ADD_STAFF',
     REMOVE_STAFF: 'REMOVE_STAFF',
     UPDATE_STAFF: 'UPDATE_STAFF',
+
+    ADD_OBSERVATION: 'ADD_OBSERVATION',
 };
 
 const Tables = {
@@ -280,6 +282,33 @@ const removeStaffMember = id => ({
         id,
     },
 });
+
+const addObservation = (
+    id,
+    semester,
+    date,
+    courseCode,
+    courseName,
+    staff,
+    location,
+    numberOfStudents,
+    duration,
+    records
+) => ({
+    type: Actions.ADD_OBSERVATION,
+    payload: {
+        id,
+        semester,
+        date,
+        courseCode,
+        courseName,
+        staff,
+        location,
+        numberOfStudents,
+        duration,
+        records,
+    },
+});
 // function are ordered as above
 export {
     setSaveTrue,
@@ -302,4 +331,5 @@ export {
     addStaffMember,
     updateStaffMember,
     removeStaffMember,
+    addObservation,
 };

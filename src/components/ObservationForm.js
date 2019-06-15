@@ -6,16 +6,22 @@ import { withRouter } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
+import uuid from 'uuid/v4';
+import { addObservation } from '../actions';
 
 const Container = styled.div`
     padding: 20px;
     border: 1px solid lightblue;
 `;
 
-const Observation = ({ observations, courses, staff }) => {
+const Observation = ({
+    observations,
+    courses,
+    staff,
+    activities,
+    addObservation,
+}) => {
     const [semester, setSemester] = useState('');
     const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [selectedCourseID, setSelectedCourseID] = useState('');
@@ -23,15 +29,18 @@ const Observation = ({ observations, courses, staff }) => {
     const [location, setLocation] = useState('');
     const [numberOfStudents, setNumberofStudents] = useState('');
     const [duration, setDuration] = useState('');
+    const [records, setRecords] = useState([]);
+    const [refreshRecord, setRefreshRecord] = useState('');
 
     const courseFiltered = courses.filter(
         course => course.id === selectedCourseID
     );
     const staffFiltered = staff.filter(staff => staff.id === selectedStaffID);
+
     const selectedCourse = courseFiltered.length > 0 ? courseFiltered[0] : {};
     const selectedStaff = staffFiltered.length > 0 ? staffFiltered[0] : {};
 
-    console.log(selectedCourse.code);
+    console.log(observations);
 
     return (
         <div>
@@ -51,7 +60,6 @@ const Observation = ({ observations, courses, staff }) => {
                     <MenuItem value="Semester 1">Semester 1</MenuItem>
                     <MenuItem value="Semester 2">Semester 2</MenuItem>
                 </TextField>
-
                 <TextField
                     label="Date"
                     type="date"
@@ -104,7 +112,6 @@ const Observation = ({ observations, courses, staff }) => {
                         </MenuItem>
                     ))}
                 </TextField>
-
                 <TextField
                     label="Location"
                     type="name"
@@ -118,7 +125,6 @@ const Observation = ({ observations, courses, staff }) => {
                     }}
                 />
                 <br />
-
                 <TextField
                     label="Number of Students"
                     type="number"
@@ -145,29 +151,184 @@ const Observation = ({ observations, courses, staff }) => {
                 <Button
                     variant="contained"
                     color="primary"
-                    // disabled={
-                    //     !(
-                    //         selectedId &&
-                    //         courses.filter(e => e.id === selectedId)
-                    //             .length > 0
-                    //     )
-                    // }
-                    // onClick={() => {
-                    //     setUpdateWindow(true);
-                    // }}
+                    onClick={() => {
+                        setRecords([
+                            ...records,
+                            {
+                                id: uuid(),
+                                startTime: '',
+                                endTime: '',
+                                studentActivity: '',
+                                staffActivity: '',
+                                engagement: '',
+                            },
+                        ]);
+                    }}
                 >
                     Start Observation
                 </Button>
+                <br />
+                {records.map(record => (
+                    <div key={uuid()}>
+                        <TextField
+                            label="Start Time"
+                            defaultValue={record.startTime}
+                            margin="normal"
+                            variant="outlined"
+                            placeholder={moment().format('HH:mm')}
+                            onChange={event => {
+                                records.filter(
+                                    i => i.id === record.id
+                                )[0].startTime = event.target.value;
+                            }}
+                            style={{ marginRight: '10px', width: '10%' }}
+                        />
+                        <TextField
+                            label="End Time"
+                            defaultValue={record.endTime}
+                            margin="normal"
+                            variant="outlined"
+                            placeholder={moment().format('HH:mm')}
+                            onChange={event => {
+                                records.filter(
+                                    i => i.id === record.id
+                                )[0].endTime = event.target.value;
+                            }}
+                            style={{ marginRight: '10px', width: '10%' }}
+                        />
+                        <TextField
+                            select
+                            label="Student Activity"
+                            value={record.studentActivity}
+                            margin="normal"
+                            variant="outlined"
+                            style={{ marginRight: '10px', width: '30%' }}
+                            onChange={event => {
+                                setRefreshRecord(uuid());
+                                records.filter(
+                                    i => i.id === record.id
+                                )[0].studentActivity = event.target.value;
+                            }}
+                        >
+                            {activities.map(
+                                item =>
+                                    item.student ? (
+                                        <MenuItem
+                                            key={item.id}
+                                            value={item.name}
+                                        >
+                                            {item.name}
+                                        </MenuItem>
+                                    ) : (
+                                        ''
+                                    )
+                            )}
+                        </TextField>
+                        <TextField
+                            select
+                            label="Staff Activity"
+                            value={record.staffActivity}
+                            margin="normal"
+                            variant="outlined"
+                            style={{ marginRight: '10px', width: '30%' }}
+                            onChange={event => {
+                                setRefreshRecord(uuid());
+                                records.filter(
+                                    i => i.id === record.id
+                                )[0].staffActivity = event.target.value;
+                            }}
+                        >
+                            {activities.map(
+                                item =>
+                                    item.staff ? (
+                                        <MenuItem
+                                            key={item.id}
+                                            value={item.name}
+                                        >
+                                            {item.name}
+                                        </MenuItem>
+                                    ) : (
+                                        ''
+                                    )
+                            )}
+                        </TextField>
+                        <TextField
+                            label="Engagement(%)"
+                            defaultValue={record.engagement}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={event => {
+                                records.filter(
+                                    i => i.id === record.id
+                                )[0].engagement = event.target.value;
+                            }}
+                            onBlur={() => {
+                                setRecords([
+                                    ...records,
+                                    {
+                                        id: uuid(),
+                                        startTime: '',
+                                        endTime: '',
+                                        studentActivity: '',
+                                        staffActivity: '',
+                                        engagement: '',
+                                    },
+                                ]);
+                            }}
+                            style={{ marginRight: '10px', width: '14%' }}
+                        />
+                    </div>
+                ))}
+                {records.length > 0 ? (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onFocus={() => {
+                            // event.preventDefault();
+                            console.log(records);
+                            addObservation(
+                                uuid(),
+                                semester,
+                                date,
+                                selectedCourse.code,
+                                selectedCourse.name,
+                                `${selectedStaff.title} ${
+                                    selectedStaff.firstname
+                                } ${selectedStaff.lastname}`,
+                                location,
+                                numberOfStudents,
+                                duration,
+                                records
+                            );
+                            setSemester('');
+                            setDate(moment().format('YYYY-MM-DD'));
+                            setSelectedCourseID('');
+                            setSelectedStaffID('');
+                            setLocation('');
+                            setNumberofStudents('');
+                            setDuration('');
+                            setRecords([]);
+                        }}
+                    >
+                        Add Observation
+                    </Button>
+                ) : (
+                    ''
+                )}
             </Container>
         </div>
     );
 };
 export default withRouter(
-    connect(state => ({
-        save: state.save,
-        courses: state.courses,
-        staff: state.staff,
-    }))(Observation)
+    connect(
+        state => ({
+            observations: state.observations,
+            courses: state.courses,
+            staff: state.staff,
+            activities: state.activities,
+        }),
+        { addObservation }
+    )(Observation)
 );
 
 Observation.propTypes = {
