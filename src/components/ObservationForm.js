@@ -40,8 +40,6 @@ const Observation = ({
     const selectedCourse = courseFiltered.length > 0 ? courseFiltered[0] : {};
     const selectedStaff = staffFiltered.length > 0 ? staffFiltered[0] : {};
 
-    console.log(observations);
-
     return (
         <div>
             <Container>
@@ -284,8 +282,9 @@ const Observation = ({
                         variant="contained"
                         color="primary"
                         onFocus={() => {
-                            // event.preventDefault();
-                            console.log(records);
+                            const filterRecords = records.filter(
+                                record => record.startTime !== ''
+                            );
                             addObservation(
                                 uuid(),
                                 semester,
@@ -298,7 +297,7 @@ const Observation = ({
                                 location,
                                 numberOfStudents,
                                 duration,
-                                records
+                                filterRecords
                             );
                             setSemester('');
                             setDate(moment().format('YYYY-MM-DD'));
