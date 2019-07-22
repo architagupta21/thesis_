@@ -57,7 +57,14 @@ const dbPostReducer = (state = '', action) => {
     }
 };
 
-const staffReducer = (state = [], action) => {
+const staff = {
+    id: 'fdsagdsafas',
+    title: 'Mr',
+    firstname: 'Guang',
+    lastname: 'Yang',
+};
+
+const staffReducer = (state = [staff], action) => {
     const { type, payload } = action;
     switch (type) {
         case Actions.ADD_STAFF:
@@ -90,7 +97,31 @@ const staffReducer = (state = [], action) => {
     }
 };
 
-const activitiesReducer = (state = [], action) => {
+const activities1 = {
+    id: 'fda',
+    name: 'Listening the lecture',
+    staff: false,
+    student: true,
+};
+
+const activities2 = {
+    id: 'ffdsfdgq',
+    name: 'Discussing the problem',
+    staff: false,
+    student: true,
+};
+
+const activities3 = {
+    id: 'qqqqqq',
+    name: 'Lecturing',
+    staff: true,
+    student: false,
+};
+
+const activitiesReducer = (
+    state = [activities1, activities2, activities3],
+    action
+) => {
     /**
      
         {
@@ -167,7 +198,16 @@ const programsReducer = (state = [], action) => {
     }
 };
 
-const coursesReducer = (state = [], action) => {
+const course = {
+    id: 'nnkjnadnk',
+    code: 'DECO1300',
+    name: 'Test',
+    units: 2,
+    semester: 'Semester 1',
+    year: 2019,
+};
+
+const coursesReducer = (state = [course], action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -204,6 +244,31 @@ const coursesReducer = (state = [], action) => {
     }
 };
 
+const observationsReducer = (state = [], action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case Actions.ADD_OBSERVATION:
+            return [
+                ...state,
+                {
+                    id: payload.id,
+                    semester: payload.semester,
+                    date: payload.date,
+                    courseCode: payload.courseCode,
+                    courseName: payload.courseName,
+                    staff: payload.staff,
+                    location: payload.location,
+                    numberOfStudents: payload.numberOfStudents,
+                    duration: payload.duration,
+                    records: payload.records,
+                },
+            ];
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     count: countReducer,
     defaultCount: defaultCountReducer,
@@ -214,4 +279,5 @@ export default combineReducers({
     activities: activitiesReducer,
     programs: programsReducer,
     courses: coursesReducer,
+    observations: observationsReducer,
 });
