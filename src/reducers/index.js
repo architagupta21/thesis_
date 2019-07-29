@@ -264,6 +264,26 @@ const observationsReducer = (state = [], action) => {
                     records: payload.records,
                 },
             ];
+        case Actions.REMOVE_OBSERVATION:
+            return state.filter(state => state.id !== action.payload);
+        case Actions.UPDATE_OBSERVATION:
+            return state.map(item => {
+                if (item.id === payload.id) {
+                    return {
+                        ...item,
+                        semester: payload.semester,
+                        date: payload.date,
+                        courseCode: payload.courseCode,
+                        courseName: payload.courseName,
+                        staff: payload.staff,
+                        location: payload.location,
+                        numberOfStudents: payload.numberOfStudents,
+                        duration: payload.duration,
+                        records: payload.records,
+                    };
+                }
+                return item;
+            });
         default:
             return state;
     }

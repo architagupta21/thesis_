@@ -313,6 +313,7 @@ const ActivityForm = ({
                                         />
                                     }
                                     label={item.name}
+                                    key={item.id}
                                 />
                             </FormGroup>
                         ))}
@@ -399,6 +400,7 @@ const ActivityForm = ({
                                         />
                                     }
                                     label={item.name}
+                                    key={item.id}
                                 />
                             </FormGroup>
                         ))}
@@ -485,6 +487,7 @@ const ActivityForm = ({
                                         />
                                     }
                                     label={item.name}
+                                    key={item.id}
                                 />
                             </FormGroup>
                         ))}

@@ -255,6 +255,7 @@ const StaffDetailsForm = ({
                                 <FormControlLabel
                                     control={
                                         <Radio
+                                            key={staffmembers.id}
                                             color="primary"
                                             checked={staffmembers.id === listid}
                                             value={staffmembers.id}
