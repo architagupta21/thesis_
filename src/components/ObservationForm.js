@@ -54,17 +54,16 @@ const Observation = ({
     // const [updateStaffActivity, setUpdateStaffActivity] = useState('');
     // const [updateEngagementTime, setUpdateEngagementTime] = useState('');
     const [updateSemester, setUpdateSemester] = useState('');
-    const [updateCourseCode, setUpdateCourseCode] = useState('');
-    const [updateInstructor, setUpdateInstructor] = useState('');
+    const [updateCourseID, setUpdateCourseID] = useState('');
+    const [updateStaffID, setUpdateStaffID] = useState('');
     const [updateLocation, setUpdateLocation] = useState('');
-    // const [updateCourseName, setUpdateCourseName] = useState('');
     const [updateDuration, setUpdateDuration] = useState('');
     const [updateNumOfStudents, setUpdateNumOfStudents] = useState('');
     const [updateCurrentDate, setUpdateCurrentDate] = useState('');
 
-    const recordCounter = 1;
+    // const recordCounter = 1;
 
-    const [updateRecords, setUpdateRecords] = useState('');
+    const [updateRecords, setUpdateRecords] = useState([]);
 
     const courseFiltered = courses.filter(
         course => course.id === selectedCourseID
@@ -72,10 +71,10 @@ const Observation = ({
     const staffFiltered = staff.filter(staff => staff.id === selectedStaffID);
 
     const updateCourseFiltered = courses.filter(
-        course => course.id === updateCourseCode
+        course => course.id === updateCourseID
     );
     const updateStaffFiltered = staff.filter(
-        staff => staff.id === updateInstructor
+        staff => staff.id === updateStaffID
     );
 
     const selectedCourse = courseFiltered.length > 0 ? courseFiltered[0] : {};
@@ -128,16 +127,14 @@ const Observation = ({
                         <TextField
                             select
                             label="Select Course Code"
-                            value={updateCourseCode}
+                            value={updateCourseID}
                             onChange={event => {
-                                setUpdateCourseCode(event.target.value);
+                                setUpdateCourseID(event.target.value);
                             }}
                             margin="normal"
                             variant="outlined"
                             style={{ marginRight: '25px', width: '35%' }}
                         >
-                            {/* <MenuItem value="Code 1">Code 1</MenuItem>
-                            <MenuItem value="Code 1">Code 2</MenuItem> */}
                             {courses.map(item => (
                                 <MenuItem key={item.id} value={item.id}>
                                     {item.code}
@@ -156,9 +153,9 @@ const Observation = ({
                         <TextField
                             select
                             label="Select Instructor"
-                            value={updateInstructor}
+                            value={updateStaffID}
                             onChange={event => {
-                                setUpdateInstructor(event.target.value);
+                                setUpdateStaffID(event.target.value);
                             }}
                             margin="normal"
                             variant="outlined"
@@ -218,6 +215,7 @@ const Observation = ({
                                       variant="outlined"
                                       placeholder={moment().format('HH:mm')}
                                       onChange={event => {
+                                          setRefreshRecord(uuid());
                                           updateRecords.filter(
                                               i => i.id === record.id
                                           )[0].startTime = event.target.value;
@@ -234,6 +232,7 @@ const Observation = ({
                                       variant="outlined"
                                       placeholder={moment().format('HH:mm')}
                                       onChange={event => {
+                                          setRefreshRecord(uuid());
                                           updateRecords.filter(
                                               i => i.id === record.id
                                           )[0].endTime = event.target.value;
@@ -344,12 +343,12 @@ const Observation = ({
                                               marginTop: '20px',
                                           }}
                                           onClick={() => {
-                                              const elemntId = this.document
-                                                  .parent()
-                                                  .closest('div')
-                                                  .attr('id')
-                                                  .split(' ');
-                                              console.log('element', elemntId);
+                                              //   const elemntId = this.document
+                                              //       .parent()
+                                              //       .closest('div')
+                                              //       .attr('id')
+                                              //       .split(' ');
+                                              //   console.log('element', elemntId);
                                           }}
                                       />
                                   </span>
@@ -368,20 +367,25 @@ const Observation = ({
                         Cancel
                     </Button>
                     <Button
-                        onClick={() => {
+                        onFocus={() => {
+                            const updateFilterRecords = updateRecords.filter(
+                                record => record.startTime !== ''
+                            );
                             updateObservation(
                                 listid,
                                 updateSemester,
                                 updateCurrentDate,
+                                updateCourseID,
                                 updatedCourse.code,
                                 updatedCourse.name,
+                                updateStaffID,
                                 `${updatedStaff.title} ${
                                     updatedStaff.firstname
                                 } ${updatedStaff.lastname}`,
                                 updateLocation,
                                 updateNumOfStudents,
                                 updateDuration,
-                                updateRecords
+                                updateFilterRecords
                             );
                             setUpdateWindow(false);
                             setlistitemid('');
@@ -648,12 +652,12 @@ const Observation = ({
                                           marginTop: '25px',
                                       }}
                                       onClick={() => {
-                                          const elemntId = this.document
-                                              .parent()
-                                              .closest('div')
-                                              .attr('class')
-                                              .split(' ');
-                                          console.log('element', elemntId);
+                                          //   const elemntId = this.document
+                                          //       .parent()
+                                          //       .closest('div')
+                                          //       .attr('class')
+                                          //       .split(' ');
+                                          //   console.log('element', elemntId);
                                       }}
                                   />
                               </span>
@@ -672,8 +676,10 @@ const Observation = ({
                                 uuid(),
                                 semester,
                                 date,
+                                selectedCourseID,
                                 selectedCourse.code,
                                 selectedCourse.name,
+                                selectedStaffID,
                                 `${selectedStaff.title} ${
                                     selectedStaff.firstname
                                 } ${selectedStaff.lastname}`,
@@ -726,14 +732,14 @@ const Observation = ({
                                                                 event.target
                                                                     .value
                                                         )[0];
+                                                        console.log(
+                                                            observationToUpdate.courseCode
+                                                        );
                                                         const obsRecordsToUpdate =
                                                             observationToUpdate.records;
                                                         setUpdateSemester(
                                                             observationToUpdate.semester
                                                         );
-                                                        // setUpdateCourseName(
-                                                        //     observationToUpdate.courseName
-                                                        // );
                                                         setUpdateNumOfStudents(
                                                             observationToUpdate.numberOfStudents
                                                         );
@@ -743,30 +749,29 @@ const Observation = ({
                                                         setUpdateCurrentDate(
                                                             observationToUpdate.date
                                                         );
-                                                        setUpdateCourseCode(
-                                                            observationToUpdate.courseCode
+                                                        setUpdateCourseID(
+                                                            observationToUpdate.courseId
                                                         );
-                                                        setUpdateInstructor(
-                                                            observationToUpdate.staff
+                                                        setUpdateStaffID(
+                                                            observationToUpdate.staffId
                                                         );
                                                         setUpdateLocation(
                                                             observationToUpdate.location
                                                         );
-                                                        setUpdateRecords([
-                                                            ...obsRecordsToUpdate,
-                                                            {
-                                                                startTime:
-                                                                    obsRecordsToUpdate.startTime,
-                                                                endTime:
-                                                                    obsRecordsToUpdate.endTime,
-                                                                studentActivity:
-                                                                    obsRecordsToUpdate.studentActivity,
-                                                                staffActivity:
-                                                                    obsRecordsToUpdate.staffActivity,
-                                                                engagement:
-                                                                    obsRecordsToUpdate.engagement,
-                                                            },
-                                                        ]);
+                                                        setUpdateRecords(
+                                                            observationToUpdate.records // {
+                                                            //     startTime:
+                                                            //         obsRecordsToUpdate.startTime,
+                                                            //     endTime:
+                                                            //         obsRecordsToUpdate.endTime,
+                                                            //     studentActivity:
+                                                            //         obsRecordsToUpdate.studentActivity,
+                                                            //     staffActivity:
+                                                            //         obsRecordsToUpdate.staffActivity,
+                                                            //     engagement:
+                                                            //         obsRecordsToUpdate.engagement,
+                                                            // },
+                                                        );
                                                         console.log(
                                                             'updateRecords-1: ',
                                                             obsRecordsToUpdate

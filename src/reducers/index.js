@@ -64,7 +64,14 @@ const staff = {
     lastname: 'Yang',
 };
 
-const staffReducer = (state = [staff], action) => {
+const staff1 = {
+    id: 'xvvfewaf',
+    title: 'Ms',
+    firstname: 'Archita',
+    lastname: 'Gupta',
+};
+
+const staffReducer = (state = [staff, staff1], action) => {
     const { type, payload } = action;
     switch (type) {
         case Actions.ADD_STAFF:
@@ -207,7 +214,16 @@ const course = {
     year: 2019,
 };
 
-const coursesReducer = (state = [course], action) => {
+const course1 = {
+    id: 'wefadfdsnk',
+    code: 'DECO7861',
+    name: 'Thesis',
+    units: 2,
+    semester: 'Semester 1',
+    year: 2019,
+};
+
+const coursesReducer = (state = [course, course1], action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -255,8 +271,10 @@ const observationsReducer = (state = [], action) => {
                     id: payload.id,
                     semester: payload.semester,
                     date: payload.date,
+                    courseId: payload.courseId,
                     courseCode: payload.courseCode,
                     courseName: payload.courseName,
+                    staffId: payload.staffId,
                     staff: payload.staff,
                     location: payload.location,
                     numberOfStudents: payload.numberOfStudents,
@@ -273,8 +291,10 @@ const observationsReducer = (state = [], action) => {
                         ...item,
                         semester: payload.semester,
                         date: payload.date,
+                        courseId: payload.courseId,
                         courseCode: payload.courseCode,
                         courseName: payload.courseName,
+                        staffId: payload.staffId,
                         staff: payload.staff,
                         location: payload.location,
                         numberOfStudents: payload.numberOfStudents,
