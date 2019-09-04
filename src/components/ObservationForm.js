@@ -34,6 +34,7 @@ const Observation = ({
     staff,
     activities,
     addObservation,
+
     removeObservation,
     updateObservation,
 }) => {
@@ -47,6 +48,7 @@ const Observation = ({
     const [records, setRecords] = useState([]);
     const [listid, setlistitemid] = useState('');
     const [updateWindow, setUpdateWindow] = useState(false);
+    const [selectedId, setSelectedID] = useState('');
     const [refreshRecord, setRefreshRecord] = useState('');
     // const [updateStartTime, setUpdateStartTime] = useState('');
     // const [updateEndTime, setUpdateEndTime] = useState('');
@@ -86,7 +88,8 @@ const Observation = ({
         updateStaffFiltered.length > 0 ? updateStaffFiltered[0] : {};
 
     console.log('obs', observations);
-    console.log('updateRecords: ', updateRecords);
+    console.log(records);
+    console.log(selectedId);
 
     return (
         <div>
@@ -537,9 +540,29 @@ const Observation = ({
                 {records && records.length > 0
                     ? records.map((record, i) => (
                           <div id={i.valueOf()}>
+                              <FormControlLabel
+                                  key={record.id}
+                                  control={
+                                      <Radio
+                                          checked={record.id === selectedId}
+                                          onChange={event => {
+                                              if (
+                                                  event.target.checked === true
+                                              ) {
+                                                  setSelectedID(
+                                                      event.target.value
+                                                  );
+                                              } else {
+                                                  setSelectedID('');
+                                              }
+                                          }}
+                                          value={record.id}
+                                      />
+                                  }
+                              />
                               <TextField
                                   label="Start Time"
-                                  defaultValue={record.startTime}
+                                  //   value={record.startTime}
                                   margin="normal"
                                   variant="outlined"
                                   placeholder={moment().format('HH:mm')}
@@ -552,7 +575,7 @@ const Observation = ({
                               />
                               <TextField
                                   label="End Time"
-                                  defaultValue={record.endTime}
+                                  //   value={record.endTime}
                                   margin="normal"
                                   variant="outlined"
                                   placeholder={moment().format('HH:mm')}
@@ -621,7 +644,7 @@ const Observation = ({
                               </TextField>
                               <TextField
                                   label="Engagement(%)"
-                                  defaultValue={record.engagement}
+                                  //   value={record.engagement}
                                   margin="normal"
                                   variant="outlined"
                                   onChange={event => {
@@ -646,18 +669,22 @@ const Observation = ({
                               />
                               <span>
                                   <DeleteIcon
-                                      label="Delete Record"
                                       style={{
                                           fontSize: 32,
                                           marginTop: '25px',
                                       }}
                                       onClick={() => {
+                                          setRecords(
+                                              records.filter(
+                                                  i => i.id !== selectedId
+                                              )
+                                          );
                                           //   const elemntId = this.document
                                           //       .parent()
                                           //       .closest('div')
                                           //       .attr('class')
                                           //       .split(' ');
-                                          //   console.log('element', elemntId);
+                                          //   console.log(this.className);
                                       }}
                                   />
                               </span>
@@ -732,9 +759,6 @@ const Observation = ({
                                                                 event.target
                                                                     .value
                                                         )[0];
-                                                        console.log(
-                                                            observationToUpdate.courseCode
-                                                        );
                                                         const obsRecordsToUpdate =
                                                             observationToUpdate.records;
                                                         setUpdateSemester(
@@ -771,10 +795,6 @@ const Observation = ({
                                                             //     engagement:
                                                             //         obsRecordsToUpdate.engagement,
                                                             // },
-                                                        );
-                                                        console.log(
-                                                            'updateRecords-1: ',
-                                                            obsRecordsToUpdate
                                                         );
                                                     } else {
                                                         setlistitemid('');
