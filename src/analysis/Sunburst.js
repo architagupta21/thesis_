@@ -8,6 +8,8 @@ const Sunburst = ({ id, data }) => {
 
     const format = d3.format(',d');
     const color = d3.scaleOrdinal(
+        // d3.quantize(d3.interpolateRainbow, 111)
+
         d3.quantize(d3.interpolateRainbow, data.children.length + 1)
     );
     const arc = d3

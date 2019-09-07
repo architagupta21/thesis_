@@ -1,6 +1,6 @@
 const data = [
     {
-        name: '2019-8-26 Data Mining',
+        name: 'CSSE7030 2019-9-5',
         children: [
             {
                 name: 'Active Learning',
@@ -37,7 +37,7 @@ const data = [
         ],
     },
     {
-        name: '2019-8-25 Thesis Project',
+        name: 'CSSE7023 2019-9-6',
         children: [
             {
                 name: 'Active Learning',
