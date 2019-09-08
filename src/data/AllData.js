@@ -4,9 +4,12 @@ const data = [
         children: [
             {
                 name: 'Master of Information Technology',
+                noOfStudents: 90,
+                averageDiscussionEngagement: 56,
                 children: [
                     {
                         name: 'Introduction to Software Engineering',
+                        averageDiscussionEngagement: 51,
                         children: [
                             {
                                 name: 'CSSE7030 2019-9-5',
@@ -145,6 +148,7 @@ const data = [
                     },
                     {
                         name: 'Advanced Software Engineering',
+                        averageDiscussionEngagement: 67,
                         children: [
                             {
                                 name: 'CSSE7023 2019-9-5',
@@ -285,9 +289,12 @@ const data = [
             },
             {
                 name: 'Master of Computer Science',
+                noOfStudents: 70,
+                averageDiscussionEngagement: 68,
                 children: [
                     {
                         name: 'Data Mining',
+                        averageDiscussionEngagement: 34,
                         children: [
                             {
                                 name: 'INFS7203 2019-9-5',
@@ -426,6 +433,7 @@ const data = [
                     },
                     {
                         name: 'Machine Learning',
+                        averageDiscussionEngagement: 16,
                         children: [
                             {
                                 name: 'COMP7703 2019-9-5',
@@ -566,9 +574,12 @@ const data = [
             },
             {
                 name: 'Master of Data Science',
+                noOfStudents: 90,
+                averageDiscussionEngagement: 79,
                 children: [
                     {
                         name: 'Relational Database Systems',
+                        averageDiscussionEngagement: 56,
                         children: [
                             {
                                 name: 'INFS7903 2019-9-15',
@@ -707,6 +718,7 @@ const data = [
                     },
                     {
                         name: 'Artificial Intelligence',
+                        averageDiscussionEngagement: 71,
                         children: [
                             {
                                 name: 'COMP7702 2019-9-25',
