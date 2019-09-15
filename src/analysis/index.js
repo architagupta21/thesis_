@@ -169,7 +169,7 @@ const Analysis = () => {
             <br />
             <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 onClick={() => {
                     if (program !== '' && course !== '' && obData !== '') {
                         setDisplay(true);
@@ -187,6 +187,16 @@ const Analysis = () => {
                 }}
             >
                 Analyse Data
+            </Button>
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                    setProgram('');
+                    setCourse('');
+                }}
+            >
+                Clear Data
             </Button>
             {dispaly === true ? (
                 <div>
@@ -216,6 +226,17 @@ const Analysis = () => {
                             id="sunburst2"
                             data={
                                 StudentActiveLearningData.filter(
+                                    item => item.name === obData
+                                )[0]
+                            }
+                        />
+                    </div>
+                    <div>
+                        <h2>Staffs learning activities in one session:</h2>
+                        <Sunburst
+                            id="sunburst3"
+                            data={
+                                StaffActiveLearningData.filter(
                                     item => item.name === obData
                                 )[0]
                             }
