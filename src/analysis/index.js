@@ -11,6 +11,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
+import FormControl from '@material-ui/core/FormControl';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import StudentActiveLearningData from '../data/StudentActiveLearning';
 import StaffActiveLearningData from '../data/StaffActiveLearning';
 import Sunburst from './Sunburst';
@@ -23,6 +26,11 @@ const Analysis = () => {
     const [dispaly, setDisplay] = useState(false);
     const [showProgramData, setProgramData] = useState(false);
     const [showCourseLevelData, setCourseData] = useState(false);
+    const [studentActicity, setStudentActivity] = useState('');
+    const [staffActicity, setStaffActivity] = useState('');
+    const [smartScreen, setSmartScreen] = useState(false);
+    const [whiteBoard, setWhiteBoard] = useState(false);
+    const [hearingAssistance, setHearingAssistance] = useState(false);
 
     console.log(
         'course name:',
@@ -49,13 +57,14 @@ const Analysis = () => {
                 }}
             >
                 <div style={{ marginLeft: '50px' }}>
-                    <div>Select the type of Engagement Activity:</div>
+                    <div>Select Student Engagement Activity:</div>
                     <TextField
                         select
-                        label="Enagagement Type"
-                        value={program}
+                        label="Student Enagagement Type"
+                        value={studentActicity}
+                        disabled={!(obData === '')}
                         onChange={event => {
-                            setProgram(event.target.value);
+                            setStudentActivity(event.target.value);
                             setDisplay(false);
                         }}
                         margin="normal"
@@ -72,12 +81,121 @@ const Analysis = () => {
                         >
                             {'Listening'}
                         </MenuItem>
-                        )
+                        <MenuItem
+                            key="Clicker question discussion"
+                            value="Clicker question discussion"
+                            style={{
+                                fontStyle: 'italic',
+                                fontSize: '15px',
+                            }}
+                        >
+                            {'Clicker question discussion'}
+                        </MenuItem>
                     </TextField>
+                    <br />
+                    <div>Select Staff Engagement Activity:</div>
+                    <TextField
+                        select
+                        label="Staff Enagagement Type"
+                        value={staffActicity}
+                        disabled={!(obData === '')}
+                        onChange={event => {
+                            setStaffActivity(event.target.value);
+                            setDisplay(false);
+                        }}
+                        margin="normal"
+                        // variant="outlined"
+                        style={{ width: '45%' }}
+                    >
+                        <MenuItem
+                            key="Lecturing"
+                            value="Lecturing"
+                            style={{
+                                fontStyle: 'italic',
+                                fontSize: '15px',
+                            }}
+                        >
+                            {'Lecturing'}
+                        </MenuItem>
+                        <MenuItem
+                            key="Clicker questions"
+                            value="Clicker questions"
+                            style={{
+                                fontStyle: 'italic',
+                                fontSize: '15px',
+                            }}
+                        >
+                            {'Clicker questions'}
+                        </MenuItem>
+                    </TextField>
+                    <br />
+                    <br />
+
+                    <div>Select the Learning Space:</div>
+                    <FormControl
+                        disabled={!(obData === '')}
+                        onChange={event => {
+                            if (
+                                event.target.value === 'smart screen' &&
+                                event.target.checked === true
+                            ) {
+                                setSmartScreen(true);
+                            }
+                            if (
+                                event.target.value === 'white board' &&
+                                event.target.checked === true
+                            ) {
+                                setWhiteBoard(true);
+                            }
+                            if (
+                                event.target.value === 'hearing assistance' &&
+                                event.target.checked === true
+                            ) {
+                                setHearingAssistance(true);
+                            }
+                            if (
+                                event.target.value === 'smart screen' &&
+                                event.target.checked === false
+                            ) {
+                                setSmartScreen(false);
+                            }
+                            if (
+                                event.target.value === 'white board' &&
+                                event.target.checked === false
+                            ) {
+                                setWhiteBoard(false);
+                            }
+                            if (
+                                event.target.value === 'hearing assistance' &&
+                                event.target.checked === false
+                            ) {
+                                setHearingAssistance(false);
+                            }
+                        }}
+                    >
+                        <FormControlLabel
+                            value="smart screen"
+                            control={<Checkbox />}
+                            label="smart screen"
+                            checked={smartScreen}
+                        />
+                        <FormControlLabel
+                            value="white board"
+                            control={<Checkbox />}
+                            label="white board"
+                            checked={whiteBoard}
+                        />
+                        <FormControlLabel
+                            value="hearing assistance"
+                            control={<Checkbox />}
+                            label="hearing assistance"
+                            checked={hearingAssistance}
+                        />
+                    </FormControl>
                 </div>
             </div>
             <div style={{ float: 'left', width: '50%', border: 'ridge' }}>
-                <div style={{ marginLeft: '50px' }}>
+                <div style={{ marginLeft: '50px', marginBottom: '155px' }}>
                     <TextField
                         select
                         label="Select Programs"
@@ -88,7 +206,7 @@ const Analysis = () => {
                         }}
                         margin="normal"
                         // variant="outlined"
-                        style={{ width: '45%' }}
+                        style={{ width: '55%' }}
                     >
                         {newData[0].children.map(item => (
                             <MenuItem
@@ -114,7 +232,7 @@ const Analysis = () => {
                         }}
                         margin="normal"
                         // variant="outlined"
-                        style={{ width: '45%' }}
+                        style={{ width: '55%' }}
                     >
                         {newData[0].children
                             .filter(i => i.name === program)
