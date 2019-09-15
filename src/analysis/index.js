@@ -16,29 +16,6 @@ import StaffActiveLearningData from '../data/StaffActiveLearning';
 import Sunburst from './Sunburst';
 import newData from '../data/AllData';
 
-// const BarData = {
-//     labels: [
-//         'Discussion',
-//         'Lecturing',
-//         'Listening',
-//         'Quiz',
-//         'Writing',
-//         'Answering Questions',
-//         'Indivisual Thinking',
-//     ],
-//     datasets: [
-//         {
-//             label: 'Activity Engagement During a Session',
-//             backgroundColor: 'rgba(201, 16, 16)',
-//             borderColor: 'rgba(255,99,132,1)',
-//             borderWidth: 2,
-//             hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-//             hoverBorderColor: 'rgba(255,99,132,1)',
-//             data: [65, 90, 80, 81, 56, 55, 42],
-//         },
-//     ],
-// };
-
 const Analysis = () => {
     const [program, setProgram] = useState('');
     const [course, setCourse] = useState('');
@@ -57,119 +34,149 @@ const Analysis = () => {
                 )
             )[0]
     );
-    // console.log(
-    //     'selected obj val',
-    //     StudentActiveLearningData.filter(
-    //         item => item.name === '2019-8-26 Data Mining'
-    //     )[0]
-    // );
-
-    // console.log(
-    //     'newdata obj val',
-    //     newData[0].children
-    //         .filter(i => i.name === 'Master of Computer Science')
-    //         .map(item =>
-    //             item.children
-    //                 .filter(k => k.name === 'Machine Learning')
-    //                 .map(j => j.children.filter(l => l.name === '2019-9-5'))
-    //         )[0][0][0]
-    // );
-
-    // const digram = inputData => (
-    //     <div>
-    //         <Sunburst id="sunburst" data={inputData} />
-    //     </div>
-    // );
     return (
         <div className="App">
             <h3>Welcome to the Analytics page!</h3>
             {/* {digram(observationData[0])} */}
             {/* <Sunburst id="sunburst" data={newData[0]} /> */}
             <h2>Faculty : {newData[0].name}</h2>
-            <TextField
-                select
-                label="Select Programs"
-                value={program}
-                onChange={event => {
-                    setProgram(event.target.value);
-                    setDisplay(false);
+            <div
+                style={{
+                    float: 'right',
+                    // paddingRight: '50px',
+                    width: '50%',
+                    border: 'ridge',
                 }}
-                margin="normal"
-                // variant="outlined"
-                style={{ marginRight: '25px', width: '35%' }}
             >
-                {newData[0].children.map(item => (
-                    <MenuItem
-                        key={item.name}
-                        value={item.name}
-                        style={{
-                            fontStyle: 'italic',
-                            fontSize: '15px',
+                <div style={{ marginLeft: '50px' }}>
+                    <div>Select the type of Engagement Activity:</div>
+                    <TextField
+                        select
+                        label="Enagagement Type"
+                        value={program}
+                        onChange={event => {
+                            setProgram(event.target.value);
+                            setDisplay(false);
                         }}
+                        margin="normal"
+                        // variant="outlined"
+                        style={{ width: '45%' }}
                     >
-                        {item.name}
-                    </MenuItem>
-                ))}
-            </TextField>
-            <TextField
-                select
-                label="Select Course"
-                value={course}
-                onChange={event => {
-                    setCourse(event.target.value);
-                    setDisplay(false);
-                }}
-                margin="normal"
-                // variant="outlined"
-                style={{ marginRight: '25px', width: '35%' }}
-            >
-                {newData[0].children.filter(i => i.name === program).map(item =>
-                    item.children.map(courseName => (
                         <MenuItem
-                            key={courseName.name}
-                            value={courseName.name}
-                            style={{ fontStyle: 'italic', fontSize: '15px' }}
+                            key="Listening"
+                            value="Listening"
+                            style={{
+                                fontStyle: 'italic',
+                                fontSize: '15px',
+                            }}
                         >
-                            {courseName.name}
+                            {'Listening'}
                         </MenuItem>
-                    ))
-                )}
-            </TextField>
-            <TextField
-                select
-                label="Select Observation"
-                value={obData}
-                onChange={event => {
-                    setObData(event.target.value);
-                    setDisplay(false);
-                    console.log(obData);
-                }}
-                margin="normal"
-                // variant="outlined"
-                style={{ marginRight: '25px', width: '35%' }}
-            >
-                {newData[0].children.filter(i => i.name === program).map(item =>
-                    item.children.filter(k => k.name === course).map(j =>
-                        j.children.map(obName => (
+                        )
+                    </TextField>
+                </div>
+            </div>
+            <div style={{ float: 'left', width: '50%', border: 'ridge' }}>
+                <div style={{ marginLeft: '50px' }}>
+                    <TextField
+                        select
+                        label="Select Programs"
+                        value={program}
+                        onChange={event => {
+                            setProgram(event.target.value);
+                            setDisplay(false);
+                        }}
+                        margin="normal"
+                        // variant="outlined"
+                        style={{ width: '45%' }}
+                    >
+                        {newData[0].children.map(item => (
                             <MenuItem
-                                key={obName.name}
-                                value={obName.name}
+                                key={item.name}
+                                value={item.name}
                                 style={{
                                     fontStyle: 'italic',
                                     fontSize: '15px',
                                 }}
-                                dense
                             >
-                                {obName.name}
+                                {item.name}
                             </MenuItem>
-                        ))
-                    )
-                )}
-            </TextField>
-            <br />
+                        ))}
+                    </TextField>
+                    <br />
+                    <TextField
+                        select
+                        label="Select Course"
+                        value={course}
+                        onChange={event => {
+                            setCourse(event.target.value);
+                            setDisplay(false);
+                        }}
+                        margin="normal"
+                        // variant="outlined"
+                        style={{ width: '45%' }}
+                    >
+                        {newData[0].children
+                            .filter(i => i.name === program)
+                            .map(item =>
+                                item.children.map(courseName => (
+                                    <MenuItem
+                                        key={courseName.name}
+                                        value={courseName.name}
+                                        style={{
+                                            fontStyle: 'italic',
+                                            fontSize: '15px',
+                                        }}
+                                    >
+                                        {courseName.name}
+                                    </MenuItem>
+                                ))
+                            )}
+                    </TextField>
+                    <br />
+                    <TextField
+                        select
+                        label="Select Observation"
+                        value={obData}
+                        onChange={event => {
+                            setObData(event.target.value);
+                            setDisplay(false);
+                            console.log(obData);
+                        }}
+                        margin="normal"
+                        // variant="outlined"
+                        style={{ width: '45%' }}
+                    >
+                        {newData[0].children
+                            .filter(i => i.name === program)
+                            .map(item =>
+                                item.children
+                                    .filter(k => k.name === course)
+                                    .map(j =>
+                                        j.children.map(obName => (
+                                            <MenuItem
+                                                key={obName.name}
+                                                value={obName.name}
+                                                style={{
+                                                    fontStyle: 'italic',
+                                                    fontSize: '15px',
+                                                }}
+                                                dense
+                                            >
+                                                {obName.name}
+                                            </MenuItem>
+                                        ))
+                                    )
+                            )}
+                    </TextField>
+                    <br />
+                </div>
+            </div>
+
             <Button
                 variant="contained"
                 color="primary"
+                style={{ margin: '15px' }}
                 onClick={() => {
                     if (program !== '' && course !== '' && obData !== '') {
                         setDisplay(true);
@@ -192,12 +199,16 @@ const Analysis = () => {
                 variant="contained"
                 color="secondary"
                 onClick={() => {
+                    setDisplay(false);
+                    setCourseData(false);
+                    setProgramData(false);
                     setProgram('');
                     setCourse('');
                 }}
             >
                 Clear Data
             </Button>
+
             {dispaly === true ? (
                 <div>
                     <div>
