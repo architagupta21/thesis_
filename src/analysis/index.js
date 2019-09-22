@@ -17,6 +17,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import StudentActiveLearningData from '../data/StudentActiveLearning';
 import StaffActiveLearningData from '../data/StaffActiveLearning';
+import SlotData from '../data/Slot';
 import Sunburst from './Sunburst';
 import newData from '../data/AllData';
 
@@ -727,6 +728,17 @@ const Analysis = () => {
                     <div>
                         <div>
                             <br />
+                            <div>
+                                <h2>Learning activities in one session:</h2>
+                                <Sunburst
+                                    id="sunburst0"
+                                    data={
+                                        SlotData.filter(
+                                            item => item.name === obData
+                                        )[0]
+                                    }
+                                />
+                            </div>
                             <h2>
                                 Students and staffs engagement in one session:
                             </h2>

@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 
 const Sunburst = ({ id, data }) => {
-    const width = 600;
-    const height = 600;
+    const width = 700;
+    const height = 700;
     const radius = Math.min(width, height) / 2;
 
     const format = d3.format(',d');
