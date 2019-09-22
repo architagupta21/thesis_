@@ -10,7 +10,7 @@ const data = [
                         children: [
                             {
                                 name: 'Listening',
-                                value: 2,
+                                value: 10,
                             },
                         ],
                     },
@@ -19,7 +19,7 @@ const data = [
                         children: [
                             {
                                 name: 'Lecturing',
-                                value: 2,
+                                value: 10,
                             },
                         ],
                     },
@@ -32,54 +32,8 @@ const data = [
                         name: 'Student',
                         children: [
                             {
-                                name: 'Listening',
-                                value: 2,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Staff',
-                        children: [
-                            {
-                                name: 'Lecturing',
-                                value: 2,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                name: 'Record3',
-                children: [
-                    {
-                        name: 'Student',
-                        children: [
-                            {
-                                name: 'Listening',
-                                value: 2,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Staff',
-                        children: [
-                            {
-                                name: 'Lecturing',
-                                value: 2,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                name: 'Record4',
-                children: [
-                    {
-                        name: 'Student',
-                        children: [
-                            {
                                 name: 'Discussing questions in a group',
-                                value: 2,
+                                value: 4,
                             },
                         ],
                     },
@@ -90,12 +44,16 @@ const data = [
                                 name: 'Asking a clicker question',
                                 value: 2,
                             },
+                            {
+                                name: 'Waiting',
+                                value: 2,
+                            },
                         ],
                     },
                 ],
             },
             {
-                name: 'Record5',
+                name: 'Record3',
                 children: [
                     {
                         name: 'Student',
@@ -110,7 +68,7 @@ const data = [
                         name: 'Staff',
                         children: [
                             {
-                                name: 'Asking a clicker question',
+                                name: 'Listening/answering question',
                                 value: 2,
                             },
                         ],
@@ -118,7 +76,7 @@ const data = [
                 ],
             },
             {
-                name: 'Record6',
+                name: 'Record4',
                 children: [
                     {
                         name: 'Student',
@@ -141,7 +99,7 @@ const data = [
                 ],
             },
             {
-                name: 'Record7',
+                name: 'Record5',
                 children: [
                     {
                         name: 'Student',
@@ -168,14 +126,14 @@ const data = [
                 ],
             },
             {
-                name: 'Record8',
+                name: 'Record6',
                 children: [
                     {
                         name: 'Student',
                         children: [
                             {
                                 name: 'Engaged in whole class discussion',
-                                value: 2,
+                                value: 8,
                             },
                         ],
                     },
@@ -184,37 +142,18 @@ const data = [
                         children: [
                             {
                                 name: 'Moving through class guiding work',
-                                value: 2,
+                                value: 4,
                             },
-                        ],
-                    },
-                ],
-            },
-            {
-                name: 'Record9',
-                children: [
-                    {
-                        name: 'Student',
-                        children: [
-                            {
-                                name: 'Engaged in whole class discussion',
-                                value: 2,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Staff',
-                        children: [
                             {
                                 name: 'Waiting',
-                                value: 2,
+                                value: 8,
                             },
                         ],
                     },
                 ],
             },
             {
-                name: 'Record10',
+                name: 'Record7',
                 children: [
                     {
                         name: 'Student',
@@ -241,14 +180,14 @@ const data = [
                 ],
             },
             {
-                name: 'Record11',
+                name: 'Record8',
                 children: [
                     {
                         name: 'Student',
                         children: [
                             {
                                 name: 'Listening',
-                                value: 2,
+                                value: 4,
                             },
                         ],
                     },
@@ -257,30 +196,7 @@ const data = [
                         children: [
                             {
                                 name: 'Lecturing',
-                                value: 2,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                name: 'Record12',
-                children: [
-                    {
-                        name: 'Student',
-                        children: [
-                            {
-                                name: 'Listening',
-                                value: 2,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Staff',
-                        children: [
-                            {
-                                name: 'Lecturing',
-                                value: 2,
+                                value: 4,
                             },
                         ],
                     },
