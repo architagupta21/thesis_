@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -19,6 +20,16 @@ import StaffActiveLearningData from '../data/StaffActiveLearning';
 import Sunburst from './Sunburst';
 import newData from '../data/AllData';
 
+// function getRandomArray(numItems) {
+//     // Create random array of objects
+//     // const names = 'Week_';
+//     const data = [];
+//     for (let i = 0; i < numItems; ) {
+//         data.push(Math.round(20 + 80 * Math.random()));
+//     }
+//     console.log(data);
+//     return data;
+// }
 const Analysis = () => {
     const [program, setProgram] = useState('');
     const [course, setCourse] = useState('');
@@ -31,33 +42,282 @@ const Analysis = () => {
     const [smartScreen, setSmartScreen] = useState(false);
     const [whiteBoard, setWhiteBoard] = useState(false);
     const [hearingAssistance, setHearingAssistance] = useState(false);
-
-    console.log(
-        'course name:',
-        newData[0].children
-            .filter(i => i.name === program)
-            .map(item =>
-                item.children.map(
-                    courseName => courseName.averageDiscussionEngagement
-                )
-            )[0]
+    const [programEngagementDisplay, setProgramEngagementDisplay] = useState(
+        false
     );
+    const [courseEngagementDisplay, setCourseEngagementDisplay] = useState(
+        false
+    );
+    const [
+        staffprogramEngagementDisplay,
+        setStaffProgramEngagementDisplay,
+    ] = useState(false);
+    const [
+        staffcourseEngagementDisplay,
+        setStaffCourseEngagementDisplay,
+    ] = useState(false);
+    const [
+        programEngagement_studentStaff,
+        setProgramEngagement_studentStaff,
+    ] = useState(false);
+    const [
+        courseEngagement_studentStaff,
+        setCourseEngagement_studentStaff,
+    ] = useState(false);
+    // const [
+    //     staffStudentProgramDisplay,
+    //     setStaffStudentProgramDisplay,
+    // ] = useState(false);
+
+    const [programSpaceDisplay, setProgramSpaceDisplay] = useState(false);
+    const [courseSpaceDisplay, setCourseSpaceDisplay] = useState(false);
+
+    const StudentEngagementDataProgram = {
+        labels: [
+            'Week1',
+            'Week2',
+            'Week3',
+            'Week4',
+            'Week5',
+            'Week6',
+            'Week7',
+            'Week8',
+            'Week9',
+            'Week10',
+            'Week11',
+            'Week12',
+        ],
+        datasets: [
+            {
+                label: 'Student Engagement During a Semester for Program',
+                backgroundColor: 'rgba(100, 6, 16)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [65, 70, 80, 81, 90, 91, 95, 83, 70, 58, 44, 22],
+            },
+        ],
+    };
+
+    const StudentEngagementDataCourse = {
+        labels: [
+            'Week1',
+            'Week2',
+            'Week3',
+            'Week4',
+            'Week5',
+            'Week6',
+            'Week7',
+            'Week8',
+            'Week9',
+            'Week10',
+            'Week11',
+            'Week12',
+        ],
+        datasets: [
+            {
+                label: 'Student Engagement During a Semester for Course',
+                backgroundColor: 'rgba(100, 6, 16)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [55, 20, 70, 41, 30, 81, 85, 73, 60, 48, 34, 22],
+            },
+            {
+                label: 'Student Engagement During a Semester for Course',
+                backgroundColor: 'rgba(100, 6, 16)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
+            },
+        ],
+    };
+
+    const StaffEngagementDataProgram = {
+        labels: [
+            'Week1',
+            'Week2',
+            'Week3',
+            'Week4',
+            'Week5',
+            'Week6',
+            'Week7',
+            'Week8',
+            'Week9',
+            'Week10',
+            'Week11',
+            'Week12',
+        ],
+        datasets: [
+            {
+                label: 'Staff Engagement During a Semester in a Program',
+                backgroundColor: 'rgba(300, 46, 76)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [45, 10, 40, 71, 40, 81, 85, 23, 30, 48, 34, 22],
+            },
+        ],
+    };
+
+    const StaffEngagementDataCourse = {
+        labels: [
+            'Week1',
+            'Week2',
+            'Week3',
+            'Week4',
+            'Week5',
+            'Week6',
+            'Week7',
+            'Week8',
+            'Week9',
+            'Week10',
+            'Week11',
+            'Week12',
+        ],
+        datasets: [
+            {
+                label: 'Staff Engagement During a Semester for Course',
+                backgroundColor: 'rgba(100, 6, 16)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [75, 90, 50, 41, 80, 81, 85, 67, 60, 48, 34, 22],
+                // data: getRandomArray(12),
+            },
+            {
+                label: 'Staff Engagement During a Semester in a Course',
+                backgroundColor: 'rgba(300, 46, 76)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [55, 60, 80, 71, 80, 81, 56, 73, 60, 98, 34, 22],
+                // data: getRandomArray(12),
+            },
+        ],
+    };
+
+    const ProgramStudentStaffEngagement = {
+        labels: [
+            'Week1',
+            'Week2',
+            'Week3',
+            'Week4',
+            'Week5',
+            'Week6',
+            'Week7',
+            'Week8',
+            'Week9',
+            'Week10',
+            'Week11',
+            'Week12',
+        ],
+        datasets: [
+            {
+                label: 'Staff Engagement During a Semester in a Program',
+                backgroundColor: 'rgba(300, 46, 76)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [25, 40, 20, 31, 10, 31, 25, 43, 50, 48, 24, 12],
+                // data: getRandomArray(12),
+            },
+        ],
+    };
+
+    const CourseStudentStaffEngagement = {
+        labels: [
+            'Week1',
+            'Week2',
+            'Week3',
+            'Week4',
+            'Week5',
+            'Week6',
+            'Week7',
+            'Week8',
+            'Week9',
+            'Week10',
+            'Week11',
+            'Week12',
+        ],
+        datasets: [
+            {
+                label: 'Staff Engagement During a Semester in a Course',
+                backgroundColor: 'rgba(300, 46, 76)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
+                // data: getRandomArray(12),
+            },
+            {
+                label: 'Staff Engagement During a Semester in a Course',
+                backgroundColor: 'rgba(300, 46, 76)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
+                // data: getRandomArray(12),
+            },
+            {
+                label: 'Student Engagement During a Semester in a Program',
+                backgroundColor: 'rgba(300, 46, 76)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
+                // data: getRandomArray(12),
+            },
+            {
+                label: 'Student Engagement During a Semester in a Course',
+                backgroundColor: 'rgba(300, 46, 76)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
+                // data: getRandomArray(12),
+            },
+        ],
+    };
+
     return (
+        // <h3>
+        //     Select Student/Staff Engagement Activities:
+        //     <h5 style={{ margin: 'unset' }}>
+        //         (Applicable only for Program and Course level selection)
+        //     </h5>
+        // </h3>
         <div className="App">
-            <h3>Welcome to the Analytics page!</h3>
-            {/* {digram(observationData[0])} */}
-            {/* <Sunburst id="sunburst" data={newData[0]} /> */}
-            <h2>Faculty : {newData[0].name}</h2>
+            <h2 style={{ textAlign: 'center' }}>COPUS Insights</h2>
+            <h3>Faculty : {newData[0].name}</h3>
             <div
                 style={{
                     float: 'right',
-                    // paddingRight: '50px',
                     width: '50%',
                     border: 'ridge',
+                    height: '500px',
                 }}
             >
                 <div style={{ marginLeft: '50px' }}>
-                    <div>Select Student Engagement Activity:</div>
+                    <h3>
+                        Select Student/Staff Engagement Activities:
+                        <h5 style={{ margin: 'unset' }}>
+                            (Applicable only for Program and Course level
+                            selection)
+                        </h5>
+                    </h3>
                     <TextField
                         select
                         label="Student Enagagement Type"
@@ -67,7 +327,7 @@ const Analysis = () => {
                             setStudentActivity(event.target.value);
                             setDisplay(false);
                         }}
-                        margin="normal"
+                        margin="dense"
                         // variant="outlined"
                         style={{ width: '45%' }}
                     >
@@ -92,8 +352,10 @@ const Analysis = () => {
                             {'Clicker question discussion'}
                         </MenuItem>
                     </TextField>
+                    {/* <div style={{ marginTop: '40px' }}>
+                        Select Staff Engagement Activity:
+                    </div> */}
                     <br />
-                    <div>Select Staff Engagement Activity:</div>
                     <TextField
                         select
                         label="Staff Enagagement Type"
@@ -131,7 +393,13 @@ const Analysis = () => {
                     <br />
                     <br />
 
-                    <div>Select the Learning Space:</div>
+                    <h3>
+                        Select the Learning Space:
+                        <h5 style={{ margin: 'unset' }}>
+                            (Applicable only for Program and Course level
+                            selection)
+                        </h5>
+                    </h3>
                     <FormControl
                         disabled={!(obData === '')}
                         onChange={event => {
@@ -194,8 +462,19 @@ const Analysis = () => {
                     </FormControl>
                 </div>
             </div>
-            <div style={{ float: 'left', width: '50%', border: 'ridge' }}>
-                <div style={{ marginLeft: '50px', marginBottom: '155px' }}>
+            <div
+                style={{
+                    float: 'left',
+                    width: '50%',
+                    border: 'ridge',
+                    height: '500px',
+                }}
+            >
+                <div style={{ marginLeft: '50px' }}>
+                    <h3>
+                        Please select appropriate filters for data insights
+                        below:
+                    </h3>
                     <TextField
                         select
                         label="Select Programs"
@@ -205,7 +484,6 @@ const Analysis = () => {
                             setDisplay(false);
                         }}
                         margin="normal"
-                        // variant="outlined"
                         style={{ width: '55%' }}
                     >
                         {newData[0].children.map(item => (
@@ -263,7 +541,7 @@ const Analysis = () => {
                         }}
                         margin="normal"
                         // variant="outlined"
-                        style={{ width: '45%' }}
+                        style={{ width: '55%' }}
                     >
                         {newData[0].children
                             .filter(i => i.name === program)
@@ -289,170 +567,325 @@ const Analysis = () => {
                     </TextField>
                     <br />
                 </div>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    style={{ margin: '95px' }}
+                    onClick={() => {
+                        if (program !== '' && course !== '' && obData !== '') {
+                            setDisplay(true);
+                            setProgramData(false);
+                            setCourseData(false);
+                            setProgramEngagementDisplay(false);
+                            setCourseEngagementDisplay(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setStaffCourseEngagementDisplay(false);
+                            setCourseEngagement_studentStaff(false);
+                            setProgramEngagement_studentStaff(false);
+                        } else if (
+                            program !== '' &&
+                            course !== '' &&
+                            studentActicity === ''
+                        ) {
+                            setCourseData(true);
+                            setDisplay(false);
+                            setProgramData(false);
+                            setProgramEngagementDisplay(false);
+                            setCourseEngagementDisplay(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setStaffCourseEngagementDisplay(false);
+                            setCourseEngagement_studentStaff(false);
+                            setProgramEngagement_studentStaff(false);
+                        } else if (
+                            program !== '' &&
+                            studentActicity !== '' &&
+                            course === ''
+                        ) {
+                            setProgramEngagementDisplay(true);
+                            setDisplay(false);
+                            setProgramData(false);
+                            setCourseData(false);
+                            setCourseEngagementDisplay(false);
+                            setStaffCourseEngagementDisplay(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setCourseEngagement_studentStaff(false);
+                            setProgramEngagement_studentStaff(false);
+                        } else if (
+                            program !== '' &&
+                            course !== '' &&
+                            studentActicity !== ''
+                        ) {
+                            setProgramEngagementDisplay(false);
+                            setDisplay(false);
+                            setProgramData(false);
+                            setCourseData(false);
+                            setStaffCourseEngagementDisplay(false);
+                            setCourseEngagementDisplay(true);
+                            setStaffProgramEngagementDisplay(false);
+                            setCourseEngagement_studentStaff(false);
+                            setProgramEngagement_studentStaff(false);
+                        } else if (
+                            program !== '' &&
+                            staffActicity !== '' &&
+                            course === '' &&
+                            staffActicity === ''
+                        ) {
+                            setDisplay(false);
+                            setProgramData(false);
+                            setCourseData(false);
+                            setProgramEngagementDisplay(false);
+                            setCourseEngagementDisplay(false);
+                            setStaffProgramEngagementDisplay(true);
+                            setStaffCourseEngagementDisplay(false);
+                            setCourseEngagement_studentStaff(false);
+                            setProgramEngagement_studentStaff(false);
+                        } else if (
+                            program !== '' &&
+                            course !== '' &&
+                            studentActicity === '' &&
+                            staffActicity !== ''
+                        ) {
+                            setDisplay(false);
+                            setProgramData(false);
+                            setCourseData(false);
+                            setProgramEngagementDisplay(false);
+                            setCourseEngagementDisplay(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setStaffCourseEngagementDisplay(true);
+                            setCourseEngagement_studentStaff(false);
+                            setProgramEngagement_studentStaff(false);
+                        } else if (
+                            program !== '' &&
+                            course === '' &&
+                            staffActicity !== '' &&
+                            studentActicity !== ''
+                        ) {
+                            setDisplay(false);
+                            setProgramData(false);
+                            setCourseData(false);
+                            setProgramEngagementDisplay(false);
+                            setCourseEngagementDisplay(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setStaffCourseEngagementDisplay(false);
+                            setProgramEngagement_studentStaff(true);
+                            setCourseEngagement_studentStaff(false);
+                        } else if (
+                            program !== '' &&
+                            course !== '' &&
+                            staffActicity !== '' &&
+                            studentActicity !== ''
+                        ) {
+                            setDisplay(false);
+                            setProgramData(false);
+                            setCourseData(false);
+                            setProgramEngagementDisplay(false);
+                            setCourseEngagementDisplay(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setStaffCourseEngagementDisplay(false);
+                            setCourseEngagement_studentStaff(true);
+                            setProgramEngagement_studentStaff(false);
+                        } else {
+                            setCourseEngagement_studentStaff(false);
+                            setProgramEngagement_studentStaff(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setStaffCourseEngagementDisplay(false);
+                            setCourseEngagementDisplay(false);
+                            setProgramEngagementDisplay(false);
+                            setDisplay(false);
+                            setCourseData(false);
+                            setProgramData(true);
+                        }
+                    }}
+                >
+                    Analyse Data
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                        setCourseEngagement_studentStaff(false);
+                        setProgramEngagement_studentStaff(false);
+                        setStaffProgramEngagementDisplay(false);
+                        setStaffCourseEngagementDisplay(false);
+                        setCourseEngagementDisplay(false);
+                        setProgramEngagementDisplay(false);
+                        setStaffActivity('');
+                        setStudentActivity('');
+                        setDisplay(false);
+                        setCourseData(false);
+                        setProgramData(false);
+                        setProgram('');
+                        setCourse('');
+                    }}
+                >
+                    Clear Data
+                </Button>
             </div>
-
-            <Button
-                variant="contained"
-                color="primary"
-                style={{ margin: '15px' }}
-                onClick={() => {
-                    if (program !== '' && course !== '' && obData !== '') {
-                        setDisplay(true);
-                        setProgramData(false);
-                        setCourseData(false);
-                    } else if (program !== '' && course !== '') {
-                        setCourseData(true);
-                        setDisplay(false);
-                        setProgramData(false);
-                    } else {
-                        setDisplay(false);
-                        setCourseData(false);
-                        setProgramData(true);
-                    }
-                }}
-            >
-                Analyse Data
-            </Button>
-            <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                    setDisplay(false);
-                    setCourseData(false);
-                    setProgramData(false);
-                    setProgram('');
-                    setCourse('');
-                }}
-            >
-                Clear Data
-            </Button>
-
-            {dispaly === true ? (
-                <div>
+            <div>
+                {dispaly === true ? (
                     <div>
-                        <br />
-                        <h2>Students and staffs engagement in one session:</h2>
-                        <Sunburst
-                            id="sunburst1"
-                            data={
-                                newData[0].children
-                                    .filter(i => i.name === program)
-                                    .map(item =>
-                                        item.children
-                                            .filter(k => k.name === course)
-                                            .map(j =>
-                                                j.children.filter(
-                                                    l => l.name === obData
-                                                )
-                                            )
-                                    )[0][0][0]
-                            }
-                        />
-                    </div>
-                    <div>
-                        <h2>Students learning activities in one session:</h2>
-                        <Sunburst
-                            id="sunburst2"
-                            data={
-                                StudentActiveLearningData.filter(
-                                    item => item.name === obData
-                                )[0]
-                            }
-                        />
-                    </div>
-                    <div>
-                        <h2>Staffs learning activities in one session:</h2>
-                        <Sunburst
-                            id="sunburst3"
-                            data={
-                                StaffActiveLearningData.filter(
-                                    item => item.name === obData
-                                )[0]
-                            }
-                        />
-                    </div>
-                </div>
-            ) : (
-                ''
-            )}
-            {showProgramData === true ? (
-                <div>
-                    <h3 style={{ marginTop: '15px' }}>
-                        Showing Program Level Analysis
-                    </h3>
-                    <h4>
-                        For specific courses and programs please select
-                        dropdowns accordingly!
-                    </h4>
-                    <Bar
-                        data={{
-                            labels: newData[0].children.map(item => item.name),
-                            datasets: [
-                                {
-                                    label:
-                                        'Discussion Activity Engagement Across programs',
-                                    backgroundColor: 'rgba(201, 16, 16)',
-                                    borderColor: 'rgba(255,99,132,1)',
-                                    borderWidth: 2,
-                                    hoverBackgroundColor:
-                                        'rgba(255,99,132,0.4)',
-                                    hoverBorderColor: 'rgba(255,99,132,1)',
-                                    data: newData[0].children.map(
-                                        item => item.averageDiscussionEngagement
-                                    ),
-                                },
-                            ],
-                        }}
-                        // width={50}
-                        height={50}
-                        // options={{ maintainAspectRatio: true }}
-                    />
-                </div>
-            ) : (
-                ''
-            )}
-
-            {showCourseLevelData === true ? (
-                <div>
-                    {/* Please Select valid values from the above dropdowns! */}
-                    <Bar
-                        data={{
-                            labels: newData[0].children
-                                .filter(i => i.name === program)
-                                .map(item =>
-                                    item.children.map(
-                                        courseName => courseName.name
-                                    )
-                                )[0],
-                            datasets: [
-                                {
-                                    label:
-                                        'Discussion Activity Engagement Across courses',
-                                    backgroundColor: 'rgba(201, 16, 16)',
-                                    borderColor: 'rgba(255,99,132,1)',
-                                    borderWidth: 2,
-                                    hoverBackgroundColor:
-                                        'rgba(255,99,132,0.4)',
-                                    hoverBorderColor: 'rgba(255,99,132,1)',
-                                    data: newData[0].children
+                        <div>
+                            <br />
+                            <h2>
+                                Students and staffs engagement in one session:
+                            </h2>
+                            <Sunburst
+                                id="sunburst1"
+                                data={
+                                    newData[0].children
                                         .filter(i => i.name === program)
                                         .map(item =>
-                                            item.children.map(
-                                                courseName =>
-                                                    courseName.averageDiscussionEngagement
-                                            )
-                                        )[0],
-                                },
-                            ],
-                        }}
-                        // width={50}
-                        height={50}
-                        // options={{ maintainAspectRatio: true }}
-                    />
-                </div>
-            ) : (
-                ''
-            )}
+                                            item.children
+                                                .filter(k => k.name === course)
+                                                .map(j =>
+                                                    j.children.filter(
+                                                        l => l.name === obData
+                                                    )
+                                                )
+                                        )[0][0][0]
+                                }
+                            />
+                        </div>
+                        <div>
+                            <h2>
+                                Students learning activities in one session:
+                            </h2>
+                            <Sunburst
+                                id="sunburst2"
+                                data={
+                                    StudentActiveLearningData.filter(
+                                        item => item.name === obData
+                                    )[0]
+                                }
+                            />
+                        </div>
+                        <div>
+                            <h2>Staffs learning activities in one session:</h2>
+                            <Sunburst
+                                id="sunburst3"
+                                data={
+                                    StaffActiveLearningData.filter(
+                                        item => item.name === obData
+                                    )[0]
+                                }
+                            />
+                        </div>
+                    </div>
+                ) : (
+                    ''
+                )}
+                {showProgramData === true ? (
+                    <div>
+                        <h3 style={{ marginTop: '15px' }}>
+                            Showing Program Level Analysis
+                        </h3>
+                        <h4>
+                            For specific courses and programs please select
+                            dropdowns accordingly!
+                        </h4>
+                        <Bar
+                            data={{
+                                labels: newData[0].children.map(
+                                    item => item.name
+                                ),
+                                datasets: [
+                                    {
+                                        label:
+                                            'Discussion Activity Engagement Across programs',
+                                        backgroundColor: 'rgba(201, 16, 16)',
+                                        borderColor: 'rgba(255,99,132,1)',
+                                        borderWidth: 2,
+                                        hoverBackgroundColor:
+                                            'rgba(255,99,132,0.4)',
+                                        hoverBorderColor: 'rgba(255,99,132,1)',
+                                        data: newData[0].children.map(
+                                            item =>
+                                                item.averageDiscussionEngagement
+                                        ),
+                                    },
+                                ],
+                            }}
+                            // width={50}
+                            height={50}
+                            // options={{ maintainAspectRatio: true }}
+                        />
+                    </div>
+                ) : (
+                    ''
+                )}
+                {showCourseLevelData === true ? (
+                    <div>
+                        {/* Please Select valid values from the above dropdowns! */}
+                        <Bar
+                            data={{
+                                labels: newData[0].children
+                                    .filter(i => i.name === program)
+                                    .map(item =>
+                                        item.children.map(
+                                            courseName => courseName.name
+                                        )
+                                    )[0],
+                                datasets: [
+                                    {
+                                        label:
+                                            'Discussion Activity Engagement Across courses',
+                                        backgroundColor: 'rgba(201, 16, 16)',
+                                        borderColor: 'rgba(255,99,132,1)',
+                                        borderWidth: 2,
+                                        hoverBackgroundColor:
+                                            'rgba(255,99,132,0.4)',
+                                        hoverBorderColor: 'rgba(255,99,132,1)',
+                                        data: newData[0].children
+                                            .filter(i => i.name === program)
+                                            .map(item =>
+                                                item.children.map(
+                                                    courseName =>
+                                                        courseName.averageDiscussionEngagement
+                                                )
+                                            )[0],
+                                    },
+                                ],
+                            }}
+                            // width={50}
+                            height={50}
+                            // options={{ maintainAspectRatio: true }}
+                        />
+                    </div>
+                ) : (
+                    ''
+                )}
+                {programEngagementDisplay === true ? (
+                    <Bar data={StudentEngagementDataProgram} />
+                ) : (
+                    ''
+                )}
+                {courseEngagementDisplay === true ? (
+                    <Bar data={StudentEngagementDataCourse} />
+                ) : (
+                    ''
+                )}
+                {staffprogramEngagementDisplay === true ? (
+                    <Bar data={StaffEngagementDataProgram} />
+                ) : (
+                    ''
+                )}
+                {staffcourseEngagementDisplay === true ? (
+                    <Bar data={StaffEngagementDataCourse} />
+                ) : (
+                    ''
+                )}
+                {programEngagement_studentStaff === true ? (
+                    <Bar data={ProgramStudentStaffEngagement} />
+                ) : (
+                    ''
+                )}
+                {courseEngagement_studentStaff === true ? (
+                    <Bar data={CourseStudentStaffEngagement} />
+                ) : (
+                    ''
+                )}
+            </div>
         </div>
     );
 };
