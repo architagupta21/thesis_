@@ -23,10 +23,8 @@ const Sunburst = ({ id, data }) => {
 
     const partition = data =>
         d3.partition().size([2 * Math.PI, radius])(
-            d3
-                .hierarchy(data)
-                .sum(d => d.value)
-                .sort((a, b) => b.value - a.value)
+            d3.hierarchy(data).sum(d => d.value)
+            // .sort((a, b) => b.value - a.value)
         );
     const root = partition(data);
 

@@ -3,7 +3,7 @@ const data = [
         name: 'CSSE7030 2019-9-5',
         children: [
             {
-                name: 'Record1',
+                name: '09:00-09:10',
                 children: [
                     {
                         name: 'Student',
@@ -26,7 +26,7 @@ const data = [
                 ],
             },
             {
-                name: 'Record2',
+                name: '09:10-09:14',
                 children: [
                     {
                         name: 'Student',
@@ -53,7 +53,7 @@ const data = [
                 ],
             },
             {
-                name: 'Record3',
+                name: '09:14-09:16',
                 children: [
                     {
                         name: 'Student',
@@ -76,14 +76,14 @@ const data = [
                 ],
             },
             {
-                name: 'Record4',
+                name: '09:16-09:20',
                 children: [
                     {
                         name: 'Student',
                         children: [
                             {
                                 name: 'Listening',
-                                value: 2,
+                                value: 4,
                             },
                         ],
                     },
@@ -92,14 +92,14 @@ const data = [
                         children: [
                             {
                                 name: 'Lecturing',
-                                value: 2,
+                                value: 4,
                             },
                         ],
                     },
                 ],
             },
             {
-                name: 'Record5',
+                name: '09:20-09:22',
                 children: [
                     {
                         name: 'Student',
@@ -126,7 +126,7 @@ const data = [
                 ],
             },
             {
-                name: 'Record6',
+                name: '09:22-09:30',
                 children: [
                     {
                         name: 'Student',
@@ -146,21 +146,21 @@ const data = [
                             },
                             {
                                 name: 'Waiting',
-                                value: 8,
+                                value: 4,
                             },
                         ],
                     },
                 ],
             },
             {
-                name: 'Record7',
+                name: '09:30-09:35',
                 children: [
                     {
                         name: 'Student',
                         children: [
                             {
                                 name: 'Listening',
-                                value: 2,
+                                value: 5,
                             },
                         ],
                     },
@@ -173,21 +173,21 @@ const data = [
                             },
                             {
                                 name: 'One on one discussion',
-                                value: 1,
+                                value: 4,
                             },
                         ],
                     },
                 ],
             },
             {
-                name: 'Record8',
+                name: '09:35-09:50',
                 children: [
                     {
                         name: 'Student',
                         children: [
                             {
                                 name: 'Listening',
-                                value: 4,
+                                value: 15,
                             },
                         ],
                     },
@@ -196,7 +196,7 @@ const data = [
                         children: [
                             {
                                 name: 'Lecturing',
-                                value: 4,
+                                value: 15,
                             },
                         ],
                     },

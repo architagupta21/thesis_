@@ -6,7 +6,9 @@ import { withRouter } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FormGroup } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
@@ -507,6 +509,66 @@ const Observation = ({
                             setDuration(event.target.value);
                         }}
                     />
+                    <br />
+                    <FormControl
+                    // onChange={event => {
+                    //     if (
+                    //         event.target.value === 'smart screen' &&
+                    //         event.target.checked === true
+                    //     ) {
+                    //         setSmartScreen(true);
+                    //     }
+                    //     if (
+                    //         event.target.value === 'white board' &&
+                    //         event.target.checked === true
+                    //     ) {
+                    //         setWhiteBoard(true);
+                    //     }
+                    //     if (
+                    //         event.target.value === 'hearing assistance' &&
+                    //         event.target.checked === true
+                    //     ) {
+                    //         setHearingAssistance(true);
+                    //     }
+                    //     if (
+                    //         event.target.value === 'smart screen' &&
+                    //         event.target.checked === false
+                    //     ) {
+                    //         setSmartScreen(false);
+                    //     }
+                    //     if (
+                    //         event.target.value === 'white board' &&
+                    //         event.target.checked === false
+                    //     ) {
+                    //         setWhiteBoard(false);
+                    //     }
+                    //     if (
+                    //         event.target.value === 'hearing assistance' &&
+                    //         event.target.checked === false
+                    //     ) {
+                    //         setHearingAssistance(false);
+                    //     }
+                    // }}
+                    >
+                        <FormControlLabel
+                            value="smart screen"
+                            control={<Checkbox />}
+                            label="smart screen"
+                            // checked={smartScreen}
+                        />
+                        <FormControlLabel
+                            value="white board"
+                            control={<Checkbox />}
+                            label="white board"
+                            // checked={whiteBoard}
+                        />
+                        <FormControlLabel
+                            value="hearing assistance"
+                            control={<Checkbox />}
+                            label="hearing assistance"
+                            // checked={hearingAssistance}
+                        />
+                    </FormControl>
                 </div>
                 <br />
                 <Button

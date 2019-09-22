@@ -718,6 +718,7 @@ const Analysis = () => {
                         setProgramData(false);
                         setProgram('');
                         setCourse('');
+                        setObData('');
                     }}
                 >
                     Clear Data
