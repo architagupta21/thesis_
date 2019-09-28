@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import React, { useState } from 'react';
-// import ReactDOM from 'react-dom';
-// import Radio from '@material-ui/core/Radio';
-// import FormControl from '@material-ui/core/FormControl';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -35,10 +31,10 @@ const Analysis = () => {
     const [program, setProgram] = useState('');
     const [course, setCourse] = useState('');
     const [obData, setObData] = useState('');
-    const [dispaly, setDisplay] = useState(false);
+    const [display, setDisplay] = useState(false);
     const [showProgramData, setProgramData] = useState(false);
     const [showCourseLevelData, setCourseData] = useState(false);
-    const [studentActicity, setStudentActivity] = useState('');
+    const [studentActivity, setStudentActivity] = useState('');
     const [staffActicity, setStaffActivity] = useState('');
     const [smartScreen, setSmartScreen] = useState(false);
     const [whiteBoard, setWhiteBoard] = useState(false);
@@ -65,43 +61,64 @@ const Analysis = () => {
         courseEngagement_studentStaff,
         setCourseEngagement_studentStaff,
     ] = useState(false);
-    // const [
-    //     staffStudentProgramDisplay,
-    //     setStaffStudentProgramDisplay,
-    // ] = useState(false);
 
     const [programSpaceDisplay, setProgramSpaceDisplay] = useState(false);
     const [courseSpaceDisplay, setCourseSpaceDisplay] = useState(false);
+    const barLabels = [
+        'Week1',
+        'Week2',
+        'Week3',
+        'Week4',
+        'Week5',
+        'Week6',
+        'Week7',
+        'Week8',
+        'Week9',
+        'Week10',
+        'Week11',
+        'Week12',
+    ];
+    const barColor = '#3f51b5';
+    const multiColor = [
+        '#FF6384',
+        '#36A2EB',
+        '#FFCE56',
+        '#FF1324',
+        '#31A2BB',
+        '#FDCE16',
+        '#DF6384',
+        '#16A6ED',
+        '#CCFE11',
+        '#EE6348',
+        '#63A2BE',
+        '#CEFF56',
+    ];
+    const legendOpts = {
+        display: true,
+        position: 'bottom',
+        fullWidth: true,
+        reverse: false,
+        // labels: {
+        //     fontColor: 'rgb(255, 99, 132)',
+        // },
+    };
 
     const StudentEngagementDataProgram = {
-        labels: [
-            'Week1',
-            'Week2',
-            'Week3',
-            'Week4',
-            'Week5',
-            'Week6',
-            'Week7',
-            'Week8',
-            'Week9',
-            'Week10',
-            'Week11',
-            'Week12',
-        ],
+        labels: barLabels,
         datasets: [
             {
-                label: 'Student Engagement During a Semester for Program',
-                backgroundColor: 'rgba(100, 6, 16)',
-                borderColor: 'rgba(255,99,132,1)',
+                label: `Student Engagement- ${studentActivity} During a Semester for Program`,
+                backgroundColor: barColor,
+                borderColor: barColor,
                 borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
+                hoverBackgroundColor: barColor,
+                hoverBorderColor: barColor,
                 data: [65, 70, 80, 81, 90, 91, 95, 83, 70, 58, 44, 22],
             },
         ],
     };
 
-    const StudentEngagementDataCourse = {
+    const StudentEngagementDataProgram_Pie = {
         labels: [
             'Week1',
             'Week2',
@@ -118,188 +135,110 @@ const Analysis = () => {
         ],
         datasets: [
             {
-                label: 'Student Engagement During a Semester for Course',
-                backgroundColor: 'rgba(100, 6, 16)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [55, 20, 70, 41, 30, 81, 85, 73, 60, 48, 34, 22],
+                backgroundColor: multiColor,
+                borderColor: multiColor,
+                borderWidth: 5,
+                data: [65, 70, 80, 81, 90, 91, 95, 83, 70, 58, 44, 22],
             },
+        ],
+        legend: legendOpts,
+    };
+
+    const StudentEngagementDataCourse = {
+        labels: barLabels,
+        datasets: [
             {
                 label: 'Student Engagement During a Semester for Course',
-                backgroundColor: 'rgba(100, 6, 16)',
-                borderColor: 'rgba(255,99,132,1)',
+                backgroundColor: barColor,
+                borderColor: barColor,
                 borderWidth: 2,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
+                hoverBorderColor: barColor,
+                data: [55, 20, 70, 41, 30, 81, 85, 73, 60, 48, 34, 22],
             },
         ],
     };
 
     const StaffEngagementDataProgram = {
-        labels: [
-            'Week1',
-            'Week2',
-            'Week3',
-            'Week4',
-            'Week5',
-            'Week6',
-            'Week7',
-            'Week8',
-            'Week9',
-            'Week10',
-            'Week11',
-            'Week12',
-        ],
+        labels: barLabels,
         datasets: [
             {
                 label: 'Staff Engagement During a Semester in a Program',
-                backgroundColor: 'rgba(300, 46, 76)',
-                borderColor: 'rgba(255,99,132,1)',
+                backgroundColor: barColor,
+                borderColor: barColor,
                 borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
+                hoverBackgroundColor: barColor,
+                hoverBorderColor: barColor,
                 data: [45, 10, 40, 71, 40, 81, 85, 23, 30, 48, 34, 22],
             },
         ],
     };
 
     const StaffEngagementDataCourse = {
-        labels: [
-            'Week1',
-            'Week2',
-            'Week3',
-            'Week4',
-            'Week5',
-            'Week6',
-            'Week7',
-            'Week8',
-            'Week9',
-            'Week10',
-            'Week11',
-            'Week12',
-        ],
+        labels: barLabels,
         datasets: [
             {
-                label: 'Staff Engagement During a Semester for Course',
-                backgroundColor: 'rgba(100, 6, 16)',
-                borderColor: 'rgba(255,99,132,1)',
+                label: `Staff ${staffActicity} Engagement During a Semester for Course`,
+                backgroundColor: '#3f51b5',
+                borderColor: '#3f51b5',
                 borderWidth: 2,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
+                hoverBorderColor: '#3f51b5',
                 data: [75, 90, 50, 41, 80, 81, 85, 67, 60, 48, 34, 22],
-                // data: getRandomArray(12),
-            },
-            {
-                label: 'Staff Engagement During a Semester in a Course',
-                backgroundColor: 'rgba(300, 46, 76)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [55, 60, 80, 71, 80, 81, 56, 73, 60, 98, 34, 22],
                 // data: getRandomArray(12),
             },
         ],
     };
 
     const ProgramStudentStaffEngagement = {
-        labels: [
-            'Week1',
-            'Week2',
-            'Week3',
-            'Week4',
-            'Week5',
-            'Week6',
-            'Week7',
-            'Week8',
-            'Week9',
-            'Week10',
-            'Week11',
-            'Week12',
-        ],
+        labels: barLabels,
         datasets: [
             {
-                label: 'Staff Engagement During a Semester in a Program',
+                label: `Student ${studentActivity} Engagement During a Semester in a Program`,
                 backgroundColor: 'rgba(300, 46, 76)',
                 borderColor: 'rgba(255,99,132,1)',
                 borderWidth: 2,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                 hoverBorderColor: 'rgba(255,99,132,1)',
                 data: [25, 40, 20, 31, 10, 31, 25, 43, 50, 48, 24, 12],
-                // data: getRandomArray(12),
+            },
+            {
+                label: `Staff ${staffActicity} Engagement During a Semester for Program`,
+                backgroundColor: '#3f51b5',
+                borderColor: '#3f51b5',
+                borderWidth: 2,
+                hoverBackgroundColor: '#3f51b5',
+                hoverBorderColor: '#3f51b5',
+                data: [65, 70, 80, 81, 90, 91, 95, 83, 70, 58, 44, 22],
             },
         ],
     };
 
     const CourseStudentStaffEngagement = {
-        labels: [
-            'Week1',
-            'Week2',
-            'Week3',
-            'Week4',
-            'Week5',
-            'Week6',
-            'Week7',
-            'Week8',
-            'Week9',
-            'Week10',
-            'Week11',
-            'Week12',
-        ],
+        labels: barLabels,
         datasets: [
             {
-                label: 'Staff Engagement During a Semester in a Course',
+                label: `Student ${studentActivity} Engagement During a Semester in a Course`,
                 backgroundColor: 'rgba(300, 46, 76)',
                 borderColor: 'rgba(255,99,132,1)',
                 borderWidth: 2,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                 hoverBorderColor: 'rgba(255,99,132,1)',
                 data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
-                // data: getRandomArray(12),
             },
             {
-                label: 'Staff Engagement During a Semester in a Course',
-                backgroundColor: 'rgba(300, 46, 76)',
-                borderColor: 'rgba(255,99,132,1)',
+                label: `Staff ${staffActicity} Engagement During a Semester in a Course`,
+                backgroundColor: '#3f51b5',
+                borderColor: '#3f51b5',
                 borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
+                hoverBackgroundColor: '#3f51b5',
+                hoverBorderColor: '#3f51b5',
                 data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
-                // data: getRandomArray(12),
-            },
-            {
-                label: 'Student Engagement During a Semester in a Program',
-                backgroundColor: 'rgba(300, 46, 76)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
-                // data: getRandomArray(12),
-            },
-            {
-                label: 'Student Engagement During a Semester in a Course',
-                backgroundColor: 'rgba(300, 46, 76)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
-                // data: getRandomArray(12),
             },
         ],
     };
 
     return (
-        // <h3>
-        //     Select Student/Staff Engagement Activities:
-        //     <h5 style={{ margin: 'unset' }}>
-        //         (Applicable only for Program and Course level selection)
-        //     </h5>
-        // </h3>
         <div className="App">
             <h2 style={{ textAlign: 'center' }}>COPUS Insights</h2>
             <h3>Faculty : {newData[0].name}</h3>
@@ -322,7 +261,7 @@ const Analysis = () => {
                     <TextField
                         select
                         label="Student Enagagement Type"
-                        value={studentActicity}
+                        value={studentActivity}
                         disabled={!(obData === '')}
                         onChange={event => {
                             setStudentActivity(event.target.value);
@@ -587,7 +526,8 @@ const Analysis = () => {
                         } else if (
                             program !== '' &&
                             course !== '' &&
-                            studentActicity === ''
+                            studentActivity === '' &&
+                            staffActicity === ''
                         ) {
                             setCourseData(true);
                             setDisplay(false);
@@ -600,8 +540,9 @@ const Analysis = () => {
                             setProgramEngagement_studentStaff(false);
                         } else if (
                             program !== '' &&
-                            studentActicity !== '' &&
-                            course === ''
+                            studentActivity !== '' &&
+                            course === '' &&
+                            staffActicity === ''
                         ) {
                             setProgramEngagementDisplay(true);
                             setDisplay(false);
@@ -615,7 +556,8 @@ const Analysis = () => {
                         } else if (
                             program !== '' &&
                             course !== '' &&
-                            studentActicity !== ''
+                            studentActivity !== '' &&
+                            staffActicity === ''
                         ) {
                             setProgramEngagementDisplay(false);
                             setDisplay(false);
@@ -630,7 +572,7 @@ const Analysis = () => {
                             program !== '' &&
                             staffActicity !== '' &&
                             course === '' &&
-                            staffActicity === ''
+                            studentActivity === ''
                         ) {
                             setDisplay(false);
                             setProgramData(false);
@@ -644,7 +586,7 @@ const Analysis = () => {
                         } else if (
                             program !== '' &&
                             course !== '' &&
-                            studentActicity === '' &&
+                            studentActivity === '' &&
                             staffActicity !== ''
                         ) {
                             setDisplay(false);
@@ -660,7 +602,7 @@ const Analysis = () => {
                             program !== '' &&
                             course === '' &&
                             staffActicity !== '' &&
-                            studentActicity !== ''
+                            studentActivity !== ''
                         ) {
                             setDisplay(false);
                             setProgramData(false);
@@ -675,7 +617,7 @@ const Analysis = () => {
                             program !== '' &&
                             course !== '' &&
                             staffActicity !== '' &&
-                            studentActicity !== ''
+                            studentActivity !== ''
                         ) {
                             setDisplay(false);
                             setProgramData(false);
@@ -725,7 +667,7 @@ const Analysis = () => {
                 </Button>
             </div>
             <div>
-                {dispaly === true ? (
+                {display === true ? (
                     <div>
                         <div>
                             <br />
@@ -870,6 +812,16 @@ const Analysis = () => {
                 )}
                 {programEngagementDisplay === true ? (
                     <Bar data={StudentEngagementDataProgram} />
+                ) : (
+                    ''
+                )}
+                {/* {programEngagementDisplay === true ? (
+                    <Pie data={StudentEngagementDataProgram_Pie} />
+                ) : (
+                    ''
+                )} */}
+                {programEngagementDisplay === true ? (
+                    <Doughnut data={StudentEngagementDataProgram_Pie} />
                 ) : (
                     ''
                 )}
