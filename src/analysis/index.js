@@ -93,14 +93,15 @@ const Analysis = () => {
         '#63A2BE',
         '#CEFF56',
     ];
-    const legendOpts = {
-        display: true,
-        position: 'bottom',
-        fullWidth: true,
-        reverse: false,
-        // labels: {
-        //     fontColor: 'rgb(255, 99, 132)',
-        // },
+    const barOptions = {
+        scales: {
+            xAxes: [
+                {
+                    barPercentage: 0.3,
+                },
+            ],
+        },
+        maintainAspectRatio: true,
     };
 
     const StudentEngagementDataProgram = {
@@ -116,23 +117,13 @@ const Analysis = () => {
                 data: [65, 70, 80, 81, 90, 91, 95, 83, 70, 58, 44, 22],
             },
         ],
+        height: '600px',
+        width: '1000px',
+        margin: '25%',
     };
 
     const StudentEngagementDataProgram_Pie = {
-        labels: [
-            'Week1',
-            'Week2',
-            'Week3',
-            'Week4',
-            'Week5',
-            'Week6',
-            'Week7',
-            'Week8',
-            'Week9',
-            'Week10',
-            'Week11',
-            'Week12',
-        ],
+        labels: barLabels,
         datasets: [
             {
                 backgroundColor: multiColor,
@@ -141,7 +132,6 @@ const Analysis = () => {
                 data: [65, 70, 80, 81, 90, 91, 95, 83, 70, 58, 44, 22],
             },
         ],
-        legend: legendOpts,
     };
 
     const StudentEngagementDataCourse = {
@@ -237,6 +227,36 @@ const Analysis = () => {
             },
         ],
     };
+
+    if (program !== '' && course !== '') {
+        console.log('program', program);
+        console.log('course', course);
+        console.log(
+            'space:',
+            newData[0].children.filter(i => i.name === program)[0].isSmartScreen
+        );
+        console.log(
+            'space_course:',
+            newData[0].children
+                .filter(i => i.name === program)
+                .map(
+                    i =>
+                        i.children.filter(i => i.name === course)[0]
+                            .isSmartScreen
+                )[0]
+        );
+        console.log(
+            newData[0].children
+                .filter(i => i.name === program)
+                .map(
+                    i =>
+                        i.children.filter(i => i.name === course)[0]
+                            .isSmartScreen
+                )[0] === false
+                ? 'so its false hmm '
+                : 'ohh its still true!'
+        );
+    }
 
     return (
         <div className="App">
@@ -348,36 +368,74 @@ const Analysis = () => {
                                 event.target.checked === true
                             ) {
                                 setSmartScreen(true);
+                                if (program !== '' && course === '') {
+                                    setProgramSpaceDisplay(true);
+                                    setCourseSpaceDisplay(false);
+                                    setSmartScreen(true);
+                                    console.log(
+                                        'smart screen here: ',
+                                        smartScreen
+                                    );
+                                } else if (program !== '' && course !== '') {
+                                    setCourseSpaceDisplay(true);
+                                    setProgramSpaceDisplay(false);
+                                    console.log(
+                                        'smart screen P n C here: ',
+                                        smartScreen
+                                    );
+                                }
                             }
                             if (
                                 event.target.value === 'white board' &&
                                 event.target.checked === true
                             ) {
                                 setWhiteBoard(true);
+                                if (program !== '' && course === '') {
+                                    setProgramSpaceDisplay(true);
+                                    setCourseSpaceDisplay(false);
+                                }
+                                if (program !== '' && course !== '') {
+                                    setCourseSpaceDisplay(true);
+                                    setProgramSpaceDisplay(false);
+                                }
                             }
                             if (
                                 event.target.value === 'hearing assistance' &&
                                 event.target.checked === true
                             ) {
                                 setHearingAssistance(true);
+                                if (program !== '' && course === '') {
+                                    setProgramSpaceDisplay(true);
+                                    setCourseSpaceDisplay(false);
+                                }
+                                if (program !== '' && course !== '') {
+                                    setCourseSpaceDisplay(true);
+                                    setProgramSpaceDisplay(false);
+                                }
                             }
                             if (
                                 event.target.value === 'smart screen' &&
                                 event.target.checked === false
                             ) {
                                 setSmartScreen(false);
+                                setCourseSpaceDisplay(false);
+                                setProgramSpaceDisplay(false);
                             }
                             if (
                                 event.target.value === 'white board' &&
                                 event.target.checked === false
                             ) {
                                 setWhiteBoard(false);
+                                setCourseSpaceDisplay(false);
+                                setProgramSpaceDisplay(false);
                             }
                             if (
                                 event.target.value === 'hearing assistance' &&
                                 event.target.checked === false
                             ) {
                                 setHearingAssistance(false);
+                                setCourseSpaceDisplay(false);
+                                setProgramSpaceDisplay(false);
                             }
                         }}
                     >
@@ -386,18 +444,54 @@ const Analysis = () => {
                             control={<Checkbox />}
                             label="smart screen"
                             checked={smartScreen}
+                            disabled={
+                                program !== '' && course !== ''
+                                    ? newData[0].children
+                                          .filter(i => i.name === program)
+                                          .map(
+                                              i =>
+                                                  i.children.filter(
+                                                      i => i.name === course
+                                                  )[0].isSmartScreen
+                                          )[0] === false
+                                    : ''
+                            }
                         />
                         <FormControlLabel
                             value="white board"
                             control={<Checkbox />}
                             label="white board"
                             checked={whiteBoard}
+                            disabled={
+                                program !== '' && course !== ''
+                                    ? newData[0].children
+                                          .filter(i => i.name === program)
+                                          .map(
+                                              i =>
+                                                  i.children.filter(
+                                                      i => i.name === course
+                                                  )[0].isWhiteBoard
+                                          )[0] === false
+                                    : ''
+                            }
                         />
                         <FormControlLabel
                             value="hearing assistance"
                             control={<Checkbox />}
                             label="hearing assistance"
                             checked={hearingAssistance}
+                            disabled={
+                                program !== '' && course !== ''
+                                    ? newData[0].children
+                                          .filter(i => i.name === program)
+                                          .map(
+                                              i =>
+                                                  i.children.filter(
+                                                      i => i.name === course
+                                                  )[0].isHearingAssistance
+                                          )[0] === false
+                                    : ''
+                            }
                         />
                     </FormControl>
                 </div>
@@ -447,6 +541,15 @@ const Analysis = () => {
                         onChange={event => {
                             setCourse(event.target.value);
                             setDisplay(false);
+                            setProgramData(false);
+                            setProgramEngagementDisplay(false);
+                            setProgramSpaceDisplay(false);
+                            setStaffProgramEngagementDisplay(false);
+                            setSmartScreen(false);
+                            setWhiteBoard(false);
+                            setHearingAssistance(false);
+                            setStaffActivity('');
+                            setStudentActivity('');
                         }}
                         margin="normal"
                         // variant="outlined"
@@ -658,6 +761,9 @@ const Analysis = () => {
                         setDisplay(false);
                         setCourseData(false);
                         setProgramData(false);
+                        setWhiteBoard(false);
+                        setHearingAssistance(false);
+                        setSmartScreen(false);
                         setProgram('');
                         setCourse('');
                         setObData('');
@@ -762,8 +868,8 @@ const Analysis = () => {
                                 ],
                             }}
                             // width={50}
+                            options={barOptions}
                             height={50}
-                            // options={{ maintainAspectRatio: true }}
                         />
                     </div>
                 ) : (
@@ -804,49 +910,235 @@ const Analysis = () => {
                             }}
                             // width={50}
                             height={50}
-                            // options={{ maintainAspectRatio: true }}
+                            options={barOptions}
                         />
                     </div>
                 ) : (
                     ''
                 )}
                 {programEngagementDisplay === true ? (
-                    <Bar data={StudentEngagementDataProgram} />
-                ) : (
-                    ''
-                )}
-                {/* {programEngagementDisplay === true ? (
-                    <Pie data={StudentEngagementDataProgram_Pie} />
-                ) : (
-                    ''
-                )} */}
-                {programEngagementDisplay === true ? (
-                    <Doughnut data={StudentEngagementDataProgram_Pie} />
+                    <div>
+                        <Bar
+                            data={StudentEngagementDataProgram}
+                            options={barOptions}
+                        />
+                        <br />
+                        <span>
+                            A bar Chart Representation from Above Engagement
+                            Scores:
+                        </span>
+                        <br />
+                        <Doughnut
+                            data={StudentEngagementDataProgram_Pie}
+                            options={{
+                                legend: {
+                                    display: false,
+                                },
+                            }}
+                        />
+                    </div>
                 ) : (
                     ''
                 )}
                 {courseEngagementDisplay === true ? (
-                    <Bar data={StudentEngagementDataCourse} />
+                    <Bar
+                        data={StudentEngagementDataCourse}
+                        options={barOptions}
+                    />
                 ) : (
                     ''
                 )}
                 {staffprogramEngagementDisplay === true ? (
-                    <Bar data={StaffEngagementDataProgram} />
+                    <Bar
+                        data={StaffEngagementDataProgram}
+                        options={barOptions}
+                    />
                 ) : (
                     ''
                 )}
                 {staffcourseEngagementDisplay === true ? (
-                    <Bar data={StaffEngagementDataCourse} />
+                    <Bar
+                        data={StaffEngagementDataCourse}
+                        options={barOptions}
+                    />
                 ) : (
                     ''
                 )}
                 {programEngagement_studentStaff === true ? (
-                    <Bar data={ProgramStudentStaffEngagement} />
+                    <Bar
+                        data={ProgramStudentStaffEngagement}
+                        options={barOptions}
+                    />
                 ) : (
                     ''
                 )}
                 {courseEngagement_studentStaff === true ? (
-                    <Bar data={CourseStudentStaffEngagement} />
+                    <Bar
+                        data={CourseStudentStaffEngagement}
+                        options={barOptions}
+                    />
+                ) : (
+                    ''
+                )}
+                {programSpaceDisplay === true &&
+                newData[0].children.filter(i => i.name === program)[0]
+                    .isSmartScreen ? (
+                    <Bar
+                        data={{
+                            labels: newData[0].children.map(item => item.name),
+                            datasets: [
+                                {
+                                    label:
+                                        'Listening Activity engagement with Smart Screens present- Program Level',
+                                    backgroundColor: '#FF6347',
+                                    borderColor: '#FF6347',
+                                    borderWidth: 2,
+                                    hoverBackgroundColor: '#FF6347',
+                                    hoverBorderColor: '#FF6347',
+                                    data: newData[0].children.map(
+                                        item => item.averageListeningEngagement
+                                    ),
+                                },
+                                {
+                                    label:
+                                        'Discussion Activity engagement with Smart Screens present- Program Level',
+                                    backgroundColor: '#800080',
+                                    borderColor: '#800080',
+                                    borderWidth: 2,
+                                    hoverBackgroundColor: '#800080',
+                                    hoverBorderColor: '#800080',
+                                    data: newData[0].children.map(
+                                        item => item.averageDiscussionEngagement
+                                    ),
+                                },
+                                {
+                                    label:
+                                        'Average No of Students using Smart Screens- Program Level',
+                                    backgroundColor: '#228B22',
+                                    borderColor: '#228B22',
+                                    borderWidth: 2,
+                                    hoverBackgroundColor: '#228B22',
+                                    hoverBorderColor: '#228B22',
+                                    data: newData[0].children.map(
+                                        item => item.noOfStudents
+                                    ),
+                                },
+                            ],
+                        }}
+                        options={barOptions}
+                    />
+                ) : (
+                    ''
+                )}
+                {program !== '' &&
+                programSpaceDisplay === true &&
+                newData[0].children.filter(i => i.name === program)[0]
+                    .isSmartScreen === false ? (
+                    <h2>
+                        <br />
+                        Selected physical Attribute is not available for this
+                        program, Choose another programs..
+                    </h2>
+                ) : (
+                    ''
+                )}
+                {program !== '' &&
+                course !== '' &&
+                courseSpaceDisplay === true &&
+                newData[0].children
+                    .filter(i => i.name === program)
+                    .map(
+                        i =>
+                            i.children.filter(i => i.name === course)[0]
+                                .isSmartScreen
+                    )[0] ? (
+                    <Bar
+                        data={{
+                            labels: newData[0].children
+                                .filter(i => i.name === program)
+                                .map(i =>
+                                    i.children
+                                        .filter(i => i.name === course)
+                                        .map(i => i.name)
+                                ),
+                            datasets: [
+                                {
+                                    label:
+                                        'Listening Activity engagement with Smart Screens present- Course Level',
+                                    backgroundColor: '#FF6347',
+                                    borderColor: '#FF6347',
+                                    borderWidth: 2,
+                                    hoverBackgroundColor: '#FF6347',
+                                    hoverBorderColor: '#FF6347',
+                                    data: newData[0].children
+                                        .filter(i => i.name === program)
+                                        .map(i =>
+                                            i.children
+                                                .filter(i => i.name === course)
+                                                .map(
+                                                    i =>
+                                                        i.averageListeningEngagement
+                                                )
+                                        ),
+                                },
+                                {
+                                    label:
+                                        'Discussion Activity engagement with Smart Screens present- Course Level',
+                                    backgroundColor: '#800080',
+                                    borderColor: '#800080',
+                                    borderWidth: 2,
+                                    hoverBackgroundColor: '#800080',
+                                    hoverBorderColor: '#800080',
+                                    data: newData[0].children
+                                        .filter(i => i.name === program)
+                                        .map(i =>
+                                            i.children
+                                                .filter(i => i.name === course)
+                                                .map(
+                                                    i =>
+                                                        i.averageDiscussionEngagement
+                                                )
+                                        ),
+                                },
+                                {
+                                    label:
+                                        'Average No of Students using Smart Screens- Course Level',
+                                    backgroundColor: '#228B22',
+                                    borderColor: '#228B22',
+                                    borderWidth: 2,
+                                    hoverBackgroundColor: '#228B22',
+                                    hoverBorderColor: '#228B22',
+                                    data: newData[0].children
+                                        .filter(i => i.name === program)
+                                        .map(i =>
+                                            i.children
+                                                .filter(i => i.name === course)
+                                                .map(i => i.noOfStudents)
+                                        ),
+                                },
+                            ],
+                        }}
+                        options={barOptions}
+                    />
+                ) : (
+                    ''
+                )}
+
+                {program !== '' &&
+                course !== '' &&
+                courseSpaceDisplay === true &&
+                newData[0].children
+                    .filter(i => i.name === program)
+                    .map(
+                        i =>
+                            i.children.filter(i => i.name === course)[0]
+                                .isSmartScreen
+                    )[0] === false ? (
+                    <h2>
+                        <br />
+                        Selected physical Attribute is not available for this
+                        course, Choose another Course..
+                    </h2>
                 ) : (
                     ''
                 )}

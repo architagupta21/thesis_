@@ -4,12 +4,21 @@ const data = [
         children: [
             {
                 name: 'Master of Information Technology',
-                noOfStudents: 90,
+                noOfStudents: 100,
                 averageDiscussionEngagement: 56,
+                averageListeningEngagement: 73,
+                isSmartScreen: true,
+                isWhiteBoard: true,
+                isHearingAssistance: true,
                 children: [
                     {
                         name: 'Introduction to Software Engineering',
                         averageDiscussionEngagement: 51,
+                        averageListeningEngagement: 93,
+                        noOfStudents: 90,
+                        isSmartScreen: true,
+                        isWhiteBoard: false,
+                        isHearingAssistance: true,
                         children: [
                             {
                                 name: 'CSSE7030 2019-9-5',
@@ -149,6 +158,11 @@ const data = [
                     {
                         name: 'Advanced Software Engineering',
                         averageDiscussionEngagement: 67,
+                        averageListeningEngagement: 97,
+                        noOfStudents: 110,
+                        isSmartScreen: true,
+                        isWhiteBoard: false,
+                        isHearingAssistance: true,
                         children: [
                             {
                                 name: 'CSSE7023 2019-9-5',
@@ -291,10 +305,19 @@ const data = [
                 name: 'Master of Computer Science',
                 noOfStudents: 70,
                 averageDiscussionEngagement: 68,
+                averageListeningEngagement: 87,
+                isSmartScreen: true,
+                isWhiteBoard: true,
+                isHearingAssistance: true,
                 children: [
                     {
                         name: 'Data Mining',
                         averageDiscussionEngagement: 34,
+                        averageListeningEngagement: 73,
+                        noOfStudents: 80,
+                        isSmartScreen: true,
+                        isWhiteBoard: true,
+                        isHearingAssistance: false,
                         children: [
                             {
                                 name: 'INFS7203 2019-9-5',
@@ -434,6 +457,11 @@ const data = [
                     {
                         name: 'Machine Learning',
                         averageDiscussionEngagement: 16,
+                        averageListeningEngagement: 63,
+                        noOfStudents: 60,
+                        isSmartScreen: true,
+                        isWhiteBoard: false,
+                        isHearingAssistance: true,
                         children: [
                             {
                                 name: 'COMP7703 2019-9-5',
@@ -576,10 +604,19 @@ const data = [
                 name: 'Master of Data Science',
                 noOfStudents: 90,
                 averageDiscussionEngagement: 79,
+                averageListeningEngagement: 82,
+                isSmartScreen: true,
+                isWhiteBoard: true,
+                isHearingAssistance: true,
                 children: [
                     {
                         name: 'Relational Database Systems',
                         averageDiscussionEngagement: 56,
+                        averageListeningEngagement: 77,
+                        noOfStudents: 80,
+                        isSmartScreen: false,
+                        isWhiteBoard: false,
+                        isHearingAssistance: true,
                         children: [
                             {
                                 name: 'INFS7903 2019-9-15',
@@ -719,6 +756,11 @@ const data = [
                     {
                         name: 'Artificial Intelligence',
                         averageDiscussionEngagement: 71,
+                        averageListeningEngagement: 85,
+                        isSmartScreen: true,
+                        noOfStudents: 100,
+                        isWhiteBoard: true,
+                        isHearingAssistance: false,
                         children: [
                             {
                                 name: 'COMP7702 2019-9-25',
