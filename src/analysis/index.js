@@ -108,7 +108,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: `Student Engagement- ${studentActivity} During a Semester for Program`,
+                label: `Student Engagement- ${studentActivity} During a Semester for ${program}`,
                 backgroundColor: barColor,
                 borderColor: barColor,
                 borderWidth: 2,
@@ -138,7 +138,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: 'Student Engagement During a Semester for Course',
+                label: `Student Engagement- ${studentActivity} During a Semester for ${course}`,
                 backgroundColor: barColor,
                 borderColor: barColor,
                 borderWidth: 2,
@@ -153,7 +153,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: 'Staff Engagement During a Semester in a Program',
+                label: `Staff Engagement- ${staffActicity} During a Semester for ${program}`,
                 backgroundColor: barColor,
                 borderColor: barColor,
                 borderWidth: 2,
@@ -168,7 +168,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: `Staff ${staffActicity} Engagement During a Semester for Course`,
+                label: `Staff Engagement- ${staffActicity} During a Semester for ${course}`,
                 backgroundColor: '#3f51b5',
                 borderColor: '#3f51b5',
                 borderWidth: 2,
@@ -184,7 +184,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: `Student ${studentActivity} Engagement During a Semester in a Program`,
+                label: `Student ${studentActivity} Engagement During a Semester in a ${program}`,
                 backgroundColor: 'rgba(300, 46, 76)',
                 borderColor: 'rgba(255,99,132,1)',
                 borderWidth: 2,
@@ -193,7 +193,7 @@ const Analysis = () => {
                 data: [25, 40, 20, 31, 10, 31, 25, 43, 50, 48, 24, 12],
             },
             {
-                label: `Staff ${staffActicity} Engagement During a Semester for Program`,
+                label: `Staff ${staffActicity} Engagement During a Semester for ${program}`,
                 backgroundColor: '#3f51b5',
                 borderColor: '#3f51b5',
                 borderWidth: 2,
@@ -208,7 +208,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: `Student ${studentActivity} Engagement During a Semester in a Course`,
+                label: `Student ${studentActivity} Engagement During a Semester in ${course}`,
                 backgroundColor: 'rgba(300, 46, 76)',
                 borderColor: 'rgba(255,99,132,1)',
                 borderWidth: 2,
@@ -217,7 +217,7 @@ const Analysis = () => {
                 data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
             },
             {
-                label: `Staff ${staffActicity} Engagement During a Semester in a Course`,
+                label: `Staff ${staffActicity} Engagement During a Semester in ${course}`,
                 backgroundColor: '#3f51b5',
                 borderColor: '#3f51b5',
                 borderWidth: 2,
@@ -788,9 +788,7 @@ const Analysis = () => {
                                     }
                                 />
                             </div>
-                            <h2>
-                                Students and staffs engagement in one session:
-                            </h2>
+                            <h2>Students engagement in one session:</h2>
                             <Sunburst
                                 id="sunburst1"
                                 data={
@@ -804,14 +802,12 @@ const Analysis = () => {
                                                         l => l.name === obData
                                                     )
                                                 )
-                                        )[0][0][0]
+                                        )[0][0][0].children[0]
                                 }
                             />
                         </div>
                         <div>
-                            <h2>
-                                Students learning activities in one session:
-                            </h2>
+                            <h2>Students active learning in one session:</h2>
                             <Sunburst
                                 id="sunburst2"
                                 data={
@@ -822,7 +818,7 @@ const Analysis = () => {
                             />
                         </div>
                         <div>
-                            <h2>Staffs learning activities in one session:</h2>
+                            <h2>Staffs active learning in one session:</h2>
                             <Sunburst
                                 id="sunburst3"
                                 data={
