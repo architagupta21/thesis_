@@ -184,16 +184,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: `Student ${studentActivity} Engagement During a Semester in a ${program}`,
-                backgroundColor: 'rgba(300, 46, 76)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [25, 40, 20, 31, 10, 31, 25, 43, 50, 48, 24, 12],
-            },
-            {
-                label: `Staff ${staffActicity} Engagement During a Semester for ${program}`,
+                label: `Time Percentage Spent by Staff on: ${staffActicity} During a Semester for ${program}`,
                 backgroundColor: '#3f51b5',
                 borderColor: '#3f51b5',
                 borderWidth: 2,
@@ -208,16 +199,7 @@ const Analysis = () => {
         labels: barLabels,
         datasets: [
             {
-                label: `Student ${studentActivity} Engagement During a Semester in ${course}`,
-                backgroundColor: 'rgba(300, 46, 76)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 2,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [55, 60, 70, 71, 80, 81, 85, 73, 60, 48, 34, 22],
-            },
-            {
-                label: `Staff ${staffActicity} Engagement During a Semester in ${course}`,
+                label: `Time Percentage Spent by Staff on: ${staffActicity} During a Semester in ${course}`,
                 backgroundColor: '#3f51b5',
                 borderColor: '#3f51b5',
                 borderWidth: 2,
@@ -227,37 +209,6 @@ const Analysis = () => {
             },
         ],
     };
-
-    if (program !== '' && course !== '') {
-        console.log('program', program);
-        console.log('course', course);
-        console.log(
-            'space:',
-            newData[0].children.filter(i => i.name === program)[0].isSmartScreen
-        );
-        console.log(
-            'space_course:',
-            newData[0].children
-                .filter(i => i.name === program)
-                .map(
-                    i =>
-                        i.children.filter(i => i.name === course)[0]
-                            .isSmartScreen
-                )[0]
-        );
-        console.log(
-            newData[0].children
-                .filter(i => i.name === program)
-                .map(
-                    i =>
-                        i.children.filter(i => i.name === course)[0]
-                            .isSmartScreen
-                )[0] === false
-                ? 'so its false hmm '
-                : 'ohh its still true!'
-        );
-    }
-
     return (
         <div className="App">
             <h2 style={{ textAlign: 'center' }}>COPUS Insights</h2>
@@ -372,17 +323,9 @@ const Analysis = () => {
                                     setProgramSpaceDisplay(true);
                                     setCourseSpaceDisplay(false);
                                     setSmartScreen(true);
-                                    console.log(
-                                        'smart screen here: ',
-                                        smartScreen
-                                    );
                                 } else if (program !== '' && course !== '') {
                                     setCourseSpaceDisplay(true);
                                     setProgramSpaceDisplay(false);
-                                    console.log(
-                                        'smart screen P n C here: ',
-                                        smartScreen
-                                    );
                                 }
                             }
                             if (
@@ -445,7 +388,8 @@ const Analysis = () => {
                             label="smart screen"
                             checked={smartScreen}
                             disabled={
-                                program !== '' && course !== ''
+                                !(obData === '') ||
+                                (program !== '' && course !== ''
                                     ? newData[0].children
                                           .filter(i => i.name === program)
                                           .map(
@@ -454,7 +398,7 @@ const Analysis = () => {
                                                       i => i.name === course
                                                   )[0].isSmartScreen
                                           )[0] === false
-                                    : ''
+                                    : '')
                             }
                         />
                         <FormControlLabel
@@ -463,7 +407,8 @@ const Analysis = () => {
                             label="white board"
                             checked={whiteBoard}
                             disabled={
-                                program !== '' && course !== ''
+                                !(obData === '') ||
+                                (program !== '' && course !== ''
                                     ? newData[0].children
                                           .filter(i => i.name === program)
                                           .map(
@@ -472,7 +417,7 @@ const Analysis = () => {
                                                       i => i.name === course
                                                   )[0].isWhiteBoard
                                           )[0] === false
-                                    : ''
+                                    : '')
                             }
                         />
                         <FormControlLabel
@@ -481,7 +426,8 @@ const Analysis = () => {
                             label="hearing assistance"
                             checked={hearingAssistance}
                             disabled={
-                                program !== '' && course !== ''
+                                !(obData === '') ||
+                                (program !== '' && course !== ''
                                     ? newData[0].children
                                           .filter(i => i.name === program)
                                           .map(
@@ -490,7 +436,7 @@ const Analysis = () => {
                                                       i => i.name === course
                                                   )[0].isHearingAssistance
                                           )[0] === false
-                                    : ''
+                                    : '')
                             }
                         />
                     </FormControl>
@@ -610,168 +556,169 @@ const Analysis = () => {
                     </TextField>
                     <br />
                 </div>
+            </div>
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ margin: '95px' }}
-                    onClick={() => {
-                        if (program !== '' && course !== '' && obData !== '') {
-                            setDisplay(true);
-                            setProgramData(false);
-                            setCourseData(false);
-                            setProgramEngagementDisplay(false);
-                            setCourseEngagementDisplay(false);
-                            setStaffProgramEngagementDisplay(false);
-                            setStaffCourseEngagementDisplay(false);
-                            setCourseEngagement_studentStaff(false);
-                            setProgramEngagement_studentStaff(false);
-                        } else if (
-                            program !== '' &&
-                            course !== '' &&
-                            studentActivity === '' &&
-                            staffActicity === ''
-                        ) {
-                            setCourseData(true);
-                            setDisplay(false);
-                            setProgramData(false);
-                            setProgramEngagementDisplay(false);
-                            setCourseEngagementDisplay(false);
-                            setStaffProgramEngagementDisplay(false);
-                            setStaffCourseEngagementDisplay(false);
-                            setCourseEngagement_studentStaff(false);
-                            setProgramEngagement_studentStaff(false);
-                        } else if (
-                            program !== '' &&
-                            studentActivity !== '' &&
-                            course === '' &&
-                            staffActicity === ''
-                        ) {
-                            setProgramEngagementDisplay(true);
-                            setDisplay(false);
-                            setProgramData(false);
-                            setCourseData(false);
-                            setCourseEngagementDisplay(false);
-                            setStaffCourseEngagementDisplay(false);
-                            setStaffProgramEngagementDisplay(false);
-                            setCourseEngagement_studentStaff(false);
-                            setProgramEngagement_studentStaff(false);
-                        } else if (
-                            program !== '' &&
-                            course !== '' &&
-                            studentActivity !== '' &&
-                            staffActicity === ''
-                        ) {
-                            setProgramEngagementDisplay(false);
-                            setDisplay(false);
-                            setProgramData(false);
-                            setCourseData(false);
-                            setStaffCourseEngagementDisplay(false);
-                            setCourseEngagementDisplay(true);
-                            setStaffProgramEngagementDisplay(false);
-                            setCourseEngagement_studentStaff(false);
-                            setProgramEngagement_studentStaff(false);
-                        } else if (
-                            program !== '' &&
-                            staffActicity !== '' &&
-                            course === '' &&
-                            studentActivity === ''
-                        ) {
-                            setDisplay(false);
-                            setProgramData(false);
-                            setCourseData(false);
-                            setProgramEngagementDisplay(false);
-                            setCourseEngagementDisplay(false);
-                            setStaffProgramEngagementDisplay(true);
-                            setStaffCourseEngagementDisplay(false);
-                            setCourseEngagement_studentStaff(false);
-                            setProgramEngagement_studentStaff(false);
-                        } else if (
-                            program !== '' &&
-                            course !== '' &&
-                            studentActivity === '' &&
-                            staffActicity !== ''
-                        ) {
-                            setDisplay(false);
-                            setProgramData(false);
-                            setCourseData(false);
-                            setProgramEngagementDisplay(false);
-                            setCourseEngagementDisplay(false);
-                            setStaffProgramEngagementDisplay(false);
-                            setStaffCourseEngagementDisplay(true);
-                            setCourseEngagement_studentStaff(false);
-                            setProgramEngagement_studentStaff(false);
-                        } else if (
-                            program !== '' &&
-                            course === '' &&
-                            staffActicity !== '' &&
-                            studentActivity !== ''
-                        ) {
-                            setDisplay(false);
-                            setProgramData(false);
-                            setCourseData(false);
-                            setProgramEngagementDisplay(false);
-                            setCourseEngagementDisplay(false);
-                            setStaffProgramEngagementDisplay(false);
-                            setStaffCourseEngagementDisplay(false);
-                            setProgramEngagement_studentStaff(true);
-                            setCourseEngagement_studentStaff(false);
-                        } else if (
-                            program !== '' &&
-                            course !== '' &&
-                            staffActicity !== '' &&
-                            studentActivity !== ''
-                        ) {
-                            setDisplay(false);
-                            setProgramData(false);
-                            setCourseData(false);
-                            setProgramEngagementDisplay(false);
-                            setCourseEngagementDisplay(false);
-                            setStaffProgramEngagementDisplay(false);
-                            setStaffCourseEngagementDisplay(false);
-                            setCourseEngagement_studentStaff(true);
-                            setProgramEngagement_studentStaff(false);
-                        } else {
-                            setCourseEngagement_studentStaff(false);
-                            setProgramEngagement_studentStaff(false);
-                            setStaffProgramEngagementDisplay(false);
-                            setStaffCourseEngagementDisplay(false);
-                            setCourseEngagementDisplay(false);
-                            setProgramEngagementDisplay(false);
-                            setDisplay(false);
-                            setCourseData(false);
-                            setProgramData(true);
-                        }
-                    }}
-                >
-                    Analyse Data
-                </Button>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => {
+            <Button
+                variant="contained"
+                color="primary"
+                style={{ margin: '55px', textAlign: 'center' }}
+                onClick={() => {
+                    if (program !== '' && course !== '' && obData !== '') {
+                        setDisplay(true);
+                        setProgramData(false);
+                        setCourseData(false);
+                        setProgramEngagementDisplay(false);
+                        setCourseEngagementDisplay(false);
+                        setStaffProgramEngagementDisplay(false);
+                        setStaffCourseEngagementDisplay(false);
+                        setCourseEngagement_studentStaff(false);
+                        setProgramEngagement_studentStaff(false);
+                    } else if (
+                        program !== '' &&
+                        course !== '' &&
+                        studentActivity === '' &&
+                        staffActicity === ''
+                    ) {
+                        setCourseData(true);
+                        setDisplay(false);
+                        setProgramData(false);
+                        setProgramEngagementDisplay(false);
+                        setCourseEngagementDisplay(false);
+                        setStaffProgramEngagementDisplay(false);
+                        setStaffCourseEngagementDisplay(false);
+                        setCourseEngagement_studentStaff(false);
+                        setProgramEngagement_studentStaff(false);
+                    } else if (
+                        program !== '' &&
+                        studentActivity !== '' &&
+                        course === '' &&
+                        staffActicity === ''
+                    ) {
+                        setProgramEngagementDisplay(true);
+                        setDisplay(false);
+                        setProgramData(false);
+                        setCourseData(false);
+                        setCourseEngagementDisplay(false);
+                        setStaffCourseEngagementDisplay(false);
+                        setStaffProgramEngagementDisplay(false);
+                        setCourseEngagement_studentStaff(false);
+                        setProgramEngagement_studentStaff(false);
+                    } else if (
+                        program !== '' &&
+                        course !== '' &&
+                        studentActivity !== '' &&
+                        staffActicity === ''
+                    ) {
+                        setProgramEngagementDisplay(false);
+                        setDisplay(false);
+                        setProgramData(false);
+                        setCourseData(false);
+                        setStaffCourseEngagementDisplay(false);
+                        setCourseEngagementDisplay(true);
+                        setStaffProgramEngagementDisplay(false);
+                        setCourseEngagement_studentStaff(false);
+                        setProgramEngagement_studentStaff(false);
+                    } else if (
+                        program !== '' &&
+                        staffActicity !== '' &&
+                        course === '' &&
+                        studentActivity === ''
+                    ) {
+                        setDisplay(false);
+                        setProgramData(false);
+                        setCourseData(false);
+                        setProgramEngagementDisplay(false);
+                        setCourseEngagementDisplay(false);
+                        setStaffProgramEngagementDisplay(true);
+                        setStaffCourseEngagementDisplay(false);
+                        setCourseEngagement_studentStaff(false);
+                        setProgramEngagement_studentStaff(false);
+                    } else if (
+                        program !== '' &&
+                        course !== '' &&
+                        studentActivity === '' &&
+                        staffActicity !== ''
+                    ) {
+                        setDisplay(false);
+                        setProgramData(false);
+                        setCourseData(false);
+                        setProgramEngagementDisplay(false);
+                        setCourseEngagementDisplay(false);
+                        setStaffProgramEngagementDisplay(false);
+                        setStaffCourseEngagementDisplay(true);
+                        setCourseEngagement_studentStaff(false);
+                        setProgramEngagement_studentStaff(false);
+                    } else if (
+                        program !== '' &&
+                        course === '' &&
+                        staffActicity !== '' &&
+                        studentActivity !== ''
+                    ) {
+                        setDisplay(false);
+                        setProgramData(false);
+                        setCourseData(false);
+                        setProgramEngagementDisplay(false);
+                        setCourseEngagementDisplay(false);
+                        setStaffProgramEngagementDisplay(false);
+                        setStaffCourseEngagementDisplay(false);
+                        setProgramEngagement_studentStaff(true);
+                        setCourseEngagement_studentStaff(false);
+                    } else if (
+                        program !== '' &&
+                        course !== '' &&
+                        staffActicity !== '' &&
+                        studentActivity !== ''
+                    ) {
+                        setDisplay(false);
+                        setProgramData(false);
+                        setCourseData(false);
+                        setProgramEngagementDisplay(false);
+                        setCourseEngagementDisplay(false);
+                        setStaffProgramEngagementDisplay(false);
+                        setStaffCourseEngagementDisplay(false);
+                        setCourseEngagement_studentStaff(true);
+                        setProgramEngagement_studentStaff(false);
+                    } else {
                         setCourseEngagement_studentStaff(false);
                         setProgramEngagement_studentStaff(false);
                         setStaffProgramEngagementDisplay(false);
                         setStaffCourseEngagementDisplay(false);
                         setCourseEngagementDisplay(false);
                         setProgramEngagementDisplay(false);
-                        setStaffActivity('');
-                        setStudentActivity('');
                         setDisplay(false);
                         setCourseData(false);
-                        setProgramData(false);
-                        setWhiteBoard(false);
-                        setHearingAssistance(false);
-                        setSmartScreen(false);
-                        setProgram('');
-                        setCourse('');
-                        setObData('');
-                    }}
-                >
-                    Clear Data
-                </Button>
-            </div>
+                        setProgramData(true);
+                    }
+                }}
+            >
+                Analyse Data
+            </Button>
+            <Button
+                variant="contained"
+                color="secondary"
+                style={{ textAlign: 'center' }}
+                onClick={() => {
+                    setCourseEngagement_studentStaff(false);
+                    setProgramEngagement_studentStaff(false);
+                    setStaffProgramEngagementDisplay(false);
+                    setStaffCourseEngagementDisplay(false);
+                    setCourseEngagementDisplay(false);
+                    setProgramEngagementDisplay(false);
+                    setStaffActivity('');
+                    setStudentActivity('');
+                    setDisplay(false);
+                    setCourseData(false);
+                    setProgramData(false);
+                    setWhiteBoard(false);
+                    setHearingAssistance(false);
+                    setSmartScreen(false);
+                    setProgram('');
+                    setCourse('');
+                    setObData('');
+                }}
+            >
+                Clear Data
+            </Button>
             <div>
                 {display === true ? (
                     <div>
@@ -961,18 +908,84 @@ const Analysis = () => {
                     ''
                 )}
                 {programEngagement_studentStaff === true ? (
-                    <Bar
-                        data={ProgramStudentStaffEngagement}
-                        options={barOptions}
-                    />
+                    <div>
+                        <Bar
+                            data={ProgramStudentStaffEngagement}
+                            options={barOptions}
+                        />
+                        <Bar
+                            data={{
+                                labels: barLabels,
+                                datasets: [
+                                    {
+                                        label: `Student ${studentActivity} Engagement During a Semester in a ${program}`,
+                                        backgroundColor: 'rgba(300, 46, 76)',
+                                        borderColor: 'rgba(255,99,132,1)',
+                                        borderWidth: 2,
+                                        hoverBackgroundColor:
+                                            'rgba(255,99,132,0.4)',
+                                        hoverBorderColor: 'rgba(255,99,132,1)',
+                                        data: [
+                                            25,
+                                            40,
+                                            20,
+                                            31,
+                                            10,
+                                            31,
+                                            25,
+                                            43,
+                                            50,
+                                            48,
+                                            24,
+                                            12,
+                                        ],
+                                    },
+                                ],
+                            }}
+                            options={barOptions}
+                        />
+                    </div>
                 ) : (
                     ''
                 )}
                 {courseEngagement_studentStaff === true ? (
-                    <Bar
-                        data={CourseStudentStaffEngagement}
-                        options={barOptions}
-                    />
+                    <div>
+                        <Bar
+                            data={CourseStudentStaffEngagement}
+                            options={barOptions}
+                        />
+                        <Bar
+                            data={{
+                                labels: barLabels,
+                                datasets: [
+                                    {
+                                        label: `Student ${studentActivity} Engagement During a Semester in ${course}`,
+                                        backgroundColor: 'rgba(300, 46, 76)',
+                                        borderColor: 'rgba(255,99,132,1)',
+                                        borderWidth: 2,
+                                        hoverBackgroundColor:
+                                            'rgba(255,99,132,0.4)',
+                                        hoverBorderColor: 'rgba(255,99,132,1)',
+                                        data: [
+                                            55,
+                                            60,
+                                            70,
+                                            71,
+                                            80,
+                                            81,
+                                            85,
+                                            73,
+                                            60,
+                                            48,
+                                            34,
+                                            82,
+                                        ],
+                                    },
+                                ],
+                            }}
+                            options={barOptions}
+                        />
+                    </div>
                 ) : (
                     ''
                 )}
