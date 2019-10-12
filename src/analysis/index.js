@@ -100,6 +100,15 @@ const Analysis = () => {
                     barPercentage: 0.3,
                 },
             ],
+            yAxes: [
+                {
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                    },
+                },
+            ],
         },
         maintainAspectRatio: true,
     };
@@ -144,7 +153,7 @@ const Analysis = () => {
                 borderWidth: 2,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                 hoverBorderColor: barColor,
-                data: [55, 20, 70, 41, 30, 81, 85, 73, 60, 48, 34, 22],
+                data: [55, 80, 70, 41, 60, 81, 85, 73, 60, 48, 34, 52],
             },
         ],
     };
@@ -159,7 +168,7 @@ const Analysis = () => {
                 borderWidth: 2,
                 hoverBackgroundColor: barColor,
                 hoverBorderColor: barColor,
-                data: [45, 10, 40, 71, 40, 81, 85, 23, 30, 48, 34, 22],
+                data: [65, 60, 70, 71, 80, 81, 75, 53, 60, 78, 74, 72],
             },
         ],
     };
@@ -810,9 +819,33 @@ const Analysis = () => {
                                     },
                                 ],
                             }}
+                            maintainAspectRatio
+                            options={barOptions}
+                        />
+                        <Bar
+                            data={{
+                                labels: newData[0].children.map(
+                                    item => item.name
+                                ),
+                                datasets: [
+                                    {
+                                        label:
+                                            'Listening Activity Engagement Across programs',
+                                        backgroundColor: 'rgba(201, 16, 16)',
+                                        borderColor: 'rgba(255,99,132,1)',
+                                        borderWidth: 2,
+                                        hoverBackgroundColor:
+                                            'rgba(255,99,132,0.4)',
+                                        hoverBorderColor: 'rgba(255,99,132,1)',
+                                        data: newData[0].children.map(
+                                            item =>
+                                                item.averageListeningEngagement
+                                        ),
+                                    },
+                                ],
+                            }}
                             // width={50}
                             options={barOptions}
-                            height={50}
                         />
                     </div>
                 ) : (
@@ -820,7 +853,6 @@ const Analysis = () => {
                 )}
                 {showCourseLevelData === true ? (
                     <div>
-                        {/* Please Select valid values from the above dropdowns! */}
                         <Bar
                             data={{
                                 labels: newData[0].children
@@ -851,8 +883,38 @@ const Analysis = () => {
                                     },
                                 ],
                             }}
-                            // width={50}
-                            height={50}
+                            options={barOptions}
+                        />
+                        <Bar
+                            data={{
+                                labels: newData[0].children
+                                    .filter(i => i.name === program)
+                                    .map(item =>
+                                        item.children.map(
+                                            courseName => courseName.name
+                                        )
+                                    )[0],
+                                datasets: [
+                                    {
+                                        label:
+                                            'Listening Activity Engagement Across courses',
+                                        backgroundColor: 'rgba(201, 16, 16)',
+                                        borderColor: 'rgba(255,99,132,1)',
+                                        borderWidth: 2,
+                                        hoverBackgroundColor:
+                                            'rgba(255,99,132,0.4)',
+                                        hoverBorderColor: 'rgba(255,99,132,1)',
+                                        data: newData[0].children
+                                            .filter(i => i.name === program)
+                                            .map(item =>
+                                                item.children.map(
+                                                    courseName =>
+                                                        courseName.averageListeningEngagement
+                                                )
+                                            )[0],
+                                    },
+                                ],
+                            }}
                             options={barOptions}
                         />
                     </div>

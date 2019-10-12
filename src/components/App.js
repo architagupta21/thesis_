@@ -33,24 +33,24 @@ APIButtonComponent.propTypes = {
     onClick: PropTypes.func.isRequired,
 };
 
-const App = props => {
-    const { phpMessage, dbPost, count } = props;
-    return (
-        <AppContainer>
-            <AppTitle>
-                Hello LTI
-                <FontAwesomeIcon icon={['fab', 'react']} />
-                React App!
-            </AppTitle>
-            <p>
-                Open <FontAwesomeIcon icon="cog" /> Developer Tools to see log
-                outputs on state change
-            </p>
-            <APIButtonMessage>
+const App = props => (
+    // const { phpMessage, dbPost, count } = props;
+    <AppContainer>
+        <AppTitle>
+            Hello! This is the Homepage of COPUS tool
+            {/* <FontAwesomeIcon icon={['fab', 'react']} />
+                React App! */}
+        </AppTitle>
+        <p>
+            <FontAwesomeIcon icon="cog" /> Please Use the Settings tab to Update
+            records for new Information
+            <FontAwesomeIcon icon="cog" />
+        </p>
+        {/* <APIButtonMessage>
                 Ensure that you have created the sample database and tables to
                 test the API button below, Use developer tools to see output.
-            </APIButtonMessage>
-            <APIButtonComponent
+            </APIButtonMessage> */}
+        {/* <APIButtonComponent
                 onClick={() => {
                     // Example of how to use axios without redux middleware
                     axios({
@@ -87,18 +87,19 @@ const App = props => {
                             console.log(error);
                         });
                 }}
-            />
-            <h4>
-                <FontAwesomeIcon icon="store" /> Redux Example
-            </h4>
-            <h5>PHP MESSAGE: {phpMessage}</h5>
+            /> */}
+        <h4>
+            <FontAwesomeIcon icon="store" /> Use the tool to analyse classroom
+            analytics by studying engagement levels of students and staff
+            members.
+        </h4>
+        {/* <h5>PHP MESSAGE: {phpMessage}</h5>
             <p>DB POST: {dbPost}</p>
             <h5>COUNTER EXAMPLE</h5>
             <p>APP COMPONENT: {count}</p>
-            COUNTER COMPONENT: <Counter />
-        </AppContainer>
-    );
-};
+            COUNTER COMPONENT: <Counter /> */}
+    </AppContainer>
+);
 
 export { APIButtonComponent };
 

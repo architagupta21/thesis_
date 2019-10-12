@@ -5,7 +5,7 @@ const data = [
             {
                 name: 'Master of Information Technology',
                 noOfStudents: 100,
-                averageDiscussionEngagement: 56,
+                averageDiscussionEngagement: 65,
                 averageListeningEngagement: 73,
                 isSmartScreen: true,
                 isWhiteBoard: true,
@@ -13,7 +13,7 @@ const data = [
                 children: [
                     {
                         name: 'Introduction to Software Engineering',
-                        averageDiscussionEngagement: 51,
+                        averageDiscussionEngagement: 81,
                         averageListeningEngagement: 93,
                         noOfStudents: 90,
                         isSmartScreen: true,
@@ -304,7 +304,7 @@ const data = [
             {
                 name: 'Master of Computer Science',
                 noOfStudents: 70,
-                averageDiscussionEngagement: 68,
+                averageDiscussionEngagement: 59,
                 averageListeningEngagement: 87,
                 isSmartScreen: true,
                 isWhiteBoard: true,
