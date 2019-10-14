@@ -1,0 +1,6 @@
+.react-autosuggest__suggestions-list {
+  list-style: decimal;
+}
+.react-autosuggest__container {
+  width: 35%;
+}

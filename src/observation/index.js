@@ -3,14 +3,24 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
 import ObservationForm from '../components/ObservationForm';
 
-const Container = styled.div`
-    padding: 20px;
-    border: 1px solid lightblue;
-`;
-
-const Observation = () => <ObservationForm />;
+const Observation = () => (
+    <div>
+        <ObservationForm />
+        <br />
+        <Button
+            style={{ marginLeft: '85%' }}
+            color="primary"
+            href="#/analysis"
+            variant="contained"
+        >
+            View Analysis
+        </Button>
+    </div>
+);
 
 export default withRouter(
     connect(state => ({

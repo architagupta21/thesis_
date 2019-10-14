@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Pie, Doughnut, Bar } from 'react-chartjs-2';
+import { Pie, Doughnut, Bar, Polar } from 'react-chartjs-2';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -928,18 +928,22 @@ const Analysis = () => {
                             options={barOptions}
                         />
                         <br />
-                        <span>
-                            A bar Chart Representation from Above Engagement
-                            Scores:
-                        </span>
                         <br />
-                        <Doughnut
+                        <br />
+                        <h3>
+                            A Polar Chart Representation from Above Engagement
+                            Scores:
+                        </h3>
+                        <br />
+                        <Polar
                             data={StudentEngagementDataProgram_Pie}
                             options={{
                                 legend: {
                                     display: false,
                                 },
                             }}
+                            // maintainAspectRatio
+                            // width="900px"
                         />
                     </div>
                 ) : (

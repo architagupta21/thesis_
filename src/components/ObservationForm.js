@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import deburr from 'lodash/deburr';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
+import Autosuggest from 'react-autosuggest';
+import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { FormGroup } from '@material-ui/core';
+import { FormGroup, Input } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { makeStyles } from '@material-ui/core/styles';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
+import '../../public/assets/style.css';
 
 import uuid from 'uuid/v4';
 import {
@@ -36,7 +43,6 @@ const Observation = ({
     staff,
     activities,
     addObservation,
-
     removeObservation,
     updateObservation,
 }) => {
@@ -52,11 +58,6 @@ const Observation = ({
     const [updateWindow, setUpdateWindow] = useState(false);
     const [selectedId, setSelectedID] = useState('');
     const [refreshRecord, setRefreshRecord] = useState('');
-    // const [updateStartTime, setUpdateStartTime] = useState('');
-    // const [updateEndTime, setUpdateEndTime] = useState('');
-    // const [updateStudentActivity, setUpdateStudentActivity] = useState('');
-    // const [updateStaffActivity, setUpdateStaffActivity] = useState('');
-    // const [updateEngagementTime, setUpdateEngagementTime] = useState('');
     const [updateSemester, setUpdateSemester] = useState('');
     const [updateCourseID, setUpdateCourseID] = useState('');
     const [updateStaffID, setUpdateStaffID] = useState('');
@@ -90,9 +91,111 @@ const Observation = ({
         updateStaffFiltered.length > 0 ? updateStaffFiltered[0] : {};
 
     console.log('obs', observations);
-    console.log(records);
-    console.log(selectedId);
+    // console.log(records);
+    // console.log(selectedId);
 
+    const suggestions = [
+        { label: '1 Forgan Smith ' },
+        { label: '2 Duhig Tower' },
+        { label: '3 Steele Building' },
+        { label: '4 Bookshop' },
+        { label: '5 Richards Building' },
+        { label: '6 Physics Annexe' },
+        { label: '7 Parnell Building' },
+        { label: '8 Goddard Building' },
+        { label: '9 Michie Building' },
+        { label: '17 Learning Innovation Building' },
+        { label: '23 Abel Smith Lecture Theatre' },
+        { label: '22 Schonell Theatre' },
+    ];
+
+    function renderInputComponent(inputProps) {
+        const { classes, inputRef = () => {}, ref, ...other } = inputProps;
+        return (
+            <TextField
+                margin="normal"
+                variant="outlined"
+                fullWidth
+                InputProps={{
+                    inputRef: node => {
+                        ref(node);
+                        inputRef(node);
+                    },
+                }}
+                {...other}
+            />
+        );
+    }
+
+    function renderSuggestion(suggestion, { query, isHighlighted }) {
+        const matches = match(suggestion.label, query);
+        const parts = parse(suggestion.label, matches);
+        return (
+            <MenuItem selected={isHighlighted} component="div">
+                <div>
+                    {parts.map(part => (
+                        <span
+                            key={part.text}
+                            style={{ fontWeight: part.highlight ? 500 : 400 }}
+                        >
+                            {part.text}
+                        </span>
+                    ))}
+                </div>
+            </MenuItem>
+        );
+    }
+    function getSuggestions(value) {
+        const inputValue = deburr(value.trim()).toLowerCase();
+        const inputLength = inputValue.length;
+        let count = 0;
+        return inputLength === 0
+            ? []
+            : suggestions.filter(suggestion => {
+                  const keep =
+                      count < 25 &&
+                      suggestion.label.slice(0, inputLength).toLowerCase() ===
+                          inputValue;
+                  if (keep) {
+                      count += 1;
+                  }
+                  return keep;
+              });
+    }
+
+    function getSuggestionValue(suggestion) {
+        return suggestion.label;
+    }
+    // const classes = useStyles();
+    const [state, setState] = React.useState({
+        single: '',
+        popper: '',
+    });
+
+    const [stateSuggestions, setSuggestions] = React.useState([]);
+    const handleSuggestionsFetchRequested = ({ value }) => {
+        setSuggestions(getSuggestions(value));
+    };
+
+    const handleSuggestionsClearRequested = () => {
+        setSuggestions([]);
+    };
+
+    const handleChange = name => (event, { newValue }) => {
+        setState({
+            ...state,
+            [name]: newValue,
+        });
+    };
+
+    const autosuggestProps = {
+        renderInputComponent,
+        suggestions: stateSuggestions,
+        onSuggestionsFetchRequested: handleSuggestionsFetchRequested,
+        onSuggestionsClearRequested: handleSuggestionsClearRequested,
+        getSuggestionValue,
+        renderSuggestion,
+    };
     return (
         <div>
             <Dialog
@@ -173,7 +276,7 @@ const Observation = ({
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <TextField
+                        {/* <TextField
                             label="Location"
                             type="name"
                             value={updateLocation}
@@ -184,6 +287,25 @@ const Observation = ({
                             onChange={event => {
                                 setUpdateLocation(event.target.value);
                             }}
+                        /> */}
+                        <Autosuggest
+                            {...autosuggestProps}
+                            inputProps={{
+                                id: 'react-autosuggest-simple',
+                                label: 'Location',
+                                placeholder: 'Search Building by Number',
+                                value: state.single,
+                                onChange: handleChange('single'),
+                            }}
+                            renderSuggestionsContainer={options => (
+                                <Paper
+                                    {...options.containerProps}
+                                    // style={{ width: '35%' }}
+                                >
+                                    {options.children}
+                                    {setLocation(state.single)}
+                                </Paper>
+                            )}
                         />
                         <br />
                         <TextField
@@ -402,7 +524,7 @@ const Observation = ({
                 </DialogActions>
             </Dialog>
             <Container>
-                <div>Class Session Information:</div>
+                <h3>Class Session Information:</h3>
                 <div>
                     <TextField
                         select
@@ -411,6 +533,7 @@ const Observation = ({
                         onChange={event => {
                             setSemester(event.target.value);
                         }}
+                        required
                         margin="normal"
                         variant="outlined"
                         style={{ marginRight: '25px', width: '35%' }}
@@ -419,6 +542,7 @@ const Observation = ({
                         <MenuItem value="Semester 2">Semester 2</MenuItem>
                     </TextField>
                     <TextField
+                        required
                         label="Date"
                         type="date"
                         value={date}
@@ -429,6 +553,7 @@ const Observation = ({
                     <br />
                     <TextField
                         select
+                        required
                         label="Select Course Code"
                         value={selectedCourseID}
                         onChange={event => {
@@ -449,12 +574,13 @@ const Observation = ({
                     <TextField
                         label="Course Name"
                         type="name"
+                        required
                         value={selectedCourse.name || ''}
                         margin="normal"
                         variant="outlined"
                         style={{ width: '35%' }}
                     />
-                    <br />
+                    {/* <br /> */}
                     <TextField
                         select
                         label="Select Instructor"
@@ -462,6 +588,7 @@ const Observation = ({
                         onChange={event => {
                             setSelectedStaffID(event.target.value);
                         }}
+                        required
                         margin="normal"
                         variant="outlined"
                         style={{ marginRight: '25px', width: '35%' }}
@@ -474,22 +601,11 @@ const Observation = ({
                             </MenuItem>
                         ))}
                     </TextField>
-                    <TextField
-                        label="Location"
-                        type="name"
-                        value={location}
-                        margin="normal"
-                        variant="outlined"
-                        placeholder="413 Learning Innovation Building"
-                        style={{ width: '35%' }}
-                        onChange={event => {
-                            setLocation(event.target.value);
-                        }}
-                    />
-                    <br />
+
                     <TextField
                         label="Number of Students"
                         type="number"
+                        required
                         value={numberOfStudents}
                         margin="normal"
                         variant="outlined"
@@ -498,6 +614,7 @@ const Observation = ({
                             setNumberofStudents(event.target.value);
                         }}
                     />
+                    <br />
                     <TextField
                         label="Duration(mins)"
                         type="number"
@@ -509,47 +626,27 @@ const Observation = ({
                             setDuration(event.target.value);
                         }}
                     />
-                    <br />
-                    <FormControl
-                    // onChange={event => {
-                    //     if (
-                    //         event.target.value === 'smart screen' &&
-                    //         event.target.checked === true
-                    //     ) {
-                    //         setSmartScreen(true);
-                    //     }
-                    //     if (
-                    //         event.target.value === 'white board' &&
-                    //         event.target.checked === true
-                    //     ) {
-                    //         setWhiteBoard(true);
-                    //     }
-                    //     if (
-                    //         event.target.value === 'hearing assistance' &&
-                    //         event.target.checked === true
-                    //     ) {
-                    //         setHearingAssistance(true);
-                    //     }
-                    //     if (
-                    //         event.target.value === 'smart screen' &&
-                    //         event.target.checked === false
-                    //     ) {
-                    //         setSmartScreen(false);
-                    //     }
-                    //     if (
-                    //         event.target.value === 'white board' &&
-                    //         event.target.checked === false
-                    //     ) {
-                    //         setWhiteBoard(false);
-                    //     }
-                    //     if (
-                    //         event.target.value === 'hearing assistance' &&
-                    //         event.target.checked === false
-                    //     ) {
-                    //         setHearingAssistance(false);
-                    //     }
-                    // }}
-                    >
+                    <Autosuggest
+                        {...autosuggestProps}
+                        inputProps={{
+                            id: 'react-autosuggest-simple',
+                            label: 'Location',
+                            placeholder: 'Search Building by Number',
+                            value: state.single,
+                            onChange: handleChange('single'),
+                        }}
+                        renderSuggestionsContainer={options => (
+                            <Paper
+                                {...options.containerProps}
+                                // style={{ width: '35%' }}
+                            >
+                                {options.children}
+                                {setLocation(state.single)}
+                            </Paper>
+                        )}
+                    />
+                    {/* <br /> */}
+                    <FormGroup row>
                         <FormControlLabel
                             value="smart screen"
                             control={<Checkbox />}
@@ -568,7 +665,7 @@ const Observation = ({
                             label="hearing assistance"
                             // checked={hearingAssistance}
                         />
-                    </FormControl>
+                    </FormGroup>
                 </div>
                 <br />
                 <Button

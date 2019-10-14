@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ReactJS PHP LTI</title>
+        <title>The COPUS</title>
+		<link rel="icon" href="assets/favicon.png" type="image/gif" sizes="16x16">
          <?php
 
         	require_once('./config.php');

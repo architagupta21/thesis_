@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import Counter from './Counter';
 
 const AppContainer = styled.div`
     border: 1px solid lightgrey;
@@ -18,8 +15,6 @@ const AppTitle = styled.div`
     font-weight: bold;
     font-size: 25px;
 `;
-
-const APIButtonMessage = styled.div``;
 
 const APIButton = styled.button``;
 
@@ -33,11 +28,15 @@ APIButtonComponent.propTypes = {
     onClick: PropTypes.func.isRequired,
 };
 
+const onSettingClick = e => {
+    // e.preventFefault();
+    window.location = '../src/admin';
+};
+
 const App = props => (
-    // const { phpMessage, dbPost, count } = props;
     <AppContainer>
         <AppTitle>
-            Hello! This is the Homepage of COPUS tool
+            Hello! Welcome to the COPUS tool
             {/* <FontAwesomeIcon icon={['fab', 'react']} />
                 React App! */}
         </AppTitle>
@@ -46,58 +45,43 @@ const App = props => (
             records for new Information
             <FontAwesomeIcon icon="cog" />
         </p>
-        {/* <APIButtonMessage>
-                Ensure that you have created the sample database and tables to
-                test the API button below, Use developer tools to see output.
-            </APIButtonMessage> */}
-        {/* <APIButtonComponent
-                onClick={() => {
-                    // Example of how to use axios without redux middleware
-                    axios({
-                        method: 'get',
-                        url: '../public/api/api.php',
-                        params: {
-                            action: 'hello',
-                            jwt_token: $JWT_TOKEN,
-                            data: {
-                                name: $LTI.userID,
-                            },
-                        },
-                    })
-                        .then(response => {
-                            console.log(response);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-
-                    axios({
-                        method: 'get',
-                        url: '../public/api/crud.php/posts', // test with posts table
-                        params: {
-                            jwt_token: $JWT_TOKEN,
-                            filter: 'posts.title,eq,A post by Will',
-                            transform: 1,
-                        },
-                    })
-                        .then(response => {
-                            console.log(response);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-                }}
-            /> */}
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <a href="#/edit">
+                {/* Click Me */}
+                <img
+                    src="assets/settingsIcon.png"
+                    height="200px"
+                    width="200px"
+                    alt="settings_icon"
+                    style={{ margin: '25px' }}
+                    // placeholder="Go To Settings Page"
+                    // onClick={onSettingClick()}
+                />
+            </a>
+            <a href="#/observation">
+                <img
+                    src="assets/data-entry-icon-24.jpg"
+                    height="200px"
+                    width="200px"
+                    alt="dataentry_icon"
+                    style={{ margin: '25px', marginLeft: '10px' }}
+                />
+            </a>
+            <a href="#/analysis">
+                <img
+                    src="assets/userDataAnalysis.png"
+                    height="200px"
+                    width="200px"
+                    alt="analysis_icon"
+                    style={{ margin: '25px', marginLeft: '10px' }}
+                />
+            </a>
+        </div>
         <h4>
             <FontAwesomeIcon icon="store" /> Use the tool to analyse classroom
             analytics by studying engagement levels of students and staff
             members.
         </h4>
-        {/* <h5>PHP MESSAGE: {phpMessage}</h5>
-            <p>DB POST: {dbPost}</p>
-            <h5>COUNTER EXAMPLE</h5>
-            <p>APP COMPONENT: {count}</p>
-            COUNTER COMPONENT: <Counter /> */}
     </AppContainer>
 );
 

@@ -14,6 +14,8 @@ import StaffDetailsForm from '../components/StaffDetailsForm';
 const Container = styled.div`
     padding: 20px;
     border: 1px solid lightblue;
+    font-family: monospace;
+    font-size: large;
 `;
 
 const DefaultCountInput = styled.input`
@@ -26,48 +28,6 @@ const Admin = ({ staff }) => {
 
     return (
         <Container>
-            {/* Default Count Value:
-            <DefaultCountInput
-                type="number"
-                value={defaultCount}
-                onChange={event => {
-                    setDefaultCount(event.target.value);
-                }}
-            />
-            <div>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                        console.log('I WANT TO SAVE');
-                        setCountDefault(parseInt(defaultCount, 10));
-                        history.push('/');
-                    }}
-                >
-                    Save Changes
-                </Button>
-            </div> */}
-            {/* {staff.map(person => (
-                <div>{<div>{person.firstname}</div>}</div>
-            ))} */}
-            {/* <br />
-            <br />
-            <br /> */}
-            {/* {staff.map(person => (
-                <div>
-                    <div>{person.id}</div>
-                </div>
-            ))}
-            <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                    console.log('ADD STAFF BUTTOn');
-                    addStaffMember(uuid(), 'prof', 'random', 'person');
-                }}
-            >
-                ADD RANDOM STAFF
-            </Button> */}
             <ActivityForm />
             <br />
             <ProgramForm />
@@ -75,6 +35,17 @@ const Admin = ({ staff }) => {
             <CourseForm />
             <br />
             <StaffDetailsForm />
+            <br />
+            <br />
+            <br />
+            <Button
+                style={{ marginLeft: '70%' }}
+                color="primary"
+                href="#/observation"
+                variant="contained"
+            >
+                Start Recording Observations
+            </Button>
         </Container>
     );
 };
