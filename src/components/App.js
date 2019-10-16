@@ -38,11 +38,10 @@ const App = props => {
     return (
         <AppContainer>
             <AppTitle>
-                Hello LTI
-                <FontAwesomeIcon icon={['fab', 'react']} />
-                React App!
+                Hello COPUS
+                {/* <FontAwesomeIcon icon={['fab', 'react']} /> */}
             </AppTitle>
-            <p>
+            {/* <p>
                 Open <FontAwesomeIcon icon="cog" /> Developer Tools to see log
                 outputs on state change
             </p>
@@ -95,7 +94,7 @@ const App = props => {
             <p>DB POST: {dbPost}</p>
             <h5>COUNTER EXAMPLE</h5>
             <p>APP COMPONENT: {count}</p>
-            COUNTER COMPONENT: <Counter />
+            COUNTER COMPONENT: <Counter /> */}
         </AppContainer>
     );
 };

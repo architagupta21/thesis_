@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Pie, Doughnut, Bar } from 'react-chartjs-2';
+import { Pie, Doughnut, Bar, Polar } from 'react-chartjs-2';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -102,6 +102,39 @@ const Analysis = () => {
             ],
         },
         maintainAspectRatio: true,
+    };
+    const studentEngagement = {
+        labels: [
+            'Listening',
+            'Individual thinking',
+            'Clicker question discussion',
+            'Group work',
+            'Answer question',
+            'Ask question',
+        ],
+        datasets: [
+            {
+                type: 'line',
+                label: 'Student Engagement(%)',
+                fill: false,
+                backgroundColor: 'red',
+                borderColor: 'red',
+                borderWidth: 2,
+                // hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                // hoverBorderColor: 'rgba(255,99,132,1)',
+                data: [65, 70, 80, 95, 75, 80],
+            },
+            {
+                type: 'bar',
+                label: 'Duration(%)',
+                backgroundColor: barColor,
+                borderColor: barColor,
+                borderWidth: 2,
+                hoverBackgroundColor: 'lightblue',
+                hoverBorderColor: 'lightblue',
+                data: [50, 14, 16, 10, 4, 6],
+            },
+        ],
     };
 
     const StudentEngagementDataProgram = {
@@ -736,7 +769,8 @@ const Analysis = () => {
                                 />
                             </div>
                             <h2>Students engagement in one session:</h2>
-                            <Sunburst
+                            <Bar data={studentEngagement} />
+                            {/* <Sunburst
                                 id="sunburst1"
                                 data={
                                     newData[0].children
@@ -751,7 +785,7 @@ const Analysis = () => {
                                                 )
                                         )[0][0][0].children[0]
                                 }
-                            />
+                            /> */}
                         </div>
                         <div>
                             <h2>Students active learning in one session:</h2>
