@@ -59,7 +59,7 @@ const dbPostReducer = (state = '', action) => {
 
 const staff = {
     id: 'fdsagdsafas',
-    title: 'Mr',
+    title: 'Dr',
     firstname: 'Hassan',
     lastname: 'Khosravi',
 };
