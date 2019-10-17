@@ -60,18 +60,11 @@ const dbPostReducer = (state = '', action) => {
 const staff = {
     id: 'fdsagdsafas',
     title: 'Mr',
-    firstname: 'Guang',
-    lastname: 'Yang',
+    firstname: 'Hassan',
+    lastname: 'Khosravi',
 };
 
-const staff1 = {
-    id: 'xvvfewaf',
-    title: 'Ms',
-    firstname: 'Archita',
-    lastname: 'Gupta',
-};
-
-const staffReducer = (state = [staff, staff1], action) => {
+const staffReducer = (state = [staff], action) => {
     const { type, payload } = action;
     switch (type) {
         case Actions.ADD_STAFF:

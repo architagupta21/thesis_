@@ -795,7 +795,7 @@ const Observation = ({
                 {observations && observations.length > 0 ? (
                     <div>
                         <br />
-                        <h4>Followng observations were recorded:</h4>
+                        <h4>Following observations were recorded:</h4>
                         <div>
                             <FormGroup>
                                 {observations.map(recordedObs => (
