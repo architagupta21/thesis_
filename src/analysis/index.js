@@ -500,6 +500,7 @@ const Analysis = () => {
                             setHearingAssistance(false);
                             setStaffActivity('');
                             setStudentActivity('');
+                            setObData('');
                         }}
                         margin="normal"
                         // variant="outlined"

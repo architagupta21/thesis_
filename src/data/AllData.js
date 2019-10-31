@@ -686,7 +686,7 @@ const data = [
                             },
 
                             {
-                                name: 'INFS7903 2019-9-26',
+                                name: 'INFS7903 2019-9-16',
                                 children: [
                                     {
                                         name: 'STUDENTS',
