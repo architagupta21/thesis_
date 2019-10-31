@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import React, { useState } from 'react';
@@ -17,16 +17,6 @@ import SlotData from '../data/Slot';
 import Sunburst from './Sunburst';
 import newData from '../data/AllData';
 
-// function getRandomArray(numItems) {
-//     // Create random array of objects
-//     // const names = 'Week_';
-//     const data = [];
-//     for (let i = 0; i < numItems; ) {
-//         data.push(Math.round(20 + 80 * Math.random()));
-//     }
-//     console.log(data);
-//     return data;
-// }
 const Analysis = () => {
     const [program, setProgram] = useState('');
     const [course, setCourse] = useState('');
@@ -79,20 +69,25 @@ const Analysis = () => {
         'Week12',
     ];
     const barColor = '#3f51b5';
-    const multiColor = [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56',
-        '#FF1324',
-        '#31A2BB',
-        '#FDCE16',
-        '#DF6384',
-        '#16A6ED',
-        '#CCFE11',
-        '#EE6348',
-        '#63A2BE',
-        '#CEFF56',
-    ];
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF'.split('');
+        const colorList = [];
+        if (colorList.length === 0) {
+            // eslint-disable-next-line no-plusplus
+            for (let k = 0; k < 12; k++) {
+                let color = '#';
+                // eslint-disable-next-line no-plusplus
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                colorList.push(color);
+            }
+            return colorList;
+        }
+        return colorList;
+    }
+
+    const multiColor = getRandomColor();
     const barOptions = {
         scales: {
             xAxes: [
@@ -739,7 +734,11 @@ const Analysis = () => {
                                     id="sunburst0"
                                     data={
                                         SlotData.filter(
-                                            item => item.name === obData
+                                            item =>
+                                                item.name === obData
+                                                    ? item.name === obData
+                                                    : item.name ===
+                                                      'CSSE7023 2019-9-7'
                                         )[0]
                                     }
                                 />
@@ -755,7 +754,11 @@ const Analysis = () => {
                                                 .filter(k => k.name === course)
                                                 .map(j =>
                                                     j.children.filter(
-                                                        l => l.name === obData
+                                                        l =>
+                                                            l.name === obData
+                                                                ? l.name ===
+                                                                  obData
+                                                                : 'CSSE7030 2019-9-5'
                                                     )
                                                 )
                                         )[0][0][0].children[0]

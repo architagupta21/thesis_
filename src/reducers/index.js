@@ -57,21 +57,28 @@ const dbPostReducer = (state = '', action) => {
     }
 };
 
-const staff = {
-    id: 'fdsagdsafas',
-    title: 'Mr',
-    firstname: 'Guang',
-    lastname: 'Yang',
-};
+const staff = [
+    {
+        id: '1',
+        title: 'Dr',
+        firstname: 'Helen',
+        lastname: 'Huang',
+    },
+    {
+        id: '2',
+        title: 'Dr',
+        firstname: 'Hassan',
+        lastname: 'Khosravi',
+    },
+    {
+        id: '3',
+        title: 'Dr',
+        firstname: 'Guiddo',
+        lastname: 'Zuiccon',
+    },
+];
 
-const staff1 = {
-    id: 'xvvfewaf',
-    title: 'Ms',
-    firstname: 'Archita',
-    lastname: 'Gupta',
-};
-
-const staffReducer = (state = [staff, staff1], action) => {
+const staffReducer = (state = staff, action) => {
     const { type, payload } = action;
     switch (type) {
         case Actions.ADD_STAFF:
@@ -104,31 +111,28 @@ const staffReducer = (state = [staff, staff1], action) => {
     }
 };
 
-const activities1 = {
-    id: 'fda',
-    name: 'Listening the lecture',
-    staff: false,
-    student: true,
-};
+const activities = [
+    {
+        id: '1',
+        name: 'Listening the lecture',
+        staff: false,
+        student: true,
+    },
+    {
+        id: '2',
+        name: 'Discussing the problem',
+        staff: false,
+        student: true,
+    },
+    {
+        id: '3',
+        name: 'Lecturing',
+        staff: true,
+        student: false,
+    },
+];
 
-const activities2 = {
-    id: 'ffdsfdgq',
-    name: 'Discussing the problem',
-    staff: false,
-    student: true,
-};
-
-const activities3 = {
-    id: 'qqqqqq',
-    name: 'Lecturing',
-    staff: true,
-    student: false,
-};
-
-const activitiesReducer = (
-    state = [activities1, activities2, activities3],
-    action
-) => {
+const activitiesReducer = (state = activities, action) => {
     /**
      
         {
@@ -205,25 +209,26 @@ const programsReducer = (state = [], action) => {
     }
 };
 
-const course = {
-    id: 'nnkjnadnk',
-    code: 'DECO1300',
-    name: 'Test',
-    units: 2,
-    semester: 'Semester 1',
-    year: 2019,
-};
+const course = [
+    {
+        id: '1',
+        code: 'DECO1300',
+        name: 'Test',
+        units: 2,
+        semester: 'Semester 1',
+        year: 2019,
+    },
+    {
+        id: '2',
+        code: 'DECO7861',
+        name: 'Thesis',
+        units: 2,
+        semester: 'Semester 1',
+        year: 2019,
+    },
+];
 
-const course1 = {
-    id: 'wefadfdsnk',
-    code: 'DECO7861',
-    name: 'Thesis',
-    units: 2,
-    semester: 'Semester 1',
-    year: 2019,
-};
-
-const coursesReducer = (state = [course, course1], action) => {
+const coursesReducer = (state = course, action) => {
     const { type, payload } = action;
 
     switch (type) {

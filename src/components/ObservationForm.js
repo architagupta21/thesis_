@@ -11,16 +11,16 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
+// import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { FormGroup, Input } from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import '../../public/assets/style.css';
@@ -94,19 +94,36 @@ const Observation = ({
     // console.log(records);
     // console.log(selectedId);
 
+    // By numbers
+    // const suggestions = [
+    //     { label: '1 Forgan Smith ' },
+    //     { label: '2 Duhig Tower' },
+    //     { label: '3 Steele Building' },
+    //     { label: '4 Bookshop' },
+    //     { label: '5 Richards Building' },
+    //     { label: '6 Physics Annexe' },
+    //     { label: '7 Parnell Building' },
+    //     { label: '8 Goddard Building' },
+    //     { label: '9 Michie Building' },
+    //     { label: '17 Learning Innovation Building' },
+    //     { label: '23 Abel Smith Lecture Theatre' },
+    //     { label: '22 Schonell Theatre' },
+    // ];
+
+    // Alphabetical
     const suggestions = [
-        { label: '1 Forgan Smith ' },
-        { label: '2 Duhig Tower' },
-        { label: '3 Steele Building' },
-        { label: '4 Bookshop' },
-        { label: '5 Richards Building' },
-        { label: '6 Physics Annexe' },
-        { label: '7 Parnell Building' },
-        { label: '8 Goddard Building' },
-        { label: '9 Michie Building' },
-        { label: '17 Learning Innovation Building' },
-        { label: '23 Abel Smith Lecture Theatre' },
-        { label: '22 Schonell Theatre' },
+        { label: 'Forgan Smith ' },
+        { label: 'Duhig Tower' },
+        { label: 'Steele Building' },
+        { label: 'Bookshop' },
+        { label: 'Richards Building' },
+        { label: 'Physics Annexe' },
+        { label: 'Parnell Building' },
+        { label: 'Goddard Building' },
+        { label: 'Michie Building' },
+        { label: 'Learning Innovation Building' },
+        { label: 'Abel Smith Lecture Theatre' },
+        { label: 'Schonell Theatre' },
     ];
 
     function renderInputComponent(inputProps) {
@@ -942,18 +959,7 @@ const Observation = ({
                                                             observationToUpdate.location
                                                         );
                                                         setUpdateRecords(
-                                                            observationToUpdate.records // {
-                                                            //     startTime:
-                                                            //         obsRecordsToUpdate.startTime,
-                                                            //     endTime:
-                                                            //         obsRecordsToUpdate.endTime,
-                                                            //     studentActivity:
-                                                            //         obsRecordsToUpdate.studentActivity,
-                                                            //     staffActivity:
-                                                            //         obsRecordsToUpdate.staffActivity,
-                                                            //     engagement:
-                                                            //         obsRecordsToUpdate.engagement,
-                                                            // },
+                                                            observationToUpdate.records
                                                         );
                                                     } else {
                                                         setlistitemid('');

@@ -35,25 +35,56 @@ const onSettingClick = e => {
 
 const App = props => (
     <AppContainer>
-        <AppTitle>
-            Hello! Welcome to the COPUS tool
+        <AppTitle style={{ textAlign: 'center' }}>
+            Welcome to the COPUS tool
             {/* <FontAwesomeIcon icon={['fab', 'react']} />
                 React App! */}
         </AppTitle>
         <p>
-            <FontAwesomeIcon icon="cog" /> Please Use the Settings tab to Update
-            records for new Information
-            <FontAwesomeIcon icon="cog" />
+            <div
+                style={{
+                    margin: '15px',
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                }}
+            >
+                <FontAwesomeIcon icon="cog" /> Please Use the Settings tab to
+                Update records for new Information
+                {/* <FontAwesomeIcon icon="cog" /> */}
+            </div>
+            <div
+                style={{
+                    margin: '15px',
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                }}
+            >
+                <FontAwesomeIcon icon="cog" /> Please Use the Data Entry tab to
+                Enter records for new Class Observation
+                {/* <FontAwesomeIcon icon="cog" /> */}
+            </div>
+            <div
+                style={{
+                    margin: '15px',
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                }}
+            >
+                <FontAwesomeIcon icon="cog" /> Please Use the Analysis tab to
+                Visually analyse the observations recorded
+                {/* <FontAwesomeIcon icon="cog" /> */}
+            </div>
         </p>
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
             <a href="#/edit">
                 {/* Click Me */}
                 <img
                     src="assets/settingsIcon.png"
-                    height="200px"
-                    width="200px"
+                    height="300px"
+                    width="300px"
                     alt="settings_icon"
                     style={{ margin: '25px' }}
+                    title="Edit Settings"
                     // placeholder="Go To Settings Page"
                     // onClick={onSettingClick()}
                 />
@@ -61,26 +92,30 @@ const App = props => (
             <a href="#/observation">
                 <img
                     src="assets/data-entry-icon-24.jpg"
-                    height="200px"
-                    width="200px"
+                    height="300px"
+                    width="300px"
                     alt="dataentry_icon"
                     style={{ margin: '25px', marginLeft: '10px' }}
+                    title="Start Observations"
                 />
             </a>
             <a href="#/analysis">
                 <img
                     src="assets/userDataAnalysis.png"
-                    height="200px"
-                    width="200px"
+                    height="300px"
+                    width="300px"
                     alt="analysis_icon"
+                    title="View Analysis"
                     style={{ margin: '25px', marginLeft: '10px' }}
                 />
             </a>
         </div>
         <h4>
-            <FontAwesomeIcon icon="store" /> Use the tool to analyse classroom
-            analytics by studying engagement levels of students and staff
-            members.
+            <div style={{ textAlign: 'center' }}>
+                <FontAwesomeIcon icon="store" />
+                Use the tool to analyse classroom analytics by studying
+                engagement levels of students and staff members.
+            </div>
         </h4>
     </AppContainer>
 );
