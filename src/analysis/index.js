@@ -92,7 +92,7 @@ const Analysis = () => {
         scales: {
             xAxes: [
                 {
-                    barPercentage: 0.3,
+                    barPercentage: 0.2,
                 },
             ],
             yAxes: [
@@ -105,7 +105,7 @@ const Analysis = () => {
                 },
             ],
         },
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
     };
 
     const StudentEngagementDataProgram = {
@@ -825,6 +825,8 @@ const Analysis = () => {
                             }}
                             maintainAspectRatio
                             options={barOptions}
+                            height={30}
+                            width={100}
                         />
                         <Bar
                             data={{
@@ -850,6 +852,8 @@ const Analysis = () => {
                             }}
                             // width={50}
                             options={barOptions}
+                            height={15}
+                            width={100}
                         />
                     </div>
                 ) : (
@@ -888,6 +892,8 @@ const Analysis = () => {
                                 ],
                             }}
                             options={barOptions}
+                            height={30}
+                            width={100}
                         />
                         <Bar
                             data={{
@@ -920,6 +926,8 @@ const Analysis = () => {
                                 ],
                             }}
                             options={barOptions}
+                            height={15}
+                            width={100}
                         />
                     </div>
                 ) : (
@@ -982,6 +990,8 @@ const Analysis = () => {
                         <Bar
                             data={ProgramStudentStaffEngagement}
                             options={barOptions}
+                            height={30}
+                            width={100}
                         />
                         <Bar
                             data={{
@@ -1013,6 +1023,8 @@ const Analysis = () => {
                                 ],
                             }}
                             options={barOptions}
+                            height={20}
+                            width={100}
                         />
                     </div>
                 ) : (
@@ -1023,6 +1035,8 @@ const Analysis = () => {
                         <Bar
                             data={CourseStudentStaffEngagement}
                             options={barOptions}
+                            height={30}
+                            width={100}
                         />
                         <Bar
                             data={{
@@ -1054,6 +1068,8 @@ const Analysis = () => {
                                 ],
                             }}
                             options={barOptions}
+                            height={30}
+                            width={100}
                         />
                     </div>
                 ) : (
